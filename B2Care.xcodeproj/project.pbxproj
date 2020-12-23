@@ -3,29 +3,55 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0F2583259241850077DD02 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F2582259241850077DD02 /* Extensions.swift */; };
+		2A0F2588259247F10077DD02 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F2587259247F10077DD02 /* HeaderView.swift */; };
+		2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258A25924CD20077DD02 /* LoginView.swift */; };
+		2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258E25925C1C0077DD02 /* NetworkService.swift */; };
+		2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259225925C8C0077DD02 /* B2CareService.swift */; };
+		2A0F259625926BD00077DD02 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259525926BD00077DD02 /* UserModel.swift */; };
+		2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F2598259333070077DD02 /* PasswordInputField.swift */; };
+		2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259B259335010077DD02 /* BaseInputField.swift */; };
+		2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */; };
+		2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A1259340B90077DD02 /* PatientCell.swift */; };
+		2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A5259342EE0077DD02 /* SearchField.swift */; };
+		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
+		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
 		2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEB25923EF700431A1C /* AppDelegate.swift */; };
 		2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEED25923EF700431A1C /* SceneDelegate.swift */; };
-		2A93CEF025923EF700431A1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* ViewController.swift */; };
-		2A93CEF325923EF700431A1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF125923EF700431A1C /* Main.storyboard */; };
+		2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* LoginViewController.swift */; };
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
+		2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientDetailViewController.swift */; };
 		61003584433EE3661080D064 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0F2582259241850077DD02 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2A0F2587259247F10077DD02 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		2A0F258A25924CD20077DD02 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2A0F258E25925C1C0077DD02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2A0F259225925C8C0077DD02 /* B2CareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B2CareService.swift; sourceTree = "<group>"; };
+		2A0F259525926BD00077DD02 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		2A0F2598259333070077DD02 /* PasswordInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
+		2A0F259B259335010077DD02 /* BaseInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInputField.swift; sourceTree = "<group>"; };
+		2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListViewController.swift; sourceTree = "<group>"; };
+		2A0F25A1259340B90077DD02 /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
+		2A0F25A5259342EE0077DD02 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
 		2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.debug.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.debug.xcconfig"; sourceTree = "<group>"; };
 		2A93CEE825923EF700431A1C /* B2Care.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2Care.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A93CEEB25923EF700431A1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A93CEED25923EF700431A1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2A93CEEF25923EF700431A1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2A93CEF225923EF700431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2A93CEEF25923EF700431A1C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2A93CEF425923EF900431A1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AB71B3225936B6000965423 /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.release.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.release.xcconfig"; sourceTree = "<group>"; };
 		E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -42,6 +68,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A0F257A259240C30077DD02 /* Helping Files */ = {
+			isa = PBXGroup;
+			children = (
+				2A93CEEB25923EF700431A1C /* AppDelegate.swift */,
+				2A93CEED25923EF700431A1C /* SceneDelegate.swift */,
+			);
+			path = "Helping Files";
+			sourceTree = "<group>";
+		};
+		2A0F257B259240CD0077DD02 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F2582259241850077DD02 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2A0F257C259240D40077DD02 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2A93CEEF25923EF700431A1C /* LoginViewController.swift */,
+				2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */,
+				2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */,
+				2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */,
+				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2A0F257D259240DC0077DD02 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F25A4259342CC0077DD02 /* Inputs */,
+				2A0F2587259247F10077DD02 /* HeaderView.swift */,
+				2A0F258A25924CD20077DD02 /* LoginView.swift */,
+				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2A0F257E259240E00077DD02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F258D25925BF20077DD02 /* Services */,
+				2A0F259525926BD00077DD02 /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2A0F258D25925BF20077DD02 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F258E25925C1C0077DD02 /* NetworkService.swift */,
+				2A0F259225925C8C0077DD02 /* B2CareService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2A0F25A4259342CC0077DD02 /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F2598259333070077DD02 /* PasswordInputField.swift */,
+				2A0F259B259335010077DD02 /* BaseInputField.swift */,
+				2A0F25A5259342EE0077DD02 /* SearchField.swift */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
 		2A93CEDF25923EF700431A1C = {
 			isa = PBXGroup;
 			children = (
@@ -63,10 +157,11 @@
 		2A93CEEA25923EF700431A1C /* B2Care */ = {
 			isa = PBXGroup;
 			children = (
-				2A93CEEB25923EF700431A1C /* AppDelegate.swift */,
-				2A93CEED25923EF700431A1C /* SceneDelegate.swift */,
-				2A93CEEF25923EF700431A1C /* ViewController.swift */,
-				2A93CEF125923EF700431A1C /* Main.storyboard */,
+				2A0F257E259240E00077DD02 /* Model */,
+				2A0F257D259240DC0077DD02 /* View */,
+				2A0F257C259240D40077DD02 /* Controller */,
+				2A0F257B259240CD0077DD02 /* Utils */,
+				2A0F257A259240C30077DD02 /* Helping Files */,
 				2A93CEF425923EF900431A1C /* Assets.xcassets */,
 				2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */,
 				2A93CEF925923EF900431A1C /* Info.plist */,
@@ -80,7 +175,6 @@
 				2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */,
 				4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -153,7 +247,6 @@
 			files = (
 				2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */,
 				2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */,
-				2A93CEF325923EF700431A1C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,23 +299,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A93CEF025923EF700431A1C /* ViewController.swift in Sources */,
+				2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */,
+				2A0F2588259247F10077DD02 /* HeaderView.swift in Sources */,
+				2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */,
+				2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */,
+				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
+				2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */,
+				2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */,
+				2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */,
 				2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */,
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
+				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,
+				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
+				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
+				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
+				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
+				2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */,
+				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2A93CEF125923EF700431A1C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A93CEF225923EF700431A1C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
