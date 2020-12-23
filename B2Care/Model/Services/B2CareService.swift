@@ -31,10 +31,17 @@ class B2CareService{
         }
     }
     
-    func getPatients(){
-//        let patients = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient", model: UserResponse.self, apiKey: "nzgnM6pLsmdCCKc7Zv7ctEPVc37pYkZ2XO9pX8stfuscOhvbiX1b20H9wGOu01MS") { (result) in
-//
-//        }
+    func fetchPatients(completion: @escaping (Result<PatientsData, Error>) -> Void){
+        let patients = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient", model: PatientsResponse.self, apiKey: "nzgnM6pLsmdCCKc7Zv7ctEPVc37pYkZ2XO9pX8stfuscOhvbiX1b20H9wGOu01MS") { (result) in
+            switch result{
+                
+                case .success(let data):
+                    completion(.success(data.data))
+                    
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
     }
     
     func getUserData() -> UserData? {

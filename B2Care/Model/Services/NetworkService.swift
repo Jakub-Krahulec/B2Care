@@ -31,16 +31,26 @@ class NetworkService{
     
     func performRequest<T: Decodable>(from url: String, model: T.Type, apiKey: String, completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
         let headers = HTTPHeaders([
-            "Authorization": "Token " + "\(apiKey)",
-            
+            "Authorization": "Token token=\"\(apiKey)\"",
         ])
         let request = AF.request(url, method: .get, headers: headers)
+            .validate()
             .responseJSON { (response) in
-                print(response)
+                switch response.result{
+                    
+                    case .success(let data):
+                        do{
+                            if let data = response.data{
+                                let decoded = try JSONDecoder().decode(T.self, from: data)
+                                completion(.success(decoded))
+                            }
+                        } catch{
+                            completion(.failure(error))
+                        }
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
             }
-        
-        
-        
         return request
     }
 

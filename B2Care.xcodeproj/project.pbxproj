@@ -20,6 +20,7 @@
 		2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A5259342EE0077DD02 /* SearchField.swift */; };
 		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
+		2A888FA52593799100B6E5DC /* PatientsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsModel.swift */; };
 		2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEB25923EF700431A1C /* AppDelegate.swift */; };
 		2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEED25923EF700431A1C /* SceneDelegate.swift */; };
 		2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* LoginViewController.swift */; };
@@ -44,6 +45,7 @@
 		2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
 		2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.debug.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.debug.xcconfig"; sourceTree = "<group>"; };
+		2A888FA42593799100B6E5DC /* PatientsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsModel.swift; sourceTree = "<group>"; };
 		2A93CEE825923EF700431A1C /* B2Care.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2Care.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A93CEEB25923EF700431A1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A93CEED25923EF700431A1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				2A0F258D25925BF20077DD02 /* Services */,
 				2A0F259525926BD00077DD02 /* UserModel.swift */,
+				2A888FA42593799100B6E5DC /* PatientsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */,
 				2A0F2588259247F10077DD02 /* HeaderView.swift in Sources */,
 				2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */,
+				2A888FA52593799100B6E5DC /* PatientsModel.swift in Sources */,
 				2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
 				2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */,

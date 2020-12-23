@@ -10,6 +10,7 @@ import UIKit
 class PatientCell: UITableViewCell {
 
    // MARK: - Properties
+    
     private let bgView = UIView()
     private let searchField = SearchField()
     private let nameLabel = UILabel()
@@ -18,6 +19,13 @@ class PatientCell: UITableViewCell {
     private let departmentLabel = UILabel()
     private let personImage = UIImageView()
     private let ageLabel = UILabel()
+    
+    public var data: Any?{
+        didSet{
+            updateView(with: data)
+        }
+    }
+    
     // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -49,6 +57,15 @@ class PatientCell: UITableViewCell {
     
     
     // MARK: - Helpers
+    private func updateView(with data: Any?){
+        if let data = data as? Person{
+            nameLabel.text = "\(data.firstname) \(data.surname)"
+            diagnosisLabel.text = "Diagnóza"
+            ageLabel.text = data.dateOfBirth
+            
+        }
+    }
+    
     private func prepareView(){
         backgroundColor = .backgroundLight
         addSubview(bgView)

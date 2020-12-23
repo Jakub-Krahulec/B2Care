@@ -12,12 +12,26 @@ class PatientListViewController: UIViewController {
     private let cellId = "cellId"
     private let table = UITableView()
     private let searchInput = SearchField()
+    private var patients: PatientsData?
+    {
+        didSet{
+            table.reloadData()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
-        B2CareService.shared.getPatients()
+        B2CareService.shared.fetchPatients { (result) in
+            switch result{
+                
+                case .success(let data):
+                    self.patients = data
+                case .failure(let error):
+                    self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,12 +85,18 @@ class PatientListViewController: UIViewController {
 
 extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        if let data = patients{
+            return data.data.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = table.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? PatientCell{
             cell.selectionStyle = .none
+            if let data = patients {
+                cell.data = data.data[indexPath.row].person
+            }
             return cell
         }
         return UITableViewCell()
