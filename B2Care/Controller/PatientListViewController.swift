@@ -15,7 +15,7 @@ class PatientListViewController: UIViewController {
     private var patients: PatientsData?
     {
         didSet{
-            table.reloadData()
+            table.reloadSections(IndexSet(integer: 0), with: .fade)
         }
     }
     
@@ -23,6 +23,11 @@ class PatientListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         B2CareService.shared.fetchPatients { (result) in
             switch result{
                 
@@ -32,11 +37,6 @@ class PatientListViewController: UIViewController {
                     self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

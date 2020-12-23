@@ -61,8 +61,14 @@ class PatientCell: UITableViewCell {
         if let data = data as? Person{
             nameLabel.text = "\(data.firstname) \(data.surname)"
             diagnosisLabel.text = "Diagnóza"
-            ageLabel.text = data.dateOfBirth
             
+            let age = DateService.shared.getAgeFromString(data.dateOfBirth)
+            if let age = age {
+                ageLabel.text = "\(age), \(data.gender.title.first ?? " ")"
+            }
+            else {
+                 ageLabel.text = "\(data.dateOfBirth), \(data.gender.title.first ?? " ")"
+            }
         }
     }
     
