@@ -24,6 +24,6 @@ class PatientDetailViewController: UIViewController {
     
     // MARK: - Helpers
     private func prepareView(){
-        view.backgroundColor = .green
+        view.backgroundColor = .white
     }
 }

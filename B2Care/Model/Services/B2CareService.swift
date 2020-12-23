@@ -12,7 +12,12 @@ class B2CareService{
     
     static let shared = B2CareService()
     private let API_URL =  "https://hc-intro-backend.dico.dev05.b2a.cz"
-    private var data: UserData?
+    private var API_KEY = ""
+    private var data: UserData?{
+        didSet {
+            API_KEY = data?.apiKey ?? ""
+        }
+    }
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private let defaults = UserDefaults.standard
@@ -20,6 +25,7 @@ class B2CareService{
         if let user = defaults.object(forKey: "user") as? Data {
             if let decoded = try? decoder.decode(UserData.self, from: user){
                 data = decoded
+                API_KEY = decoded.apiKey
                 return
             }
         }
@@ -31,10 +37,14 @@ class B2CareService{
         }
     }
     
+    func logout(){
+        defaults.removeObject(forKey: "user")
+        data = nil
+    }
+    
     func fetchPatients(completion: @escaping (Result<PatientsData, Error>) -> Void){
-        let patients = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient", model: PatientsResponse.self, apiKey: "nzgnM6pLsmdCCKc7Zv7ctEPVc37pYkZ2XO9pX8stfuscOhvbiX1b20H9wGOu01MS") { (result) in
+        let request = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient", model: PatientsResponse.self, apiKey: API_KEY) { (result) in
             switch result{
-                
                 case .success(let data):
                     completion(.success(data.data))
                     
@@ -50,7 +60,8 @@ class B2CareService{
     
     func login(userName: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void){
         guard let url = URL(string: API_URL + "/user/api/v1/auth") else { return}
-        let params: NSMutableDictionary? = [
+        
+        let params: NSMutableDictionary = [
             "email" : userName,
             "password" : password
         ]
@@ -69,14 +80,14 @@ class B2CareService{
         
         AF.request(request as URLRequestConvertible)
             .validate()
-            .responseString { response in
+            .responseJSON { response in
                 switch  response.result{
-                    case .success(let data):
-                        var userData: UserResponse?
+                    case .success(_):
                         do{
-                            userData = try JSONDecoder().decode(UserResponse.self, from: Data(data.utf8))
-                            if let user = userData{
-                                self.data = user.data
+                            if let data = response.data {
+                                let decoded = try self.decoder.decode(UserResponse.self, from: data)
+                                self.data = decoded.data
+                                self.save()
                                 completion(.success(true))
                             }
                         } catch{
@@ -90,6 +101,7 @@ class B2CareService{
     }
     
 }
+
 
 // nzgnM6pLsmdCCKc7Zv7ctEPVc37pYkZ2XO9pX8stfuscOhvbiX1b20H9wGOu01MS
 //  https://hc-intro-backend.dico.dev05.b2a.cz/user/api/v1/auth

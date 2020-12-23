@@ -19,8 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-       // window?.rootViewController = LoginViewController()
-        window?.rootViewController = UINavigationController(rootViewController: MainTabViewController()) 
+       
+        let user = B2CareService.shared.getUserData()
+        if let _ = user{
+            window?.rootViewController = UINavigationController(rootViewController: PatientListViewController())
+        } else {
+            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        }
+        
+        
         window?.makeKeyAndVisible()
     }
 

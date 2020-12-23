@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginViewDelegate{
+    func userDidLogIn()
+}
+
 class LoginView: UIView {
 
     // MARK: - Properties
@@ -17,6 +21,8 @@ class LoginView: UIView {
     private let statusLabel = UILabel()
     private let forgotPasswordButton = UIButton()
     private let loginButton = UIButton()
+    
+    public var delegate: LoginViewDelegate?
     
     // MARK: - Lifecycle
     
@@ -41,6 +47,7 @@ class LoginView: UIView {
             switch res{
                 case .success(let isLoggedIn):
                     print(isLoggedIn)
+                    self.delegate?.userDidLogIn()
                 case .failure(let error):
                     self.statusLabel.text = error.localizedDescription
                     self.passwordTextField.setErrorMode()
@@ -103,6 +110,7 @@ class LoginView: UIView {
     private func prepareStatusLabelStyle(){
         statusLabel.text = "Špatné heslo"
         statusLabel.textColor = .red
+        statusLabel.isHidden = true
         
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
@@ -135,14 +143,14 @@ class LoginView: UIView {
         addSubview(loginButton)
         loginButton.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(10)
             make.height.equalTo(50)
         }
     }
     
     public func moveLoginButton(to y: CGFloat){
         loginButton.snp.updateConstraints { (make) in
-            make.bottom.equalToSuperview().inset(20 + y)
+            make.bottom.equalToSuperview().inset(10 + y)
         }
         
         UIView.animate(withDuration: 2, animations: {

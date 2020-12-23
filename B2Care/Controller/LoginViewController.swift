@@ -65,6 +65,7 @@ class LoginViewController: UIViewController {
     }
     
     private func prepareLoginViewStyle(){
+        loginView.delegate = self
         view.addSubview(loginView)
         loginView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview().inset(15)
@@ -79,3 +80,8 @@ class LoginViewController: UIViewController {
     
 }
 
+extension LoginViewController: LoginViewDelegate{
+    func userDidLogIn() {
+        navigationController?.pushViewController(PatientListViewController(), animated: true)
+    }
+}

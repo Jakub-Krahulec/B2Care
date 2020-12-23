@@ -12,6 +12,7 @@ class PatientListViewController: UIViewController {
     private let cellId = "cellId"
     private let table = UITableView()
     private let searchInput = SearchField()
+    private let userButton = UserButton()
     private var patients: PatientsData?
     {
         didSet{
@@ -28,6 +29,7 @@ class PatientListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         B2CareService.shared.fetchPatients { (result) in
             switch result{
                 
@@ -46,17 +48,30 @@ class PatientListViewController: UIViewController {
     
     // MARK: - Actions
     
-    
+    @objc private func handleUserButtonTapped(){
+        B2CareService.shared.logout()
+        
+        
+        let transition = CATransition()
+        transition.duration = 1
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromBottom
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        navigationController?.pushViewController(LoginViewController(), animated: false)
+    }
     
     // MARK: - Helpers
     
     private func prepareView(){
         view.backgroundColor = .mainColor
        // hideKeyboardWhenTappedAround()
+        prepareUserButtonStyle()
         prepareSearchFieldStyle()
         prepareTableViewStyle()
     }
-    
+      
     private func prepareTableViewStyle(){
         table.delegate = self
         table.dataSource = self
@@ -73,10 +88,22 @@ class PatientListViewController: UIViewController {
         }
     }
     
+    private func prepareUserButtonStyle(){
+        userButton.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(userButton)
+        userButton.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().inset(10)
+            make.top.equalTo(view.frame.height / 10)
+            make.height.width.equalTo(30)
+        }
+    }
+    
     private func prepareSearchFieldStyle(){
         view.addSubview(searchInput)
         searchInput.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview().inset(10)
+            make.left.equalTo(userButton.snp.right).offset(5)
+            make.right.equalToSuperview().inset(10)
             make.top.equalTo(view.frame.height / 10)
             make.height.equalTo(30)
         }
