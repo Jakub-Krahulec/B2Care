@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         let user = B2CareService.shared.getUserData()
         if let _ = user{
-            window?.rootViewController = UINavigationController(rootViewController: PatientListViewController())
+            window?.rootViewController = UINavigationController(rootViewController: MainTabViewController())
         } else {
             window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         }

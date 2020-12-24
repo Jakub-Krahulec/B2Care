@@ -82,6 +82,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginViewDelegate{
     func userDidLogIn() {
-        navigationController?.pushViewController(PatientListViewController(), animated: true)
+        navigationController?.pushViewController(MainTabViewController(), animated: true)
     }
 }

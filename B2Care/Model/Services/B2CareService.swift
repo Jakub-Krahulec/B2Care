@@ -42,8 +42,8 @@ class B2CareService{
         data = nil
     }
     
-    func fetchPatients(completion: @escaping (Result<PatientsData, Error>) -> Void){
-        let request = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient", model: PatientsResponse.self, apiKey: API_KEY) { (result) in
+    func fetchPatients(parameters: String = "",completion: @escaping (Result<PatientsData, Error>) -> Void){
+        let request = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, apiKey: API_KEY) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))

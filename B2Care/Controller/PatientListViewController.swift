@@ -13,6 +13,7 @@ class PatientListViewController: UIViewController {
     private let table = UITableView()
     private let searchInput = SearchField()
     private let userButton = UserButton()
+    private var refreshControl = UIRefreshControl()
     private var patients: PatientsData?
     {
         didSet{
@@ -29,16 +30,7 @@ class PatientListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-        B2CareService.shared.fetchPatients { (result) in
-            switch result{
-                
-                case .success(let data):
-                    self.patients = data
-                case .failure(let error):
-                    self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
-            }
-        }
+        fetchPatients()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,14 +54,38 @@ class PatientListViewController: UIViewController {
         navigationController?.pushViewController(LoginViewController(), animated: false)
     }
     
+    @objc private func refresh(_ sender: AnyObject){
+        fetchPatients()
+    }
+    
     // MARK: - Helpers
     
     private func prepareView(){
         view.backgroundColor = .mainColor
        // hideKeyboardWhenTappedAround()
+        prepareRefreshControlStyle()
         prepareUserButtonStyle()
         prepareSearchFieldStyle()
         prepareTableViewStyle()
+    }
+    
+    private func fetchPatients(parameters: String = ""){
+        B2CareService.shared.fetchPatients(parameters: parameters) { (result) in
+            switch result{
+                
+                case .success(let data):
+                    self.patients = data
+                    self.refreshControl.endRefreshing()
+                case .failure(let error):
+                    self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func prepareRefreshControlStyle(){
+        refreshControl.attributedTitle = NSAttributedString(string: "Načítám data")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        table.addSubview(refreshControl)
     }
       
     private func prepareTableViewStyle(){
@@ -100,6 +116,7 @@ class PatientListViewController: UIViewController {
     }
     
     private func prepareSearchFieldStyle(){
+        searchInput.delegate = self
         view.addSubview(searchInput)
         searchInput.snp.makeConstraints { (make) in
             make.left.equalTo(userButton.snp.right).offset(5)
@@ -148,9 +165,19 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         return UISwipeActionsConfiguration(actions: [addTaskAction,urgentMessageAction])
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableVie(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.pushViewController(PatientDetailViewController(), animated: true)
     }
-    
-    
+}
+
+
+extension PatientListViewController: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.count > 0 {
+            fetchPatients(parameters: "?search=\(string)")
+        } else {
+            fetchPatients()
+        }
+        return true
+    }
 }

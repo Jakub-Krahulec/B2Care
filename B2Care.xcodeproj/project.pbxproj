@@ -108,6 +108,7 @@
 			children = (
 				2A0F25A4259342CC0077DD02 /* Inputs */,
 				2A0F2587259247F10077DD02 /* HeaderView.swift */,
+				2A888FAA2593FAC200B6E5DC /* UserButton.swift */,
 				2A0F258A25924CD20077DD02 /* LoginView.swift */,
 				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
 			);
@@ -140,7 +141,6 @@
 				2A0F2598259333070077DD02 /* PasswordInputField.swift */,
 				2A0F259B259335010077DD02 /* BaseInputField.swift */,
 				2A0F25A5259342EE0077DD02 /* SearchField.swift */,
-				2A888FAA2593FAC200B6E5DC /* UserButton.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
