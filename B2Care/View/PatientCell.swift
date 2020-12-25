@@ -15,10 +15,8 @@ class PatientCell: UITableViewCell {
     private let searchField = SearchField()
     private let nameLabel = UILabel()
     private let diagnosisLabel = UILabel()
-    private let locationImage = UIImageView()
-    private let departmentLabel = UILabel()
-    private let personImage = UIImageView()
-    private let ageLabel = UILabel()
+    private let patientDetailsView = PatientDetailsView()
+   
     
     public var data: Any?{
         didSet{
@@ -61,14 +59,7 @@ class PatientCell: UITableViewCell {
         if let data = data as? Person{
             nameLabel.text = "\(data.firstname) \(data.surname)"
             diagnosisLabel.text = "Diagnóza"
-            
-            let age = DateService.shared.getAgeFromString(data.dateOfBirth)
-            if let age = age {
-                ageLabel.text = "\(age), \(data.gender.title.first ?? " ")"
-            }
-            else {
-                 ageLabel.text = "\(data.dateOfBirth), \(data.gender.title.first ?? " ")"
-            }
+            patientDetailsView.data = data
         }
     }
     
@@ -82,11 +73,17 @@ class PatientCell: UITableViewCell {
         
         prepareNameLabelStyle()
         prepareDiagnosisLabelStyle()
-        prepareLocationImageStyle()
-        prepareDepartmentLabelStyle()
-        preparePersonImageStyle()
-        prepareAgeLabelStyle()
         prepareBackgroundViewStyle()
+        preparePatientDetailsViewStyle()
+    }
+    
+    private func preparePatientDetailsViewStyle(){
+        addSubview(patientDetailsView)
+        patientDetailsView.snp.makeConstraints { (make) in
+            make.top.equalTo(diagnosisLabel.snp.bottom).offset(15)
+            make.left.equalTo(20)
+            make.bottom.equalToSuperview().inset(30)
+        }
     }
     
     private func prepareBackgroundViewStyle(){
@@ -123,53 +120,6 @@ class PatientCell: UITableViewCell {
         }
     }
     
-    private func prepareLocationImageStyle(){
-        locationImage.image = UIImage(systemName: "location.fill")
-        locationImage.tintColor = .gray
-        
-        addSubview(locationImage)
-        locationImage.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            make.top.equalTo(diagnosisLabel.snp.bottom).offset(15)
-            make.height.width.equalTo(15)
-        }
-    }
     
-    private func prepareDepartmentLabelStyle(){
-        departmentLabel.text = "Chirurgie I, Pokoj 232/1"
-        departmentLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        departmentLabel.textColor = .lightGray
-        
-        addSubview(departmentLabel)
-        departmentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(locationImage.snp.right).offset(10)
-            make.top.equalTo(locationImage)
-        }
-    }
-    
-    private func preparePersonImageStyle(){
-        personImage.image = UIImage(systemName: "person.fill")
-        personImage.tintColor = .gray
-        
-        addSubview(personImage)
-        personImage.snp.makeConstraints { (make) in
-            make.left.equalTo(departmentLabel.snp.right).offset(20)
-            make.top.equalTo(locationImage)
-            make.height.width.equalTo(15)
-        }
-    }
-    
-    private func prepareAgeLabelStyle(){
-        ageLabel.text = "57 let, M"
-        ageLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        ageLabel.textColor = .lightGray
-        
-        addSubview(ageLabel)
-        ageLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(personImage.snp.right).offset(10)
-            make.top.equalTo(personImage)
-            make.bottom.equalToSuperview().inset(30)
-        }
-    }
 
 }

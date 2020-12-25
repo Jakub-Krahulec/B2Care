@@ -10,7 +10,7 @@ import SnapKit
 
 class LoginViewController: UIViewController {
     // MARK: - Properties
-    private let headerView = HeaderView()
+    private let headerView = LoginHeaderView()
     private let loginView = LoginView()
     
     // MARK: - Lifecycle

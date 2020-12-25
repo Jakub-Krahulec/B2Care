@@ -35,7 +35,7 @@ class PatientListViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+      //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Actions
@@ -83,7 +83,7 @@ class PatientListViewController: UIViewController {
     }
     
     private func prepareRefreshControlStyle(){
-        refreshControl.attributedTitle = NSAttributedString(string: "Načítám data")
+        //refreshControl.attributedTitle = NSAttributedString(string: "Načítám data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         table.addSubview(refreshControl)
     }
@@ -165,8 +165,10 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         return UISwipeActionsConfiguration(actions: [addTaskAction,urgentMessageAction])
     }
     
-    func tableVie(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(PatientDetailViewController(), animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = PatientDetailViewController()
+        controller.patientId = patients?.data[indexPath.row].id
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

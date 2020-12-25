@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderView: UIView {
+class LoginHeaderView: UIView {
 
    // MARK: - Properties
     let headerImage = UIImageView()
