@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SnapKit
 
 class SmallInfoBox: UIView {
 
     // MARK: - Properties
+    private let titleStack = UIStackView()
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
-    private let valueLabel = UILabel()
+    let valueLabel = UILabel()
     
     // MARK: - Lifecycle
     
@@ -36,47 +38,57 @@ class SmallInfoBox: UIView {
         
         prepareTitleLabelStyle()
         prepareImageViewStyle()
+        prepareTitleStackStyle()
         prepareValueLabelStyle()
+        
+        prepareDynamicHeight()
     }
     
-    private func prepareImageViewStyle(){
-        imageView.tintColor = .mainColor
-       // imageView.image = UIImage(systemName: "staroflife.fill")
-        
-        addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
-            make.right.equalTo(titleLabel.snp.left).offset(-5)
-            make.top.equalTo(titleLabel)
+    func prepareDynamicHeight(){
+        self.snp.makeConstraints { (make) in
+            make.bottom.equalTo(valueLabel.snp.bottom).offset(20)
         }
     }
     
-    private func prepareTitleLabelStyle(){
-       // titleLabel.text = "Pojišťovna"
-        titleLabel.textColor = .gray
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
+    private func prepareTitleStackStyle(){
+        titleStack.axis = .horizontal
+        titleStack.spacing = 5
+        titleStack.distribution = .equalSpacing
+        titleStack.alignment = .center
         
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview().offset(-12)
+        addSubview(titleStack)
+        titleStack.addArrangedSubview(imageView)
+        titleStack.addArrangedSubview(titleLabel)
+        titleStack.snp.makeConstraints { (make) in
+          //  make.centerY.equalToSuperview().offset(-12)
+            make.top.equalTo(20)
             make.centerX.equalToSuperview()
         }
     }
     
+    private func prepareImageViewStyle(){
+        imageView.tintColor = .mainColor
+    }
+    
+    private func prepareTitleLabelStyle(){
+        titleLabel.textColor = .gray
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+    }
+    
     private func prepareValueLabelStyle(){
-       // valueLabel.text = "111 - VZP"
         valueLabel.textAlignment = .center
         valueLabel.font = UIFont.boldSystemFont(ofSize: 15)
         valueLabel.numberOfLines = 0
         
         addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview().offset(12)
+            make.top.equalTo(titleStack.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
     }
     
-    public func updateView(image: UIImage, title: String, value: String){
+    public func updateView(image: UIImage?, title: String, value: String){
         imageView.image = image
         titleLabel.text = title
         valueLabel.text = value

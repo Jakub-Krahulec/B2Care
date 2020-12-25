@@ -24,6 +24,13 @@ class PatientDetailViewController: UIViewController {
     private let medicationsInfoBox = BigInfoBox()
     private let importantInfoBox = BigInfoBox()
     
+    private let personalPhoneInfoBox = ContactSmallInfoBox()
+    private let doctorPhoneInfoBox = ContactSmallInfoBox()
+    private let addressInfoBox = SmallInfoBox()
+    private let proffesionInfoBox = SmallInfoBox()
+    private let secondtLine = UIStackView()
+    private let thirdLine = UIStackView()
+    
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
@@ -71,9 +78,9 @@ class PatientDetailViewController: UIViewController {
        // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
         headerView.data = data
         
-        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill")!, title: "POJIŠŤOVNA", value: person.birthNumber)
-        idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill")!, title: "RODNÉ ČÍSLO", value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg")!, title: "DIAGNÓZA", value: "Diagnóza")
+        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: person.birthNumber)
+        idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
+        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: "Diagnóza")
         
         var allergies = ""
         for alergy in person.allergies{
@@ -81,7 +88,7 @@ class PatientDetailViewController: UIViewController {
         }
         allergies = String(allergies.dropLast(2))
         
-        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill")!, title: "ALERGIE", value: allergies, tintColor: .systemRed)
+        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: allergies, tintColor: .systemRed)
         
         var medications = ""
         for medication in person.medicationDispenses{
@@ -91,10 +98,13 @@ class PatientDetailViewController: UIViewController {
         medications = String(medications.dropLast(2))
         
         
-        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill")!, title: "MEDIKACE", value: medications, tintColor: .systemGreen)
-        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill")!, title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, tintColor: .gray)
+        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: medications, tintColor: .systemGreen)
+        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, tintColor: .gray)
         
-        
+        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: "+420 123 456 789")
+        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: "+420 123 456 789")
+        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: "Nová 1112, Praha 9, 180 00")
+        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: "Programátor")
     }
     
     private func prepareView(){
@@ -110,12 +120,19 @@ class PatientDetailViewController: UIViewController {
         
         prepareSmallInfoBoxStyle(insuranceInfoBox)
         prepareSmallInfoBoxStyle(idNumberInfoBox)
-        prepareFirstLineStyle()
+        prepareHorizontalStack(firstLine, smallInfos: [insuranceInfoBox,idNumberInfoBox])
         
         prepareBigInfoBoxStyle(diagnosisInfoBox)
         prepareBigInfoBoxStyle(alergiesInfoBox)
         prepareBigInfoBoxStyle(medicationsInfoBox)
         prepareBigInfoBoxStyle(importantInfoBox)
+        
+        prepareSmallInfoBoxStyle(personalPhoneInfoBox)
+        prepareSmallInfoBoxStyle(doctorPhoneInfoBox)
+        prepareHorizontalStack(secondtLine, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
+        prepareSmallInfoBoxStyle(addressInfoBox)
+        prepareSmallInfoBoxStyle(proffesionInfoBox)
+        prepareHorizontalStack(thirdLine, smallInfos: [addressInfoBox,proffesionInfoBox])
         
         prepareVerticalStackStyle()
         
@@ -136,7 +153,7 @@ class PatientDetailViewController: UIViewController {
     private func prepareSmallInfoBoxStyle(_ box: SmallInfoBox){
         box.snp.makeConstraints { (make) in
             make.width.equalTo((view.frame.width / 2) - 5)
-            make.height.equalTo(80)
+            //make.height.equalTo(80)
         }
     }
     
@@ -147,17 +164,18 @@ class PatientDetailViewController: UIViewController {
         }
     }
     
-    private func prepareFirstLineStyle(){
-        firstLine.axis = .horizontal
-        firstLine.spacing = 5
-        firstLine.distribution = .equalSpacing
-        firstLine.alignment = .center
+    private func prepareHorizontalStack(_ stack: UIStackView, smallInfos: [SmallInfoBox]){
+        stack.axis = .horizontal
+        stack.spacing = 5
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
         
-        firstLine.addArrangedSubview(insuranceInfoBox)
-        firstLine.addArrangedSubview(idNumberInfoBox)
-        firstLine.snp.makeConstraints { (make) in
+        for box in smallInfos{
+            stack.addArrangedSubview(box)
+        }
+        stack.snp.makeConstraints { (make) in
             make.width.equalTo(view.frame.width - 5)
-            make.height.equalTo(80)
+           // make.height.equalTo(80)
         }
     }
         
@@ -179,6 +197,8 @@ class PatientDetailViewController: UIViewController {
         verticalStack.addArrangedSubview(alergiesInfoBox)
         verticalStack.addArrangedSubview(medicationsInfoBox)
         verticalStack.addArrangedSubview(importantInfoBox)
+        verticalStack.addArrangedSubview(secondtLine)
+        verticalStack.addArrangedSubview(thirdLine)
         
         scrollView.addSubview(verticalStack)
         verticalStack.snp.makeConstraints { (make) in

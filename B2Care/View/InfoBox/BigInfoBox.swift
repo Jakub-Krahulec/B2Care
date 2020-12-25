@@ -98,7 +98,7 @@ class BigInfoBox: UIView {
         }
     }
     
-    public func updateView(image: UIImage, title: String, value: String, tintColor: UIColor = .mainColor){
+    public func updateView(image: UIImage?, title: String, value: String, tintColor: UIColor = .mainColor){
         imageView.image = image
         imageView.tintColor = tintColor
         titleLabel.text = title
