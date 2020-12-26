@@ -44,6 +44,18 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         fetchPatients()
     }
     
+    @objc private func handleSearchChangedValue(){
+        guard let text = searchInput.text else {
+            fetchPatients()
+            return
+        }
+        if text.count > 0{
+            fetchPatients(parameters: "?search=\(text)")
+        } else {
+            fetchPatients()
+        }
+    }
+    
     // MARK: - Helpers
     
     private func prepareView(){
@@ -103,7 +115,9 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     }
     
     private func prepareSearchFieldStyle(){
-        searchInput.delegate = self
+       // searchInput.delegate = self
+        searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
+        
         view.addSubview(searchInput)
         searchInput.snp.makeConstraints { (make) in
             make.left.equalTo(userButton.snp.right).offset(5)
@@ -160,12 +174,12 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension PatientListViewController: UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string.count > 0 {
-            fetchPatients(parameters: "?search=\(string)")
-        } else {
-            fetchPatients()
-        }
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if string.count > 0 {
+//            fetchPatients(parameters: "?search=\(string)")
+//        } else {
+//            fetchPatients()
+//        }
+//        return true
+//    }
 }
