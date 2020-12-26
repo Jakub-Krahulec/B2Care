@@ -135,14 +135,14 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let urgentMessageAction = UIContextualAction(style: .normal, title: "Urgentní zpráva OL") { (action, sourceView, completionHandler) in
-            
+            completionHandler(true)
         }
         urgentMessageAction.image = UIImage(systemName: "exclamationmark.bubble.fill")
         urgentMessageAction.image?.withTintColor(.white)
         urgentMessageAction.backgroundColor = .systemPink
         
         let addTaskAction = UIContextualAction(style: .normal, title: "Nový úkol") { (action, sourceView, completionHandler) in
-            
+            completionHandler(true)
         }
         addTaskAction.image = UIImage(systemName: "plus")
         addTaskAction.image?.withTintColor(.white)

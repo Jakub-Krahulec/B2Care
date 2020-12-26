@@ -27,7 +27,6 @@
 		2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */; };
 		2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38025965B9100CD8402 /* PersonModel.swift */; };
 		2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38325965BAB00CD8402 /* GenderModel.swift */; };
-		2A7EA3872596604700CD8402 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3862596604700CD8402 /* Insurance.swift */; };
 		2A7EA38C25966D6000CD8402 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38B25966D6000CD8402 /* DetailHeaderView.swift */; };
 		2A7EA390259670B000CD8402 /* PatientDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */; };
 		2A7EA39625967CCD00CD8402 /* BaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39525967CCD00CD8402 /* BaseHeaderView.swift */; };
@@ -66,7 +65,6 @@
 		2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlergyModel.swift; sourceTree = "<group>"; };
 		2A7EA38025965B9100CD8402 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2A7EA38325965BAB00CD8402 /* GenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModel.swift; sourceTree = "<group>"; };
-		2A7EA3862596604700CD8402 /* Insurance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
 		2A7EA38B25966D6000CD8402 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsView.swift; sourceTree = "<group>"; };
 		2A7EA39525967CCD00CD8402 /* BaseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHeaderView.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */,
 				2A7EA38025965B9100CD8402 /* PersonModel.swift */,
 				2A7EA38325965BAB00CD8402 /* GenderModel.swift */,
-				2A7EA3862596604700CD8402 /* Insurance.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 				2A02F1082594B5FF00DC26E1 /* BigInfoBox.swift in Sources */,
 				2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */,
 				2A02F1052594AB5300DC26E1 /* SmallInfoBox.swift in Sources */,
-				2A7EA3872596604700CD8402 /* Insurance.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
 				2A7EA39625967CCD00CD8402 /* BaseHeaderView.swift in Sources */,
 				2A7EA38C25966D6000CD8402 /* DetailHeaderView.swift in Sources */,
