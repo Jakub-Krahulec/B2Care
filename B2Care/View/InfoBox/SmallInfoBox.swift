@@ -14,7 +14,7 @@ class SmallInfoBox: UIView {
     private let titleStack = UIStackView()
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
-    let valueLabel = UILabel()
+    internal let valueLabel = UILabel()
     
     // MARK: - Lifecycle
     

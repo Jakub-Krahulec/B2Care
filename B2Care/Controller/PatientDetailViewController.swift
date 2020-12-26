@@ -28,8 +28,8 @@ class PatientDetailViewController: UIViewController {
     private let doctorPhoneInfoBox = ContactSmallInfoBox()
     private let addressInfoBox = SmallInfoBox()
     private let proffesionInfoBox = SmallInfoBox()
-    private let secondtLine = UIStackView()
-    private let thirdLine = UIStackView()
+    private let contactsStack = UIStackView()
+    private let addressStack = UIStackView()
     
     var patientId: Int? {
         didSet{
@@ -129,10 +129,10 @@ class PatientDetailViewController: UIViewController {
         
         prepareSmallInfoBoxStyle(personalPhoneInfoBox)
         prepareSmallInfoBoxStyle(doctorPhoneInfoBox)
-        prepareHorizontalStack(secondtLine, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
+        prepareHorizontalStack(contactsStack, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
         prepareSmallInfoBoxStyle(addressInfoBox)
         prepareSmallInfoBoxStyle(proffesionInfoBox)
-        prepareHorizontalStack(thirdLine, smallInfos: [addressInfoBox,proffesionInfoBox])
+        prepareHorizontalStack(addressStack, smallInfos: [addressInfoBox,proffesionInfoBox])
         
         prepareVerticalStackStyle()
         
@@ -151,6 +151,10 @@ class PatientDetailViewController: UIViewController {
     }
     
     private func prepareSmallInfoBoxStyle(_ box: SmallInfoBox){
+        if let contactBox = box as? ContactSmallInfoBox{
+            contactBox.delegate = self
+        }
+        
         box.snp.makeConstraints { (make) in
             make.width.equalTo((view.frame.width / 2) - 5)
             //make.height.equalTo(80)
@@ -197,8 +201,8 @@ class PatientDetailViewController: UIViewController {
         verticalStack.addArrangedSubview(alergiesInfoBox)
         verticalStack.addArrangedSubview(medicationsInfoBox)
         verticalStack.addArrangedSubview(importantInfoBox)
-        verticalStack.addArrangedSubview(secondtLine)
-        verticalStack.addArrangedSubview(thirdLine)
+        verticalStack.addArrangedSubview(contactsStack)
+        verticalStack.addArrangedSubview(addressStack)
         
         scrollView.addSubview(verticalStack)
         verticalStack.snp.makeConstraints { (make) in
@@ -212,6 +216,24 @@ extension PatientDetailViewController: BaseHeaderDelegate{
     func backButtonTapped() {
         _ = navigationController?.popViewController(animated: true)
     }
-    
-    
+}
+
+extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
+    func callButtonTapped(phoneNumber: String) {
+        let number = phoneNumber.filter { !$0.isWhitespace }
+        
+        if let phoneCallURL = URL(string: "telprompt://\(number)") {
+            
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                    application.openURL(phoneCallURL as URL)
+                    
+                }
+            }
+        }
+    }
 }
