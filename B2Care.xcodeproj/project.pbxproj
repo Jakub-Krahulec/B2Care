@@ -30,7 +30,6 @@
 		2A7EA3872596604700CD8402 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3862596604700CD8402 /* Insurance.swift */; };
 		2A7EA38C25966D6000CD8402 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38B25966D6000CD8402 /* DetailHeaderView.swift */; };
 		2A7EA390259670B000CD8402 /* PatientDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */; };
-		2A7EA39325967A6700CD8402 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39225967A6700CD8402 /* BackButton.swift */; };
 		2A7EA39625967CCD00CD8402 /* BaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39525967CCD00CD8402 /* BaseHeaderView.swift */; };
 		2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */; };
 		2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
@@ -42,6 +41,7 @@
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
 		2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientDetailViewController.swift */; };
+		2ACBD0E62597D71200A461AB /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACBD0E52597D71200A461AB /* SearchHeaderView.swift */; };
 		61003584433EE3661080D064 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +69,6 @@
 		2A7EA3862596604700CD8402 /* Insurance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
 		2A7EA38B25966D6000CD8402 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsView.swift; sourceTree = "<group>"; };
-		2A7EA39225967A6700CD8402 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		2A7EA39525967CCD00CD8402 /* BaseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHeaderView.swift; sourceTree = "<group>"; };
 		2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSmallInfoBox.swift; sourceTree = "<group>"; };
 		2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.debug.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB71B3225936B6000965423 /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
+		2ACBD0E52597D71200A461AB /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.release.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.release.xcconfig"; sourceTree = "<group>"; };
 		E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,7 +139,6 @@
 				2A0F258A25924CD20077DD02 /* LoginView.swift */,
 				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
 				2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */,
-				2A7EA39225967A6700CD8402 /* BackButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 				2A0F2587259247F10077DD02 /* LoginHeaderView.swift */,
 				2A7EA38B25966D6000CD8402 /* DetailHeaderView.swift */,
 				2A7EA39525967CCD00CD8402 /* BaseHeaderView.swift */,
+				2ACBD0E52597D71200A461AB /* SearchHeaderView.swift */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -363,7 +363,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A7EA39325967A6700CD8402 /* BackButton.swift in Sources */,
 				2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */,
 				2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */,
 				2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */,
@@ -393,6 +392,7 @@
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */,
 				2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */,
+				2ACBD0E62597D71200A461AB /* SearchHeaderView.swift in Sources */,
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
 				2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */,
 				2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */,

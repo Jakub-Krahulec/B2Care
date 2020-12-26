@@ -7,8 +7,14 @@
 
 import UIKit
 
-protocol BaseHeaderDelegate{
-    func backButtonTapped()
+protocol BaseHeaderDelegate where Self: UIViewController{
+    
+}
+
+extension BaseHeaderDelegate{
+    func backButtonTapped(){
+        _ = navigationController?.popViewController(animated: true)
+    }
 }
 
 class BaseHeaderView: UIView {

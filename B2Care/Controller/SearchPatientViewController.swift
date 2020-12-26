@@ -8,11 +8,11 @@
 import UIKit
 import AVFoundation
 
-class SearchPatientViewController: UIViewController {
+class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserButtonDelegate {
     // MARK: - Properties
-    
-   
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    private let headerView = SearchHeaderView()
+  
+    private var previewLayer: AVCaptureVideoPreviewLayer!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -38,7 +38,9 @@ class SearchPatientViewController: UIViewController {
         output.metadataObjectTypes = [.qr]
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = view.layer.bounds
+        
+        let headerHeight = (view.frame.height / 10) + 35
+        previewLayer.frame =  CGRect(x: 0, y: headerHeight, width: view.frame.width, height: view.frame.height - headerHeight)
         view.layer.addSublayer(previewLayer)
         
         session.startRunning()
@@ -50,7 +52,19 @@ class SearchPatientViewController: UIViewController {
     // MARK: - Helpers
     
     private func prepareView(){
-        
+        view.backgroundColor = .backgroundLight
+        prepareHeaderViewStyle()
+       
+
+    }
+    
+    private func prepareHeaderViewStyle(){
+        view.addSubview(headerView)
+        headerView.logoutButton.delegate = self
+        headerView.snp.makeConstraints { (make) in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo((view.frame.height / 10) + 35)
+        }
     }
 
 }
@@ -68,3 +82,4 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
     
 }
+

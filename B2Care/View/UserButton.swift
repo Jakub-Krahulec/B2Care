@@ -7,9 +7,34 @@
 
 import UIKit
 
+protocol UserButtonDelegate where Self: UIViewController{
+    
+}
+
+extension UserButtonDelegate{
+    func buttonTapped(){
+        B2CareService.shared.logout()
+        
+        
+        let transition = CATransition()
+        transition.duration = 1
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromBottom
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        navigationController?.pushViewController(LoginViewController(), animated: false)
+    }
+}
+
 class UserButton: UIButton {
 
     // MARK: - Properties
+    var delegate: UserButtonDelegate?
+    
+    @objc private func handleUserButtonTapped(){
+        delegate?.buttonTapped()
+    }
     
     // MARK: - Lifecycle
     
@@ -31,5 +56,6 @@ class UserButton: UIButton {
         imageView?.contentMode = .scaleAspectFill
         imageEdgeInsets = UIEdgeInsets(top: 28, left: 28, bottom: 28, right: 28)
         tintColor = .white
+        self.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
     }
 }

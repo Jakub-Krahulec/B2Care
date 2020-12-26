@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PatientDetailViewController: UIViewController {
+class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
@@ -212,11 +212,6 @@ class PatientDetailViewController: UIViewController {
     }
 }
 
-extension PatientDetailViewController: BaseHeaderDelegate{
-    func backButtonTapped() {
-        _ = navigationController?.popViewController(animated: true)
-    }
-}
 
 extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
     func callButtonTapped(phoneNumber: String) {

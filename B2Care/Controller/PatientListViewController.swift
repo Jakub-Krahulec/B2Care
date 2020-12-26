@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientListViewController: UIViewController {
+class PatientListViewController: UIViewController, UserButtonDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
     private let table = UITableView()
@@ -39,20 +39,6 @@ class PatientListViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
-    @objc private func handleUserButtonTapped(){
-        B2CareService.shared.logout()
-        
-        
-        let transition = CATransition()
-        transition.duration = 1
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromBottom
-        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        
-        navigationController?.pushViewController(LoginViewController(), animated: false)
-    }
     
     @objc private func refresh(_ sender: AnyObject){
         fetchPatients()
@@ -105,7 +91,8 @@ class PatientListViewController: UIViewController {
     }
     
     private func prepareUserButtonStyle(){
-        userButton.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
+       // userButton.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
+        userButton.delegate = self
         
         view.addSubview(userButton)
         userButton.snp.makeConstraints { (make) in
@@ -171,7 +158,6 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-
 
 extension PatientListViewController: UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
