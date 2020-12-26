@@ -8,83 +8,41 @@
 import UIKit
 import AVFoundation
 
-class SearchPatientViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class SearchPatientViewController: UIViewController {
     // MARK: - Properties
-    var captureSession = AVCaptureSession()
-    var previewLayer =  AVCaptureVideoPreviewLayer()
+    
+   
+    var previewLayer: AVCaptureVideoPreviewLayer!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
+
+        let session  = AVCaptureSession()
         
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {return}
-        let videoInput: AVCaptureDeviceInput
-        
+        let captureDevice = AVCaptureDevice.default(for: .video)
+        guard let device = captureDevice else {return}
         do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            let input = try AVCaptureDeviceInput(device: device)
+            session.addInput(input)
         } catch {
-            failed()
-            return
+            print(error.localizedDescription)
         }
         
-        if captureSession.canAddInput(videoInput){
-            captureSession.addInput(videoInput)
-        } else {
-            failed()
-            return
-        }
+        let output = AVCaptureMetadataOutput()
+        session.addOutput(output)
         
-        let metadtaOutput = AVCaptureMetadataOutput()
+        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         
-        if captureSession.canAddOutput(metadtaOutput){
-            captureSession.addOutput(metadtaOutput)
-            
-            metadtaOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadtaOutput.metadataObjectTypes = [.qr]
-        } else {
-            failed()
-            return
-        }
+        output.metadataObjectTypes = [.qr]
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.frame = view.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
         
-        captureSession.startRunning()
+        session.startRunning()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (captureSession.isRunning == false) {
-            captureSession.startRunning()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (captureSession.isRunning == true) {
-            captureSession.stopRunning()
-        }
-    }
-    
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
-        
-        if let metadataObject = metadataObjects.first {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
-        }
-        
-        dismiss(animated: true)
-    }
-    
-   
     
     // MARK: - Actions
     
@@ -92,15 +50,21 @@ class SearchPatientViewController: UIViewController, AVCaptureMetadataOutputObje
     // MARK: - Helpers
     
     private func prepareView(){
-        view.backgroundColor = .backgroundLight
-    }
-    
-    func failed() {
-        showMessage(withTitle: "Chyba", message: "Skenování není podporováno")
-    }
-    
-    func found(code: String) {
-        print(code)
+        
     }
 
+}
+
+extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if metadataObjects.count <= 0{
+            return
+        }
+        guard let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else {return}
+        if object.type == AVMetadataObject.ObjectType.qr{
+            showMessage(withTitle: "QR Kód", message: object.stringValue ?? "")
+        }
+    }
+    
 }
