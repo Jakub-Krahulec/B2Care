@@ -37,7 +37,7 @@ class LoginHeaderView: UIView {
     
     private func prepareHeaderImageViewStyle(){
         headerImage.image = UIImage(systemName: "app.fill")
-        headerImage.tintColor = .green
+        headerImage.tintColor = .gray
         addSubview(headerImage)
         headerImage.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -48,7 +48,8 @@ class LoginHeaderView: UIView {
     
     func prepareGradientStyle(){
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.headerMainColor.cgColor, UIColor.headerSecondaryColor.cgColor]
+       // gradient.colors = [UIColor.headerMainColor.cgColor, UIColor.headerSecondaryColor.cgColor]
+        gradient.colors = [UIColor.mainColor.cgColor, UIColor.blue.cgColor]
         gradient.frame = self.bounds
         gradient.startPoint = CGPoint(x: 0, y: 1)
         gradient.endPoint = CGPoint(x: 1, y: 0)

@@ -24,6 +24,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         prepareView()
     }
     
@@ -167,9 +168,11 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = PatientDetailViewController()
-        controller.patientId = patients?.data[indexPath.row].id
-        navigationController?.pushViewController(controller, animated: true)
+        if !UIApplication.shared.isKeyboardPresented{
+            let controller = PatientDetailViewController()
+            controller.patientId = patients?.data[indexPath.row].id
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
 

@@ -13,14 +13,13 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
     private let headerView = SearchHeaderView()
   
     private var previewLayer: AVCaptureVideoPreviewLayer!
+    let session  = AVCaptureSession()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
 
-        let session  = AVCaptureSession()
-        
         let captureDevice = AVCaptureDevice.default(for: .video)
         guard let device = captureDevice else {return}
         do {
@@ -42,8 +41,14 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
         let headerHeight = (view.frame.height / 10) + 35
         previewLayer.frame =  CGRect(x: 0, y: headerHeight, width: view.frame.width, height: view.frame.height - headerHeight)
         view.layer.addSublayer(previewLayer)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         session.startRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        session.stopRunning()
     }
     
     // MARK: - Actions
@@ -77,7 +82,31 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         guard let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else {return}
         if object.type == AVMetadataObject.ObjectType.qr{
-            showMessage(withTitle: "QR Kód", message: object.stringValue ?? "")
+          //  showMessage(withTitle: "QR Kód", message: object.stringValue ?? "")
+            guard let patient = object.stringValue else {return}
+            self.session.stopRunning()
+            
+            B2CareService.shared.fetchPatients(parameters: "?search=\(patient)") { [weak self] (result) in
+                switch result{
+                    case .success(let data):
+                        if data.data.count > 1{
+                            self?.showMessage(withTitle: "Chyba", message: "Nalezen víc než jeden pacient")
+                            self?.session.startRunning()
+                            return
+                        } else if data.data.count < 1{
+                            self?.showMessage(withTitle: "Chyba", message: "Pacient nenalezen")
+                            self?.session.startRunning()
+                        } else {
+                            let controller = PatientDetailViewController()
+                            
+                            controller.patientId = data.data[0].id
+                            self?.navigationController?.pushViewController(controller, animated: true)
+                        }   
+                    case .failure(let error):
+                        self?.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        self?.session.startRunning()
+                }
+            }
         }
     }
     
