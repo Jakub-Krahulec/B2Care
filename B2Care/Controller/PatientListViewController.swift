@@ -36,6 +36,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+       // searchInput.text = ""
       //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -46,15 +47,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     }
     
     @objc private func handleSearchChangedValue(){
-        guard let text = searchInput.text else {
-            fetchPatients()
-            return
-        }
-        if text.count > 0{
-            fetchPatients(parameters: "?search=\(text)")
-        } else {
-            fetchPatients()
-        }
+        fetchPatients()
     }
     
     // MARK: - Helpers
@@ -68,8 +61,14 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         prepareTableViewStyle()
     }
     
-    private func fetchPatients(parameters: String = ""){
-        B2CareService.shared.fetchPatients(parameters: parameters) { (result) in
+    private func fetchPatients(){
+        var params = ""
+        if let text = searchInput.text  {
+            if text.count > 0{
+                params = "?search=\(text)"
+            }
+        }
+        B2CareService.shared.fetchPatients(parameters: params) { (result) in
             switch result{
                 
                 case .success(let data):
