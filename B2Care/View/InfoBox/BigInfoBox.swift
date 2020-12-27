@@ -45,7 +45,7 @@ class BigInfoBox: UIView {
     }
     
     private func prepareUpdatedLabelStyle(){
-        updatedLabel.text = "Aktualizováno 4.5.2020 ve 3:31"
+       // updatedLabel.text = "Aktualizováno 4.5.2020 ve 3:31"
         updatedLabel.textColor = .lightGray
         updatedLabel.textAlignment = .right
         updatedLabel.font = UIFont.systemFont(ofSize: 10)
@@ -98,10 +98,11 @@ class BigInfoBox: UIView {
         }
     }
     
-    public func updateView(image: UIImage?, title: String, value: String, tintColor: UIColor = .mainColor){
+    public func updateView(image: UIImage?, title: String, value: String, updated: String, tintColor: UIColor = .mainColor){
         imageView.image = image
         imageView.tintColor = tintColor
         titleLabel.text = title
         valueLabel.text = value
+        updatedLabel.text = "Aktualizováno \(updated)"
     }
 }

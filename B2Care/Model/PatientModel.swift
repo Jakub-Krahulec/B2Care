@@ -15,6 +15,8 @@ struct Patient: Codable {
     var allergies: [Alergy]
     var person: Person
     var medicationDispenses: [MedicationDispenses]
+    var created: String?
+    var updated: String?
 }
 
 

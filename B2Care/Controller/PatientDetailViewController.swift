@@ -77,10 +77,15 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         guard let person = person else {return}
        // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
         headerView.data = data
+        let updatedDate = DateService.shared.getDateFromString(person.updated ?? person.created ?? "")
+        var updated = ""
+        if let updatedDate = updatedDate{
+            updated = DateService.shared.getFormattedString(from: updatedDate)
+        }
         
         insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: person.birthNumber)
         idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: "Diagnóza")
+        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: "Diagnóza", updated: updated)
         
         var allergies = ""
         for alergy in person.allergies{
@@ -88,7 +93,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         }
         allergies = String(allergies.dropLast(2))
         
-        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: allergies, tintColor: .systemRed)
+        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: allergies, updated: updated, tintColor: .systemRed)
         
         var medications = ""
         for medication in person.medicationDispenses{
@@ -98,8 +103,8 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         medications = String(medications.dropLast(2))
         
         
-        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: medications, tintColor: .systemGreen)
-        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, tintColor: .gray)
+        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: medications, updated: updated, tintColor: .systemGreen)
+        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, updated: updated, tintColor: .gray)
         
         personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: "+420 123 456 789")
         doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: "+420 123 456 789")
