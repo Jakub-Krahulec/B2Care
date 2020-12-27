@@ -83,7 +83,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
             updated = DateService.shared.getFormattedString(from: updatedDate)
         }
         
-        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: person.birthNumber)
+        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: "-")
         idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
         diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: "Diagnóza", updated: updated)
         
@@ -105,11 +105,25 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         
         medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: medications, updated: updated, tintColor: .systemGreen)
         importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, updated: updated, tintColor: .gray)
+        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: person.person.contacts.count > 0 ? person.person.contacts[0].value : "-")
         
-        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: "+420 123 456 789")
-        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: "+420 123 456 789")
-        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: "Nová 1112, Praha 9, 180 00")
-        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: "Programátor")
+        let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
+        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: doctorNumber)
+        
+        var address = ""
+        if person.person.addresses.count > 0{
+            if let address1 = person.person.addresses[0].address1{
+                address += address1 + ", "
+            }
+            if let city = person.person.addresses[0].city{
+                address += city
+            }
+        } else {
+            address = "-"
+        }
+        
+        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: address)
+        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: person.jobDescription  ?? "-")
     }
     
     private func prepareView(){

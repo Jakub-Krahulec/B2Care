@@ -41,6 +41,10 @@ class ContactSmallInfoBox: SmallInfoBox {
 
     override func updateView(image: UIImage?, title: String, value: String) {
         super.updateView(image: image, title: title, value: value)
+        if value == "-"{
+            callButton.tintColor = .darkGray
+            callButton.isEnabled = false
+        }
     }
     
     override func prepareDynamicHeight() {
@@ -48,6 +52,7 @@ class ContactSmallInfoBox: SmallInfoBox {
     }
     
     private func prepareView(){
+        super.imageView.removeFromSuperview()
         prepareCallButtonStyle()
         
         
@@ -61,6 +66,7 @@ class ContactSmallInfoBox: SmallInfoBox {
         callButton.setTitle(" VOLAT", for: .normal)
         callButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         callButton.setTitleColor(.mainColor, for: .normal)
+        callButton.setTitleColor(.darkGray, for: .disabled)
         callButton.setImage(UIImage(systemName: "phone.fill.arrow.up.right"), for: .normal)
         callButton.imageEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         callButton.addTarget(self, action: #selector(handleCallButtonTapped), for: .touchUpInside)

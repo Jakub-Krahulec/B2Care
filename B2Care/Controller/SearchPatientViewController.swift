@@ -12,7 +12,7 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
     // MARK: - Properties
     private let headerView = SearchHeaderView()
   
-    private var previewLayer: AVCaptureVideoPreviewLayer!
+    private var previewLayer = AVCaptureVideoPreviewLayer()
     let session  = AVCaptureSession()
     
     // MARK: - Lifecycle
@@ -36,7 +36,8 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
         
         output.metadataObjectTypes = [.qr]
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        previewLayer.session = session
+       // previewLayer =  AVCaptureVideoPreviewLayer(session: session)
         
         let headerHeight = (view.frame.height / 10) + 35
         previewLayer.frame =  CGRect(x: 0, y: headerHeight, width: view.frame.width, height: view.frame.height - headerHeight)

@@ -11,9 +11,9 @@ import SnapKit
 class SmallInfoBox: UIView {
 
     // MARK: - Properties
-    private let titleStack = UIStackView()
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
+    internal let titleStack = UIStackView()
+    internal let imageView = UIImageView()
+    internal let titleLabel = UILabel()
     internal let valueLabel = UILabel()
     
     // MARK: - Lifecycle

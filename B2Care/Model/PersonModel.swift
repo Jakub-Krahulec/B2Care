@@ -13,5 +13,6 @@ struct Person: Codable {
     var surname: String
     var gender: Gender
     var dateOfBirth: String
-    
+    var addresses: [Address]
+    var contacts: [Contact]
 }

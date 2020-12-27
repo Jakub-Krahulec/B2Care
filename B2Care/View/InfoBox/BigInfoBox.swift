@@ -94,7 +94,7 @@ class BigInfoBox: UIView {
         addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10) //.equalToSuperview().offset(12)
-            make.left.equalToSuperview().offset(10)
+            make.left.right.equalToSuperview().offset(10)
         }
     }
     
