@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginViewDelegate {
     // MARK: - Properties
     private let headerView = LoginHeaderView()
     private let loginView = LoginView()
@@ -81,8 +81,3 @@ class LoginViewController: UIViewController {
     
 }
 
-extension LoginViewController: LoginViewDelegate{
-    func userDidLogIn() {
-        navigationController?.pushViewController(MainTabViewController(), animated: true)
-    }
-}

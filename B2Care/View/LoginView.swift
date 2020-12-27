@@ -7,8 +7,14 @@
 
 import UIKit
 
-protocol LoginViewDelegate{
-    func userDidLogIn()
+protocol LoginViewDelegate where Self: UIViewController{
+   // func userDidLogIn()
+}
+
+extension LoginViewDelegate{
+    func userDidLogIn(){
+        navigationController?.pushViewController(MainTabViewController(), animated: true)
+    }
 }
 
 class LoginView: UIView {
