@@ -18,7 +18,13 @@ struct Patient: Codable {
     var created: String?
     var updated: String?
     var generalPractitioners: [Doctor]
+    var hospitalizations: [Hospitalization]
 }
+
+
+
+
+
 
 
 

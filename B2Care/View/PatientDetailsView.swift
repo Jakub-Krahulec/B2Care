@@ -45,14 +45,30 @@ class PatientDetailsView: UIView {
     }
     
     private func updateView(with data: Any?){
-        if let data = data as? Person{
-            let age = DateService.shared.getAgeFromString(data.dateOfBirth)
+        if let data = data as? Patient{
+            let age = DateService.shared.getAgeFromString(data.person.dateOfBirth)
             if let age = age {
-                ageLabel.text = "\(age), \(data.gender.title.first ?? " ")"
+                ageLabel.text = "\(age), \(data.person.gender.title.first ?? " ")"
             }
             else {
-                ageLabel.text = "\(data.dateOfBirth), \(data.gender.title.first ?? " ")"
+                ageLabel.text = "\(data.person.dateOfBirth), \(data.person.gender.title.first ?? " ")"
             }
+            
+            var location = ""
+            if data.hospitalizations.count > 0 {
+                if let name = data.hospitalizations[0].location.name{
+                    location += "\(name), "
+                }
+//                if let building = data.hospitalizations[0].location.building{
+//                    location += "\(building), "
+//                }
+                if let room = data.hospitalizations[0].location.room{
+                    location += "Pokoj \(room)"
+                }
+            } else {
+                location = "-"
+            }
+            departmentLabel.text = location
         }
     }
     
@@ -82,7 +98,7 @@ class PatientDetailsView: UIView {
     }
     
     private func prepareDepartmentLabelStyle(){
-        departmentLabel.text = "Chirurgie I, Pokoj 232/1"
+       // departmentLabel.text = "Chirurgie I, Pokoj 232/1"
         departmentLabel.font = UIFont.boldSystemFont(ofSize: 10)
         departmentLabel.textColor = .lightGray
         
@@ -106,7 +122,7 @@ class PatientDetailsView: UIView {
     }
     
     private func prepareAgeLabelStyle(){
-        ageLabel.text = "57 let, M"
+       // ageLabel.text = "57 let, M"
         ageLabel.font = UIFont.boldSystemFont(ofSize: 10)
         ageLabel.textColor = .lightGray
         

@@ -76,7 +76,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     private func updateView(with person: Patient?){
         guard let person = person else {return}
        // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
-        headerView.data = data
+        headerView.data = person
         let updatedDate = DateService.shared.getDateFromString(person.updated ?? person.created ?? "")
         var updated = ""
         if let updatedDate = updatedDate{
@@ -85,7 +85,10 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         
         insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: "-")
         idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: "Diagnóza", updated: updated)
+        
+        let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : "-"
+        
+        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: diagnosis, updated: updated)
         
         var allergies = ""
         for alergy in person.allergies{

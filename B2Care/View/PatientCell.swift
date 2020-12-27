@@ -56,8 +56,8 @@ class PatientCell: UITableViewCell {
     
     // MARK: - Helpers
     private func updateView(with data: Any?){
-        if let data = data as? Person{
-            nameLabel.text = "\(data.firstname) \(data.surname)"
+        if let data = data as? Patient{
+            nameLabel.text = "\(data.person.firstname) \(data.person.surname)"
             diagnosisLabel.text = "Diagnóza"
             patientDetailsView.data = data
         }

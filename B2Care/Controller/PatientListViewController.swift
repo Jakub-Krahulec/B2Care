@@ -24,7 +24,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround(cancelsTouchesInView: false)
         prepareView()
     }
     
@@ -140,7 +140,7 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         if let cell = table.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? PatientCell{
             cell.selectionStyle = .none
             if let data = patients {
-                cell.data = data.data[indexPath.row].person
+                cell.data = data.data[indexPath.row]
             }
             return cell
         }
