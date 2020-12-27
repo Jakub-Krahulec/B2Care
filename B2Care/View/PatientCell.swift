@@ -46,7 +46,6 @@ class PatientCell: UITableViewCell {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 13
         
-        // Your border code here (set border to contentView)
         self.contentView.layer.borderColor = UIColor.backgroundLight.cgColor
         self.contentView.layer.borderWidth = 5
     }

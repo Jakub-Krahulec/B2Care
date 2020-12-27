@@ -13,6 +13,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
+    private let refreshControl = UIRefreshControl()
     private let headerView = DetailHeaderView()
     private let verticalStack = UIStackView()
     private let insuranceInfoBox = SmallInfoBox()
@@ -70,6 +71,12 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     
     // MARK: - Actions
     
+    @objc private func refresh(_ sender: AnyObject){
+        //fetchPatients()
+        refreshControl.endRefreshing()
+        patientId = data?.id
+        
+    }
     
     // MARK: - Helpers
     
@@ -139,6 +146,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         prepareHeaderViewStyle()
         
         prepareScrollViewStyle()
+        prepareRefreshControlStyle()
         
         prepareSmallInfoBoxStyle(insuranceInfoBox)
         prepareSmallInfoBoxStyle(idNumberInfoBox)
@@ -161,6 +169,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         scrollView.snp.makeConstraints { (make) in
             make.bottom.equalTo(verticalStack).offset(20)
         }
+    }
+    
+    private func prepareRefreshControlStyle(){
+        refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+       // scrollView.addSubview(refreshControl)
+        scrollView.refreshControl = refreshControl
     }
     
     private func prepareHeaderViewStyle(){
@@ -206,6 +221,8 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     }
         
     private func prepareScrollViewStyle(){
+        //scrollView.isScrollEnabled = true
+        //scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.top.equalTo(headerView.snp.bottom)

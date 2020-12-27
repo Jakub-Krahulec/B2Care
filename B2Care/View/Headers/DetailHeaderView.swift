@@ -59,7 +59,7 @@ class DetailHeaderView: BaseHeaderView {
     }
     
     private func prepareTitleLabelStyle(){
-        titleLabel.text = "Pavel Novák"
+       // titleLabel.text = "Pavel Novák"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 19)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center

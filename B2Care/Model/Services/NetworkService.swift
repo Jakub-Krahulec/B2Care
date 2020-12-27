@@ -38,7 +38,7 @@ class NetworkService{
             .responseJSON { (response) in
                 switch response.result{
                     
-                    case .success(let data):
+                    case .success(_):
                         do{
                             if let data = response.data{
                                 let decoded = try JSONDecoder().decode(T.self, from: data)
