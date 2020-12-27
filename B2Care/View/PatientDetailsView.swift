@@ -73,7 +73,7 @@ class PatientDetailsView: UIView {
     }
     
     private func prepareView(){
-        self.backgroundColor = .green
+        //self.backgroundColor = .green
         prepareLocationImageStyle()
         prepareDepartmentLabelStyle()
         preparePersonImageStyle()
@@ -99,7 +99,7 @@ class PatientDetailsView: UIView {
     
     private func prepareDepartmentLabelStyle(){
        // departmentLabel.text = "Chirurgie I, Pokoj 232/1"
-        departmentLabel.font = UIFont.boldSystemFont(ofSize: 10)
+        departmentLabel.font = UIFont.boldSystemFont(ofSize: 12)
         departmentLabel.textColor = .lightGray
         
         addSubview(departmentLabel)
@@ -115,7 +115,7 @@ class PatientDetailsView: UIView {
         
         addSubview(personImage)
         personImage.snp.makeConstraints { (make) in
-            make.left.equalTo(departmentLabel.snp.right).offset(10)
+            make.left.equalTo(departmentLabel.snp.right).offset(12)
             make.top.equalTo(locationImage)
             make.height.width.equalTo(15)
         }
@@ -123,7 +123,7 @@ class PatientDetailsView: UIView {
     
     private func prepareAgeLabelStyle(){
        // ageLabel.text = "57 let, M"
-        ageLabel.font = UIFont.boldSystemFont(ofSize: 10)
+        ageLabel.font = UIFont.boldSystemFont(ofSize: 12)
         ageLabel.textColor = .lightGray
         
         addSubview(ageLabel)
