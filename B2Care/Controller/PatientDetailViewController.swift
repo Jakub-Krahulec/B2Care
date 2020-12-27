@@ -13,8 +13,10 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
+  //  private let tabbar = UITabBar()
+
     private let refreshControl = UIRefreshControl()
-    private let headerView = DetailHeaderView()
+  //  private let headerView = DetailHeaderView()
     private let verticalStack = UIStackView()
     private let insuranceInfoBox = SmallInfoBox()
     private let idNumberInfoBox = SmallInfoBox()
@@ -83,7 +85,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     private func updateView(with person: Patient?){
         guard let person = person else {return}
         // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
-        headerView.data = person
+     //   headerView.data = person
         let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : "-"
         let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
         
@@ -101,12 +103,6 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
-        
-        //   navigationController?.navigationBar.isTranslucent = false
-        //        let headerView = DetailHeaderView()
-        //        navigationItem.titleView = headerView
-        
-        prepareHeaderViewStyle()
         
         prepareScrollViewStyle()
         prepareRefreshControlStyle()
@@ -140,16 +136,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         // scrollView.addSubview(refreshControl)
         scrollView.refreshControl = refreshControl
     }
-    
-    private func prepareHeaderViewStyle(){
-        headerView.delegate = self
-        view.addSubview(headerView)
-        headerView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo((view.frame.height / 10) + 35)
-        }
-    }
-    
+
     private func prepareSmallInfoBoxStyle(_ box: SmallInfoBox){
         if let contactBox = box as? ContactSmallInfoBox{
             contactBox.delegate = self
@@ -188,7 +175,8 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         //scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            make.top.equalTo(headerView.snp.bottom)
+            //make.top.equalTo(tabbar.snp.bottom).offset(5)
+            make.top.equalToSuperview().offset(5)
             make.left.right.bottom.equalToSuperview().inset(5)
         }
     }
@@ -277,3 +265,4 @@ extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
         }
     }
 }
+

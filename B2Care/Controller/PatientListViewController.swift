@@ -168,7 +168,10 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !UIApplication.shared.isKeyboardPresented{
-            let controller = PatientDetailViewController()
+//            let controller = PatientDetailViewController()
+//            controller.patientId = patients?.data[indexPath.row].id
+            
+            let controller = PatientMenuViewController()
             controller.patientId = patients?.data[indexPath.row].id
             navigationController?.pushViewController(controller, animated: true)
         }

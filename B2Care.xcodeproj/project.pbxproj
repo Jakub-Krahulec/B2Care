@@ -29,6 +29,7 @@
 		2A71E1F72598F2D4002FE11A /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F62598F2D4002FE11A /* LocationModel.swift */; };
 		2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */; };
 		2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */; };
+		2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */; };
 		2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3752596590A00CD8402 /* PatientResponse.swift */; };
 		2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37825965B5A00CD8402 /* PatientModel.swift */; };
 		2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */; };
@@ -74,6 +75,7 @@
 		2A71E1F62598F2D4002FE11A /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisModel.swift; sourceTree = "<group>"; };
 		2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalizationModel.swift; sourceTree = "<group>"; };
+		2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMenuViewController.swift; sourceTree = "<group>"; };
 		2A7EA3752596590A00CD8402 /* PatientResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientResponse.swift; sourceTree = "<group>"; };
 		2A7EA37825965B5A00CD8402 /* PatientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientModel.swift; sourceTree = "<group>"; };
 		2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlergyModel.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */,
 				2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */,
 				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
+				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
 				2A888FA82593CBB600B6E5DC /* DateService.swift in Sources */,
 				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,
+				2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */,
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
 				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
