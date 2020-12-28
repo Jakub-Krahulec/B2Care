@@ -125,8 +125,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         
         prepareVerticalStackStyle()
         
+        let headerHeight = (view.frame.height / 10) + 35
+        let tabbarHeight: CGFloat = 50
+        let buttonsHeight: CGFloat = 50
+        let padding: CGFloat = 45
+        let offset: CGFloat = headerHeight + tabbarHeight + buttonsHeight + padding
         scrollView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(verticalStack).offset(20)
+            make.bottom.equalTo(verticalStack).offset(offset)
         }
     }
     

@@ -98,7 +98,7 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                             self?.showMessage(withTitle: "Chyba", message: "Pacient nenalezen")
                             self?.session.startRunning()
                         } else {
-                            let controller = PatientDetailViewController()
+                            let controller = PatientMenuViewController()
                             
                             controller.patientId = data.data[0].id
                             self?.navigationController?.pushViewController(controller, animated: true)
