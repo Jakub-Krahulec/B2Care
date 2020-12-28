@@ -10,6 +10,7 @@ import UIKit
 class PatientListViewController: UIViewController, UserButtonDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
+    private var isKeyboardShown = false
     private let table = UITableView()
     private let searchInput = SearchField()
     private let userButton = UserButton()
@@ -31,11 +32,14 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        setupNotificationObservers()
+        hideKeyboard()
         fetchPatients()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
        // searchInput.text = ""
       //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -50,11 +54,31 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         fetchPatients()
     }
     
+    @objc private func keyboardDidHide(notification: Notification){
+        // print("Notification: Keyboard will hide")
+        table.scrollIndicatorInsets = .zero
+        table.contentInset = .zero
+        table.layoutIfNeeded()
+        isKeyboardShown = false
+    }
+    
+    @objc private func keyboardDidShow(notification: Notification){
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            //  print("Notification: Keyboard will show")
+            table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            table.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        }
+        isKeyboardShown = true
+    }
+    
     // MARK: - Helpers
+    private func setupNotificationObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
     
     private func prepareView(){
         view.backgroundColor = .mainColor
-       // hideKeyboardWhenTappedAround()
         prepareRefreshControlStyle()
         prepareUserButtonStyle()
         prepareSearchFieldStyle()
@@ -167,10 +191,7 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !UIApplication.shared.isKeyboardPresented{
-//            let controller = PatientDetailViewController()
-//            controller.patientId = patients?.data[indexPath.row].id
-            
+        if !isKeyboardShown{
             let controller = PatientMenuViewController()
             controller.patientId = patients?.data[indexPath.row].id
             navigationController?.pushViewController(controller, animated: true)

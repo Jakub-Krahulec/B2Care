@@ -25,7 +25,6 @@
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
-		2A5B66F3259A354C00FF7105 /* DocumentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66F2259A354C00FF7105 /* DocumentDetailViewController.swift */; };
 		2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1EA2598DB80002FE11A /* MedicationModel.swift */; };
 		2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1ED2598DBFD002FE11A /* AddressModel.swift */; };
 		2A71E1F12598DC78002FE11A /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F02598DC78002FE11A /* ContactModel.swift */; };
@@ -76,7 +75,6 @@
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
-		2A5B66F2259A354C00FF7105 /* DocumentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailViewController.swift; sourceTree = "<group>"; };
 		2A71E1EA2598DB80002FE11A /* MedicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationModel.swift; sourceTree = "<group>"; };
 		2A71E1ED2598DBFD002FE11A /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		2A71E1F02598DC78002FE11A /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
 				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
 				2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */,
-				2A5B66F2259A354C00FF7105 /* DocumentDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -425,7 +422,6 @@
 				2A71E1F12598DC78002FE11A /* ContactModel.swift in Sources */,
 				2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */,
 				2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */,
-				2A5B66F3259A354C00FF7105 /* DocumentDetailViewController.swift in Sources */,
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
 				2A888FA82593CBB600B6E5DC /* DateService.swift in Sources */,
 				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,

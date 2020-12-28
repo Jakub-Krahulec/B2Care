@@ -16,6 +16,8 @@ class DocumentsViewController: UIViewController {
     private let cellId = "CellID"
     private var fileURL: URL?
     private lazy var previewController = QLPreviewController()
+    private let documentsRefreshControl = UIRefreshControl()
+    private let labRefreshControl = UIRefreshControl()
     
     var documentsData: DocumentsData? {
         didSet{
@@ -41,6 +43,15 @@ class DocumentsViewController: UIViewController {
     }
     // MARK: - Actions
     
+    @objc private func refreshDocuments(_ sender: AnyObject){
+        documentsRefreshControl.endRefreshing()
+        print("refresh")
+    }
+    
+    @objc private func refreshLabs(_ sender: AnyObject){
+        labRefreshControl.endRefreshing()
+        print("refresh")
+    }
     
     // MARK: - Helpers
     
@@ -63,6 +74,11 @@ class DocumentsViewController: UIViewController {
         labTable.layer.cornerRadius = 10
         labTable.separatorInset = .zero
         
+        labTable.refreshControl = labRefreshControl
+        labRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+        labRefreshControl.addTarget(self, action: #selector(refreshLabs(_:)), for: .valueChanged)
+        
+        
         view.addSubview(labTable)
         labTable.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview().inset(5)
@@ -81,6 +97,11 @@ class DocumentsViewController: UIViewController {
         documentTable.allowsSelection = true
         documentTable.layer.cornerRadius = 10
         documentTable.separatorInset = .zero
+        
+        documentTable.refreshControl = documentsRefreshControl
+        documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+        documentsRefreshControl.addTarget(self, action: #selector(refreshDocuments(_:)), for: .valueChanged)
+        
         
         view.addSubview(documentTable)
         documentTable.snp.makeConstraints { (make) in
@@ -184,6 +205,8 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
                 if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
                     previewController.modalPresentationStyle = .popover
                     previewController.modalTransitionStyle = .flipHorizontal
+                    previewController.preferredContentSize = CGSize(width: 150, height: 150)
+                    
                     present(previewController, animated: true, completion: nil)
                 }
             }
