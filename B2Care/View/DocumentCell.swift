@@ -14,6 +14,12 @@ class DocumentCell: UITableViewCell {
     private let dateLabel = UILabel()
     private let arrowImage = UIImageView()
     
+    var data: Any? {
+        didSet{
+            updateView(with: data)
+        }
+    }
+    
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,6 +35,14 @@ class DocumentCell: UITableViewCell {
     
     // MARK: - Helpers
     
+    private func updateView(with data: Any?){
+        guard let data = data as? Document else {
+            return
+        }
+        titleLabel.text = data.name
+        dateLabel.text = data.created
+    }
+    
     private func prepareView(){
         backgroundColor = .white
         
@@ -39,7 +53,7 @@ class DocumentCell: UITableViewCell {
     }
     
     private func prepareTitleLabelStyle(){
-        titleLabel.text = "Příjmová zpráva"
+       // titleLabel.text = "Příjmová zpráva"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textColor = .black
         titleLabel.textAlignment = .left
@@ -52,7 +66,7 @@ class DocumentCell: UITableViewCell {
     }
     
     private func prepareDateLabelStyle(){
-        dateLabel.text = "4.5.2020 ve 3:10"
+       // dateLabel.text = "4.5.2020 ve 3:10"
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.textColor = .gray
         

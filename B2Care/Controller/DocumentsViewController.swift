@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QuickLook
 
 class DocumentsViewController: UIViewController {
     
@@ -13,10 +14,18 @@ class DocumentsViewController: UIViewController {
     private let documentTable = UITableView()
     private let labTable = UITableView()
     private let cellId = "CellID"
+    private var fileURL: URL?
+    private lazy var previewController = QLPreviewController()
     
-    var data: DocumentsData? {
+    var documentsData: DocumentsData? {
         didSet{
             documentTable.reloadSections(IndexSet(integer: 0), with: .fade)
+        }
+    }
+    
+    var labResultsData: DocumentsData? {
+        didSet{
+            labTable.reloadSections(IndexSet(integer: 0), with: .fade)
         }
     }
     
@@ -25,6 +34,11 @@ class DocumentsViewController: UIViewController {
         super.viewDidLoad()
         prepareView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        documentsData = documentsHardData
+        labResultsData = laboratoryResultsHardData
+    }
     // MARK: - Actions
     
     
@@ -32,6 +46,7 @@ class DocumentsViewController: UIViewController {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
+        previewController.dataSource = self
         
         prepareDocumentTableViewStyle()
         prepareLabTableStyle()
@@ -78,8 +93,14 @@ class DocumentsViewController: UIViewController {
 
 extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let data = data{
-            return data.documents.count
+        if tableView == documentTable{
+            if let data = documentsData{
+                return data.documents.count
+            }
+        } else {
+            if let data = labResultsData{
+                return data.documents.count
+            }
         }
         return 5
     }
@@ -87,6 +108,15 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = documentTable.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? DocumentCell{
+            if tableView == documentTable{
+                if let data = documentsData{
+                    cell.data = data.documents[indexPath.row]
+                }
+            } else {
+                if let data = labResultsData{
+                    cell.data = data.documents[indexPath.row]
+                }
+            }
             return cell
         }
         
@@ -131,8 +161,53 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         return view
-        //        }
-        //        return nil
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var document: Document?
+        if tableView == documentTable{
+            if let data = documentsData{
+                document = data.documents[indexPath.row]
+            }
+        } else {
+            if let data = labResultsData{
+                document = data.documents[indexPath.row]
+            }
+        }
+        
+        guard let data = document, let itemURL = URL(string: data.value) else { return }
+        do {
+            let dataFromUrl = try Data(contentsOf: itemURL)
+            fileURL = FileManager().temporaryDirectory.appendingPathComponent("nazev.pdf")
+            if let fileURL = fileURL {
+                try dataFromUrl.write(to: fileURL, options: .atomic)
+                if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
+                    previewController.modalPresentationStyle = .popover
+                    previewController.modalTransitionStyle = .flipHorizontal
+                    present(previewController, animated: true, completion: nil)
+                }
+            }
+        } catch {
+            // cant find the url resource
+            showMessage(withTitle: "Chyba", message: error.localizedDescription)
+        }
+    }
+    
+}
+
+
+extension DocumentsViewController: QLPreviewControllerDataSource{
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        guard let url = fileURL else {
+            fatalError("Could not load pdf")
+        }
+        
+        return url as QLPreviewItem
+    }
+    
     
 }
