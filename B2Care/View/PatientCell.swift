@@ -57,7 +57,7 @@ class PatientCell: UITableViewCell {
     private func updateView(with data: Any?){
         if let data = data as? Patient{
             nameLabel.text = "\(data.person.firstname) \(data.person.surname)"
-            diagnosisLabel.text = "Diagnóza"
+            diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : "Bez diagnózy"
             patientDetailsView.data = data
         }
     }
@@ -96,7 +96,7 @@ class PatientCell: UITableViewCell {
     }
     
     private func prepareNameLabelStyle(){
-        nameLabel.text = "Tomáš Juřík"
+       // nameLabel.text = "Tomáš Juřík"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.textColor = .darkGray
         
@@ -108,7 +108,7 @@ class PatientCell: UITableViewCell {
     }
     
     private func prepareDiagnosisLabelStyle(){
-        diagnosisLabel.text = "Pravostranná tříselná kýla"
+      //  diagnosisLabel.text = "Pravostranná tříselná kýla"
         diagnosisLabel.font = UIFont.boldSystemFont(ofSize: 14)
         diagnosisLabel.textColor = .gray
         
@@ -118,7 +118,4 @@ class PatientCell: UITableViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
     }
-    
-    
-
 }

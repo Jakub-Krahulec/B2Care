@@ -15,7 +15,7 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     private var contentView = UIView()
     private lazy var patientDetailVC = PatientDetailViewController()
     private lazy var planVC = UIViewController()
-    private lazy var documentVC = UIViewController()
+    private lazy var documentVC = DocumentsViewController()
     private lazy var messagesVC = UIViewController()
     private lazy var grphsVC = UIViewController()
     private lazy var historyVC = UIViewController()
@@ -200,7 +200,6 @@ extension PatientMenuViewController: UITabBarDelegate{
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(planVC.view)
             case 3:
-                documentVC.view.backgroundColor = .systemRed
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(documentVC.view)
             case 4:
