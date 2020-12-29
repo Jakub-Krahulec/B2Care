@@ -147,13 +147,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         }
         
         box.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width).dividedBy(2).offset(-5)
+            make.width.equalTo((view.frame.width / 2) - 5)
         }
     }
     
     private func prepareBigInfoBoxStyle(_ box: BigInfoBox){
         box.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width).offset(-10)
+            make.width.equalTo(view.frame.width - 10)
         }
     }
     
@@ -167,7 +167,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
             stack.addArrangedSubview(box)
         }
         stack.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width).offset(-5)
+            make.width.equalTo(view.frame.width - 5)
         }
     }
     

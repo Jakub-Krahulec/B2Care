@@ -45,12 +45,10 @@ class DocumentsViewController: UIViewController {
     
     @objc private func refreshDocuments(_ sender: AnyObject){
         documentsRefreshControl.endRefreshing()
-        print("refresh")
     }
     
     @objc private func refreshLabs(_ sender: AnyObject){
         labRefreshControl.endRefreshing()
-        print("refresh")
     }
     
     // MARK: - Helpers
@@ -63,16 +61,20 @@ class DocumentsViewController: UIViewController {
         prepareLabTableStyle()
     }
     
+    private func prepareTableStyle(_ table: UITableView){
+        table.delegate = self
+        table.dataSource = self
+        table.register(DocumentCell.self, forCellReuseIdentifier: cellId)
+        table.backgroundColor = .white
+        table.rowHeight = UITableView.automaticDimension
+        table.separatorStyle = .singleLine
+        table.allowsSelection = true
+        table.layer.cornerRadius = 10
+        table.separatorInset = .zero
+    }
+    
     private func prepareLabTableStyle(){
-        labTable.delegate = self
-        labTable.dataSource = self
-        labTable.register(DocumentCell.self, forCellReuseIdentifier: cellId)
-        labTable.backgroundColor = .white
-        labTable.rowHeight = UITableView.automaticDimension
-        labTable.separatorStyle = .singleLine
-        labTable.allowsSelection = true
-        labTable.layer.cornerRadius = 10
-        labTable.separatorInset = .zero
+        prepareTableStyle(labTable)
         
         labTable.refreshControl = labRefreshControl
         labRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
@@ -88,15 +90,7 @@ class DocumentsViewController: UIViewController {
     }
     
     private func prepareDocumentTableViewStyle(){
-        documentTable.delegate = self
-        documentTable.dataSource = self
-        documentTable.register(DocumentCell.self, forCellReuseIdentifier: cellId)
-        documentTable.backgroundColor = .white
-        documentTable.rowHeight = UITableView.automaticDimension
-        documentTable.separatorStyle = .singleLine
-        documentTable.allowsSelection = true
-        documentTable.layer.cornerRadius = 10
-        documentTable.separatorInset = .zero
+        prepareTableStyle(documentTable)
         
         documentTable.refreshControl = documentsRefreshControl
         documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
@@ -110,53 +104,13 @@ class DocumentsViewController: UIViewController {
             make.height.equalTo(view.frame.height / 3)
         }
     }
-}
-
-extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == documentTable{
-            if let data = documentsData{
-                return data.documents.count
-            }
-        } else {
-            if let data = labResultsData{
-                return data.documents.count
-            }
-        }
-        return 5
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if let cell = documentTable.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? DocumentCell{
-            if tableView == documentTable{
-                if let data = documentsData{
-                    cell.data = data.documents[indexPath.row]
-                }
-            } else {
-                if let data = labResultsData{
-                    cell.data = data.documents[indexPath.row]
-                }
-            }
-            return cell
-        }
-        
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //  if section == 0 {
+    private func getHeaderViewForTable(_ table: UITableView) -> UIView? {
         let view = UIView()
-        //  view.backgroundColor = .green
-        
-        
         let image = UIImageView()
         let label = UILabel()
-        if tableView == documentTable{
+        
+        if table == documentTable{
             image.image = UIImage(systemName: "person.fill")
             image.tintColor = .mainColor
             label.text = "DOKUMENTACE PACIENTA"
@@ -180,8 +134,58 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
             make.left.equalTo(image.snp.right).offset(5)
             make.centerY.equalToSuperview()
         }
-        
+                
         return view
+    }
+}
+
+extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == documentTable{
+            
+            if let data = documentsData{
+                return data.documents.count
+            }
+            
+        } else {
+            
+            if let data = labResultsData{
+                return data.documents.count
+            }
+            
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = documentTable.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? DocumentCell{
+            
+            if tableView == documentTable{
+                
+                if let data = documentsData{
+                    cell.data = data.documents[indexPath.row]
+                }
+                
+            } else {
+                
+                if let data = labResultsData{
+                    cell.data = data.documents[indexPath.row]
+                }
+                
+            }
+            return cell
+        }
+        
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return getHeaderViewForTable(tableView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -198,24 +202,27 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
         
         guard let data = document, let itemURL = URL(string: data.value) else { return }
         do {
+            
             let dataFromUrl = try Data(contentsOf: itemURL)
             fileURL = FileManager().temporaryDirectory.appendingPathComponent("nazev.pdf")
+            
             if let fileURL = fileURL {
                 try dataFromUrl.write(to: fileURL, options: .atomic)
                 if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
+                    
                     previewController.modalPresentationStyle = .popover
                     previewController.modalTransitionStyle = .flipHorizontal
                     previewController.preferredContentSize = CGSize(width: 150, height: 150)
                     
                     present(previewController, animated: true, completion: nil)
                 }
+                
             }
         } catch {
             // cant find the url resource
             showMessage(withTitle: "Chyba", message: error.localizedDescription)
         }
     }
-    
 }
 
 
@@ -228,9 +235,6 @@ extension DocumentsViewController: QLPreviewControllerDataSource{
         guard let url = fileURL else {
             fatalError("Could not load pdf")
         }
-        
         return url as QLPreviewItem
     }
-    
-    
 }

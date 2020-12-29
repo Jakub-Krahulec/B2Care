@@ -123,7 +123,7 @@ class LoginView: UIView {
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
             make.left.equalTo(passwordTextField.snp.left)
-            make.width.equalTo(self.frame.width).dividedBy(2)
+            make.width.equalTo(self.frame.width / 2)
             make.top.equalTo(passwordTextField.snp.bottom).offset(10)
         }
     }

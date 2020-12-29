@@ -135,7 +135,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         view.addSubview(userButton)
         userButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height).dividedBy(10)
+            make.top.equalTo(view.frame.height / 10)
             make.height.width.equalTo(30)
         }
     }
@@ -147,7 +147,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         searchInput.snp.makeConstraints { (make) in
             make.left.equalTo(userButton.snp.right).offset(5)
             make.right.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height).dividedBy(10)
+            make.top.equalTo(view.frame.height / 10)
             make.height.equalTo(30)
         }
     }

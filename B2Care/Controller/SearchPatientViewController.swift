@@ -67,7 +67,7 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
         headerView.logoutButton.delegate = self
         headerView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height).dividedBy(10).offset(35)
+            make.height.equalTo((view.frame.height / 10) + 35)
         }
     }
 

@@ -149,7 +149,7 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         view.addSubview(headerView)
         headerView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(view.frame.height).dividedBy(10).offset(35)
+            make.height.equalTo((view.frame.height / 10) + 35)
         }
     }
     
