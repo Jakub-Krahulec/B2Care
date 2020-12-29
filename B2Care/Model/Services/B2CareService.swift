@@ -13,19 +13,17 @@ class B2CareService{
     static let shared = B2CareService()
     private let API_URL =  "https://hc-intro-backend.dico.dev05.b2a.cz"
     private var API_KEY = ""
-    private var auth_header: HTTPHeaders{
-        HTTPHeaders([
-            "Authorization": "Token token=\"\(API_KEY)\"",
-        ])
-    }
+    
+    private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
+    private let defaults = UserDefaults.standard
+    
     private var data: UserData?{
         didSet {
             API_KEY = data?.apiKey ?? ""
         }
     }
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
-    private let defaults = UserDefaults.standard
+    
     private init(){
         if let user = defaults.object(forKey: "user") as? Data {
             if let decoded = try? decoder.decode(UserData.self, from: user){
@@ -48,7 +46,7 @@ class B2CareService{
     }
     
     func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void){
-        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, headers: auth_header) { (result) in
+       let _ = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, apiKey: API_KEY) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
@@ -60,7 +58,7 @@ class B2CareService{
     }
     
     func fetchPatients(parameters: String = "",completion: @escaping (Result<PatientsData, Error>) -> Void){
-        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, headers: auth_header) { (result) in
+        let _ = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, apiKey: API_KEY) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
@@ -84,7 +82,7 @@ class B2CareService{
         ]
         var data: Data?
         do{
-            data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) //JSONEncoder().encode("{ \"email\": \"staze@b2a.cz\", \"password\":\"eat.sleep.b2a.repeat\" }")
+            data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         } catch {
             completion(.failure(error))
         }
@@ -116,11 +114,4 @@ class B2CareService{
                 }
             } 
     }
-    
 }
-
-
-// nzgnM6pLsmdCCKc7Zv7ctEPVc37pYkZ2XO9pX8stfuscOhvbiX1b20H9wGOu01MS
-//  https://hc-intro-backend.dico.dev05.b2a.cz/user/api/v1/auth
-
-// { "email": "staze@b2a.cz", "password":"eat.sleep.b2a.repeat" }
