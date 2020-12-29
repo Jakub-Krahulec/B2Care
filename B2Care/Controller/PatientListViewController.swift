@@ -11,10 +11,12 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
     private var isKeyboardShown = false
+    
     private let table = UITableView()
     private let searchInput = SearchField()
     private let userButton = UserButton()
     private var refreshControl = UIRefreshControl()
+    
     private var patients: PatientsData?
     {
         didSet{
@@ -33,15 +35,12 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setupNotificationObservers()
-        hideKeyboard()
         fetchPatients()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-       // searchInput.text = ""
-      //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Actions
@@ -54,8 +53,14 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         fetchPatients()
     }
     
+    @objc private func keyboardWillShow(notification: Notification){
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            table.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        }
+    }
+    
     @objc private func keyboardDidHide(notification: Notification){
-        // print("Notification: Keyboard will hide")
         table.scrollIndicatorInsets = .zero
         table.contentInset = .zero
         table.layoutIfNeeded()
@@ -63,18 +68,15 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     }
     
     @objc private func keyboardDidShow(notification: Notification){
-        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-            //  print("Notification: Keyboard will show")
-            table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-            table.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-        }
         isKeyboardShown = true
     }
+    
     
     // MARK: - Helpers
     private func setupNotificationObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     private func prepareView(){
@@ -92,14 +94,14 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
                 params = "?search=\(text)"
             }
         }
-        B2CareService.shared.fetchPatients(parameters: params) { (result) in
+        B2CareService.shared.fetchPatients(parameters: params) { [weak self] (result) in
+            guard let this = self else {return}
             switch result{
-                
                 case .success(let data):
-                    self.patients = data
-                    self.refreshControl.endRefreshing()
+                    this.patients = data
+                    this.refreshControl.endRefreshing()
                 case .failure(let error):
-                    self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                    this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
             }
         }
     }
@@ -133,20 +135,19 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         view.addSubview(userButton)
         userButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height / 10)
+            make.top.equalTo(view.frame.height).dividedBy(10)
             make.height.width.equalTo(30)
         }
     }
     
     private func prepareSearchFieldStyle(){
-       // searchInput.delegate = self
         searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
         
         view.addSubview(searchInput)
         searchInput.snp.makeConstraints { (make) in
             make.left.equalTo(userButton.snp.right).offset(5)
             make.right.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height / 10)
+            make.top.equalTo(view.frame.height).dividedBy(10)
             make.height.equalTo(30)
         }
     }

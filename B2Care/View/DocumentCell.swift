@@ -36,9 +36,7 @@ class DocumentCell: UITableViewCell {
     // MARK: - Helpers
     
     private func updateView(with data: Any?){
-        guard let data = data as? Document else {
-            return
-        }
+        guard let data = data as? Document else {return}
         titleLabel.text = data.name
         dateLabel.text = data.created
     }

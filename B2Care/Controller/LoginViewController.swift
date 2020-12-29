@@ -39,13 +39,11 @@ class LoginViewController: UIViewController, LoginViewDelegate {
 
     @objc private func keyboardWillShow(notification: Notification){
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-            //  print("Notification: Keyboard will show")
             loginView.moveLoginButton(to: keyboardHeight)
         }
     }
     
     @objc private func keyboardWillHide(notification: Notification){
-        // print("Notification: Keyboard will hide")
         loginView.moveLoginButton(to: 0)
     }
     

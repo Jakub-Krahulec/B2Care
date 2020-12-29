@@ -37,13 +37,14 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
-            B2CareService.shared.fetchPatient(id: id) { (result) in
+            B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
+                guard let this = self else {return}
                 switch result{
                     
                     case .success(let data):
-                        self.data = data
+                        this.data = data
                     case .failure(let error):
-                        self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
                 }
             }
         }
@@ -57,7 +58,6 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         prepareView()
     }
     
@@ -74,10 +74,8 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
     // MARK: - Actions
     
     @objc private func refresh(_ sender: AnyObject){
-        //fetchPatients()
         refreshControl.endRefreshing()
         patientId = data?.id
-        
     }
     
     // MARK: - Helpers
@@ -130,6 +128,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         let buttonsHeight: CGFloat = 50
         let padding: CGFloat = 45
         let offset: CGFloat = headerHeight + tabbarHeight + buttonsHeight + padding
+        
         scrollView.snp.makeConstraints { (make) in
             make.bottom.equalTo(verticalStack).offset(offset)
         }
@@ -148,15 +147,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         }
         
         box.snp.makeConstraints { (make) in
-            make.width.equalTo((view.frame.width / 2) - 5)
-            //make.height.equalTo(80)
+            make.width.equalTo(view.frame.width).dividedBy(2).offset(-5)
         }
     }
     
     private func prepareBigInfoBoxStyle(_ box: BigInfoBox){
         box.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width  - 10)
-            // make.height.equalTo(80)
+            make.width.equalTo(view.frame.width).offset(-10)
         }
     }
     
@@ -170,17 +167,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
             stack.addArrangedSubview(box)
         }
         stack.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width - 5)
-            // make.height.equalTo(80)
+            make.width.equalTo(view.frame.width).offset(-5)
         }
     }
     
     private func prepareScrollViewStyle(){
-        //scrollView.isScrollEnabled = true
-        //scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
-            //make.top.equalTo(tabbar.snp.bottom).offset(5)
             make.top.equalToSuperview().offset(5)
             make.left.right.bottom.equalToSuperview().inset(5)
         }
@@ -191,6 +184,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         verticalStack.spacing = 5
         verticalStack.distribution = .equalSpacing
         verticalStack.alignment = .center
+        
         verticalStack.addArrangedSubview(firstLine)
         verticalStack.addArrangedSubview(diagnosisInfoBox)
         verticalStack.addArrangedSubview(alergiesInfoBox)
@@ -262,7 +256,6 @@ extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
                 if #available(iOS 10.0, *) {
                     application.open(phoneCallURL, options: [:], completionHandler: nil)
                 } else {
-                    // Fallback on earlier versions
                     application.openURL(phoneCallURL as URL)
                     
                 }

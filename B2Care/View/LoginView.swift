@@ -49,14 +49,15 @@ class LoginView: UIView {
     
     @objc private func handleLoginButtonTapped(){
         print("Login")
-        B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { res in
+        B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] res in
+            guard let this = self else {return}
             switch res{
                 case .success(let isLoggedIn):
                     print(isLoggedIn)
-                    self.delegate?.userDidLogIn()
+                    this.delegate?.userDidLogIn()
                 case .failure(let error):
-                    self.statusLabel.text = error.localizedDescription
-                    self.passwordTextField.setErrorMode()
+                    this.statusLabel.text = error.localizedDescription
+                    this.passwordTextField.setErrorMode()
                     print(error)
                     return
             }
@@ -116,11 +117,13 @@ class LoginView: UIView {
     private func prepareStatusLabelStyle(){
         statusLabel.text = "Špatné heslo"
         statusLabel.textColor = .red
-        statusLabel.isHidden = true
+        
+      //  statusLabel.isHidden = true
         
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
             make.left.equalTo(passwordTextField.snp.left)
+            make.width.equalTo(self.frame.width).dividedBy(2)
             make.top.equalTo(passwordTextField.snp.bottom).offset(10)
         }
     }
@@ -155,8 +158,10 @@ class LoginView: UIView {
     }
     
     public func moveLoginButton(to y: CGFloat){
+        let padding: CGFloat = 10
+        let inset = padding + y
         loginButton.snp.updateConstraints { (make) in
-            make.bottom.equalToSuperview().inset(10 + y)
+            make.bottom.equalToSuperview().inset(inset)
         }
         
         UIView.animate(withDuration: 2, animations: {

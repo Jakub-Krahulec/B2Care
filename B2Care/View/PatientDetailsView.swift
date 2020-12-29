@@ -19,7 +19,7 @@ class PatientDetailsView: UIView {
     private let locationImage = UIImageView()
     private let departmentLabel = UILabel()
     private let personImage = UIImageView()
-    private let ageLabel = UILabel()
+    private let personLabel = UILabel()
     
     // MARK: - Lifecycle
 
@@ -41,47 +41,50 @@ class PatientDetailsView: UIView {
         locationImage.tintColor = .white
         departmentLabel.textColor = .white
         personImage.tintColor = .white
-        ageLabel.textColor = .white
+        personLabel.textColor = .white
+    }
+    
+    private func updatePersonLabelText(with person: Person){
+        let age = DateService.shared.getAgeFromString(person.dateOfBirth)
+        if let age = age {
+            personLabel.text = "\(age), \(person.gender.title.first ?? " ")"
+        }
+        else {
+            personLabel.text = "\(person.dateOfBirth), \(person.gender.title.first ?? " ")"
+        }
+    }
+    
+    private func updateDepartmentLabelText(with hospitalization: Hospitalization){
+        var location = ""
+        if let name = hospitalization.location.name{
+            location += "\(name), "
+        }
+        if let room = hospitalization.location.room{
+            location += "Pokoj \(room)"
+        }
+        departmentLabel.text = location
     }
     
     private func updateView(with data: Any?){
         if let data = data as? Patient{
-            let age = DateService.shared.getAgeFromString(data.person.dateOfBirth)
-            if let age = age {
-                ageLabel.text = "\(age), \(data.person.gender.title.first ?? " ")"
-            }
-            else {
-                ageLabel.text = "\(data.person.dateOfBirth), \(data.person.gender.title.first ?? " ")"
-            }
-            
-            var location = ""
+            updatePersonLabelText(with: data.person)
             if data.hospitalizations.count > 0 {
-                if let name = data.hospitalizations[0].location.name{
-                    location += "\(name), "
-                }
-//                if let building = data.hospitalizations[0].location.building{
-//                    location += "\(building), "
-//                }
-                if let room = data.hospitalizations[0].location.room{
-                    location += "Pokoj \(room)"
-                }
+                updateDepartmentLabelText(with: data.hospitalizations[0])
+                
             } else {
-                location = "-"
+                departmentLabel.text = "-"
             }
-            departmentLabel.text = location
         }
     }
     
     private func prepareView(){
-        //self.backgroundColor = .green
         prepareLocationImageStyle()
         prepareDepartmentLabelStyle()
         preparePersonImageStyle()
         prepareAgeLabelStyle()
         
         snp.makeConstraints { (make) in
-           //make.left.equalTo(0)
-            make.right.equalTo(ageLabel.snp.right)
+            make.right.equalTo(personLabel.snp.right)
         }
     }
     
@@ -123,11 +126,11 @@ class PatientDetailsView: UIView {
     
     private func prepareAgeLabelStyle(){
        // ageLabel.text = "57 let, M"
-        ageLabel.font = UIFont.boldSystemFont(ofSize: 12)
-        ageLabel.textColor = .lightGray
+        personLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        personLabel.textColor = .lightGray
         
-        addSubview(ageLabel)
-        ageLabel.snp.makeConstraints { (make) in
+        addSubview(personLabel)
+        personLabel.snp.makeConstraints { (make) in
             make.left.equalTo(personImage.snp.right).offset(2)
             make.top.equalTo(personImage).offset(2)
         }

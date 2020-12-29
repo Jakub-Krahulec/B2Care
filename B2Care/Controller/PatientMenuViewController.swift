@@ -55,7 +55,6 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         if contentView.subviews.count < 1 {
             contentView.addSubview(patientDetailVC.view)
         }
-        
         view.bringSubviewToFront(buttonsStack)
     }
     
@@ -67,7 +66,6 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     
     private func updateView(with person: Patient?){
         guard let person = person else {return}
-        // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
         patientDetailVC.patientId = person.id
         headerView.data = person
     }
@@ -84,8 +82,6 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     }
     
     private func prepareButtonStackStyle(){
-        
-        
         buttonsStack.axis = .horizontal
         buttonsStack.spacing = 15
         buttonsStack.distribution = .fillEqually
@@ -141,14 +137,11 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     }
     
     private func prepareContentViewStyle(){
-        
         view.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(tabbar.snp.bottom)
-//            make.bottom.equalTo(buttonsStack.snp.top)
         }
-       // contentView.addSubview(patientDetailVC.view)
     }
     
     private func prepareHeaderViewStyle(){
@@ -156,7 +149,7 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         view.addSubview(headerView)
         headerView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo((view.frame.height / 10) + 35)
+            make.height.equalTo(view.frame.height).dividedBy(10).offset(35)
         }
     }
     
@@ -169,7 +162,6 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         let messageTabItem = UITabBarItem(title: "Zprávy", image: UIImage(systemName: "message.fill"), tag: 4)
         let graphsTabItem = UITabBarItem(title: "Grafy", image: UIImage(systemName: "chart.bar.fill"), tag: 5)
         let historyTabItem = UITabBarItem(title: "Historie", image: UIImage(systemName: "tray.full.fill"), tag: 6)
-        
         
         tabbar.items = [infoTabItem, planTabItem,documentTabItem,messageTabItem,graphsTabItem,historyTabItem]
         tabbar.delegate = self
