@@ -13,6 +13,7 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     private let tabbar = UITabBar()
     private let headerView = DetailHeaderView()
     private var contentView = UIView()
+    
     private lazy var patientDetailVC = PatientDetailViewController()
     private lazy var planVC = UIViewController()
     private lazy var documentVC = DocumentsViewController()
@@ -153,8 +154,31 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         }
     }
     
+    func getImageWithColorPosition(color: UIColor, size: CGSize, lineSize: CGSize) -> UIImage {
+        // vytvořím čteverec o velikosti tabbaritemu
+        let rect = CGRect(x:0, y: 0, width: size.width, height: size.height)
+        // vytvořím čáru na spodu
+        let rectLine = CGRect(x:0, y:size.height-lineSize.height,width: lineSize.width,height: lineSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIColor.clear.setFill()
+        UIRectFill(rect)
+        color.setFill()
+        UIRectFill(rectLine)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
     private func prepareTabBarStyle(){
-        tabbar.barStyle = .default
+        tabbar.delegate = self
+        //tabbar.barStyle = .default
+        tabbar.backgroundColor = .white
+        tabbar.tintColor = .mainColor
+        
+        let tabItemWidth = self.view.frame.width / 6
+        tabbar.selectionIndicatorImage = getImageWithColorPosition(color: UIColor.mainColor.withAlphaComponent(0.7), size: CGSize(width: tabItemWidth, height: 49), lineSize: CGSize(width: tabItemWidth, height: 2))
         
         let infoTabItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle.fill"), tag: 1)
         let planTabItem = UITabBarItem(title: "Plán", image: UIImage(systemName: "list.dash"), tag: 2)
@@ -164,10 +188,8 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         let historyTabItem = UITabBarItem(title: "Historie", image: UIImage(systemName: "tray.full.fill"), tag: 6)
         
         tabbar.items = [infoTabItem, planTabItem,documentTabItem,messageTabItem,graphsTabItem,historyTabItem]
-        tabbar.delegate = self
         tabbar.selectedItem = infoTabItem
-        tabbar.backgroundColor = .white
-        tabbar.tintColor = .mainColor
+        
         
         view.addSubview(tabbar)
         
