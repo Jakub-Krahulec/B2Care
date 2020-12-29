@@ -74,44 +74,26 @@ class B2CareService{
     }
     
     func login(userName: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        guard let url = URL(string: API_URL + "/user/api/v1/auth") else { return}
+        let url = API_URL + "/user/api/v1/auth"
         
-        let params: NSMutableDictionary = [
+        let params: Parameters = [
             "email" : userName,
             "password" : password
         ]
-        var data: Data?
-        do{
-            data = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        } catch {
-            completion(.failure(error))
+        
+        let _ = NetworkService.shared.performRequest(from: url, model: UserResponse.self, method: HTTPMethod.post, parameters: params) { (result) in
+            switch result{
+                
+                case .success(let data):
+                    do{
+                        self.data = data.data
+                        self.save()
+                        completion(.success(true))
+                        return
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
         }
-        guard let body = data else {return}
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = body
-        
-        AF.request(request as URLRequestConvertible)
-            .validate()
-            .responseJSON { response in
-                switch  response.result{
-                    case .success(_):
-                        do{
-                            if let data = response.data {
-                                let decoded = try self.decoder.decode(UserResponse.self, from: data)
-                                self.data = decoded.data
-                                self.save()
-                                completion(.success(true))
-                            }
-                        } catch{
-                            completion(.failure(error))
-                            return
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                }
-            } 
     }
 }

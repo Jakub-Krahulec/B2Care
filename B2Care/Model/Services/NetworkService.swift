@@ -15,16 +15,22 @@ class NetworkService{
     static let shared = NetworkService()
     private init(){}
     
-    func performRequest<T: Decodable>(from url: String, model: T.Type, apiKey: String? = nil, completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
+    func performRequest<T: Decodable>(from url: String,
+                                      model: T.Type,
+                                      apiKey: String? = nil,
+                                      method: HTTPMethod = .get,
+                                      parameters: Parameters? = nil ,
+                                      completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
         
         var headers: HTTPHeaders? = nil
+        
         if let API_KEY = apiKey{
             headers = HTTPHeaders([
                 "Authorization": "Token token=\"\(API_KEY)\"",
             ])
         }
         
-        let request = AF.request(url, method: .get, headers: headers)
+        let request = AF.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate()
             .responseDecodable(of: model, queue: .main, decoder: JSONDecoder()) { (response) in
                 switch response.result {
@@ -34,6 +40,7 @@ class NetworkService{
                         completion(.failure(error))
                 }
             }
+        
         return request
     }
 
