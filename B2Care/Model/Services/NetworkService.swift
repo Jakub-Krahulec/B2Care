@@ -15,38 +15,13 @@ class NetworkService{
     static let shared = NetworkService()
     private init(){}
     
-    func performRequest<T: Decodable>(from url: String, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
-        let request = AF.request(url)
+    func performRequest<T: Decodable>(from url: String, model: T.Type, headers: HTTPHeaders? = nil, completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
+        let request = AF.request(url, method: .get, headers: authorizationHeaders)
             .validate()
             .responseDecodable(of: model, queue: .main, decoder: JSONDecoder()) { (response) in
                 switch response.result {
                     case .success(let data):
                         completion(.success(data))
-                    case .failure(let error):
-                        completion(.failure(error))
-                }
-            }
-        return request
-    }
-    
-    func performRequest<T: Decodable>(from url: String, model: T.Type, apiKey: String, completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
-        let headers = HTTPHeaders([
-            "Authorization": "Token token=\"\(apiKey)\"",
-        ])
-        let request = AF.request(url, method: .get, headers: headers)
-            .validate()
-            .responseJSON { (response) in
-                switch response.result{
-                    
-                    case .success(_):
-                        do{
-                            if let data = response.data{
-                                let decoded = try JSONDecoder().decode(T.self, from: data)
-                                completion(.success(decoded))
-                            }
-                        } catch{
-                            completion(.failure(error))
-                        }
                     case .failure(let error):
                         completion(.failure(error))
                 }

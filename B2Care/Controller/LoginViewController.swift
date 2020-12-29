@@ -28,7 +28,6 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        
     }
     
     override func viewDidLayoutSubviews() {

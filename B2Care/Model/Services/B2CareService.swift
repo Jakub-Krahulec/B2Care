@@ -13,6 +13,11 @@ class B2CareService{
     static let shared = B2CareService()
     private let API_URL =  "https://hc-intro-backend.dico.dev05.b2a.cz"
     private var API_KEY = ""
+    private var auth_header: HTTPHeaders{
+        HTTPHeaders([
+            "Authorization": "Token token=\"\(API_KEY)\"",
+        ])
+    }
     private var data: UserData?{
         didSet {
             API_KEY = data?.apiKey ?? ""
@@ -43,7 +48,7 @@ class B2CareService{
     }
     
     func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void){
-        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, apiKey: API_KEY) { (result) in
+        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, headers: auth_header) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
@@ -55,7 +60,7 @@ class B2CareService{
     }
     
     func fetchPatients(parameters: String = "",completion: @escaping (Result<PatientsData, Error>) -> Void){
-        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, apiKey: API_KEY) { (result) in
+        NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, headers: auth_header) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
