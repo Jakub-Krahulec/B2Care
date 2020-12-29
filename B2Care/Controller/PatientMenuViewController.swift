@@ -173,7 +173,6 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     
     private func prepareTabBarStyle(){
         tabbar.delegate = self
-        //tabbar.barStyle = .default
         tabbar.backgroundColor = .white
         tabbar.tintColor = .mainColor
         
@@ -206,9 +205,9 @@ extension PatientMenuViewController: UITabBarDelegate{
             case 1:
                 if let data = data{
                     patientDetailVC.patientId = data.id
-                    contentView.subviews.forEach { $0.removeFromSuperview() }
-                    contentView.addSubview(patientDetailVC.view)
                 }
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(patientDetailVC.view)
             case 2:
                 planVC.view.backgroundColor = .systemPink
                 contentView.subviews.forEach { $0.removeFromSuperview() }
