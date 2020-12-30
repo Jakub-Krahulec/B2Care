@@ -104,24 +104,13 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         
         prepareScrollViewStyle()
         prepareRefreshControlStyle()
-        
-        prepareSmallInfoBoxStyle(insuranceInfoBox)
-        prepareSmallInfoBoxStyle(idNumberInfoBox)
         prepareHorizontalStack(firstLine, smallInfos: [insuranceInfoBox,idNumberInfoBox])
-        
-        prepareBigInfoBoxStyle(diagnosisInfoBox)
-        prepareBigInfoBoxStyle(alergiesInfoBox)
-        prepareBigInfoBoxStyle(medicationsInfoBox)
-        prepareBigInfoBoxStyle(importantInfoBox)
-        
-        prepareSmallInfoBoxStyle(personalPhoneInfoBox)
-        prepareSmallInfoBoxStyle(doctorPhoneInfoBox)
         prepareHorizontalStack(contactsStack, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
-        prepareSmallInfoBoxStyle(addressInfoBox)
-        prepareSmallInfoBoxStyle(proffesionInfoBox)
         prepareHorizontalStack(addressStack, smallInfos: [addressInfoBox,proffesionInfoBox])
-        
         prepareVerticalStackStyle()
+        
+        personalPhoneInfoBox.delegate = self
+        doctorPhoneInfoBox.delegate = self
         
         let headerHeight = (view.frame.height / 10) + 35
         let tabbarHeight: CGFloat = 50
@@ -140,28 +129,12 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         // scrollView.addSubview(refreshControl)
         scrollView.refreshControl = refreshControl
     }
-
-    private func prepareSmallInfoBoxStyle(_ box: SmallInfoBox){
-        if let contactBox = box as? ContactSmallInfoBox{
-            contactBox.delegate = self
-        }
-        
-        box.snp.makeConstraints { (make) in
-            make.width.equalTo((view.frame.width / 2) - 5)
-        }
-    }
-    
-    private func prepareBigInfoBoxStyle(_ box: BigInfoBox){
-        box.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width - 10)
-        }
-    }
     
     private func prepareHorizontalStack(_ stack: UIStackView, smallInfos: [SmallInfoBox]){
         stack.axis = .horizontal
         stack.spacing = 5
-        stack.distribution = .equalSpacing
-        stack.alignment = .center
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
         
         for box in smallInfos{
             stack.addArrangedSubview(box)
@@ -183,7 +156,7 @@ class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
         verticalStack.axis = .vertical
         verticalStack.spacing = 5
         verticalStack.distribution = .equalSpacing
-        verticalStack.alignment = .center
+        verticalStack.alignment = .fill
         
         verticalStack.addArrangedSubview(firstLine)
         verticalStack.addArrangedSubview(diagnosisInfoBox)
