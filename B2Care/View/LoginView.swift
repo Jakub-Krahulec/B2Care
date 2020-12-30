@@ -60,10 +60,7 @@ class LoginView: UIView {
                         this.endErrorMode()
                     }
                 case .failure(let error):
-                    this.statusLabel.text = error.localizedDescription
-                    this.statusLabel.isHidden = false
-                    this.passwordTextField.setErrorMode()
-                    this.isInErrorMode = true
+                    this.startErrorMode(message: error.localizedDescription)
                     return
             }
         }
@@ -188,6 +185,13 @@ class LoginView: UIView {
             statusLabel.isHidden = true
             isInErrorMode = false
         }
+    }
+    
+    private func startErrorMode(message: String){
+        statusLabel.text = message
+        statusLabel.isHidden = false
+        passwordTextField.setErrorMode()
+        isInErrorMode = true
     }
 
 }
