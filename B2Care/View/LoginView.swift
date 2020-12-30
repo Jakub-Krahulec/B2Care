@@ -20,6 +20,7 @@ extension LoginViewDelegate{
 class LoginView: UIView {
 
     // MARK: - Properties
+    private var isInErrorMode = false
     private let userLabel = UILabel()
     private let userTextField = BaseInputField()
     private let passwordLabel = UILabel()
@@ -48,20 +49,28 @@ class LoginView: UIView {
     }
     
     @objc private func handleLoginButtonTapped(){
-        print("Login")
+        endErrorMode()
+        
         B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] res in
             guard let this = self else {return}
             switch res{
                 case .success(let isLoggedIn):
-                    print(isLoggedIn)
-                    this.delegate?.userDidLogIn()
+                    if isLoggedIn{
+                        this.delegate?.userDidLogIn()
+                        this.endErrorMode()
+                    }
                 case .failure(let error):
                     this.statusLabel.text = error.localizedDescription
+                    this.statusLabel.isHidden = false
                     this.passwordTextField.setErrorMode()
-                    print(error)
+                    this.isInErrorMode = true
                     return
             }
         }
+    }
+    
+    @objc private func handleInputAnyEvent(sender: UITextField){
+        endErrorMode()
     }
     
     // MARK: - Helpers
@@ -71,8 +80,8 @@ class LoginView: UIView {
         prepareUserTextFieldStyle()
         preparePasswordLabelStyle()
         preparePasswordTextFieldStyle()
-        prepareStatusLabelStyle()
         prepareForgotPasswordButtonStyle()
+        prepareStatusLabelStyle()
         prepareLoginButtonStyle()
     }
     
@@ -85,7 +94,8 @@ class LoginView: UIView {
     }
     
     private func prepareUserTextFieldStyle(){
-       
+        userTextField.addTarget(self, action: #selector(handleInputAnyEvent(sender:)), for: .allEvents)
+        
         addSubview(userTextField)
         userTextField.snp.makeConstraints { (make) in
             make.top.equalTo(userLabel.snp.bottom).offset(5)
@@ -104,7 +114,7 @@ class LoginView: UIView {
     }
     
     private func preparePasswordTextFieldStyle(){
-        
+        passwordTextField.addTarget(self, action: #selector(handleInputAnyEvent(sender:)), for: .allEvents)
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { (make) in
@@ -116,14 +126,16 @@ class LoginView: UIView {
     
     private func prepareStatusLabelStyle(){
         statusLabel.text = "Špatné heslo"
+        statusLabel.numberOfLines = 0
         statusLabel.textColor = .red
         
-      //  statusLabel.isHidden = true
+        statusLabel.isHidden = true
         
         addSubview(statusLabel)
         statusLabel.snp.makeConstraints { (make) in
             make.left.equalTo(passwordTextField.snp.left)
-            make.width.equalTo(self.frame.width / 2)
+          //  make.width.equalTo(self.frame.width / 2)
+            make.right.equalTo(forgotPasswordButton.snp.left).inset(10)
             make.top.equalTo(passwordTextField.snp.bottom).offset(10)
         }
     }
@@ -168,5 +180,15 @@ class LoginView: UIView {
             self.layoutIfNeeded()
         })
     }
+    
+    private func endErrorMode(){
+        if self.isInErrorMode{
+            passwordTextField.setNormalMode()
+            statusLabel.text = ""
+            statusLabel.isHidden = true
+            isInErrorMode = false
+        }
+    }
 
 }
+

@@ -171,10 +171,10 @@
 		2A0F257E259240E00077DD02 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2A5B66F7259C81B100FF7105 /* Hard Coded Data */,
+				2A5B66F6259C817900FF7105 /* Response */,
 				2A0F258D25925BF20077DD02 /* Services */,
 				2A0F259525926BD00077DD02 /* UserModel.swift */,
-				2A888FA42593799100B6E5DC /* PatientsResponse.swift */,
-				2A7EA3752596590A00CD8402 /* PatientResponse.swift */,
 				2A7EA37825965B5A00CD8402 /* PatientModel.swift */,
 				2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */,
 				2A7EA38025965B9100CD8402 /* PersonModel.swift */,
@@ -187,7 +187,6 @@
 				2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */,
 				2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */,
 				2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */,
-				2A5B66EF259A2B8600FF7105 /* documentsData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -210,6 +209,23 @@
 				2A0F25A5259342EE0077DD02 /* SearchField.swift */,
 			);
 			path = Inputs;
+			sourceTree = "<group>";
+		};
+		2A5B66F6259C817900FF7105 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2A888FA42593799100B6E5DC /* PatientsResponse.swift */,
+				2A7EA3752596590A00CD8402 /* PatientResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		2A5B66F7259C81B100FF7105 /* Hard Coded Data */ = {
+			isa = PBXGroup;
+			children = (
+				2A5B66EF259A2B8600FF7105 /* documentsData.swift */,
+			);
+			path = "Hard Coded Data";
 			sourceTree = "<group>";
 		};
 		2A7EA38A25966D1C00CD8402 /* Headers */ = {

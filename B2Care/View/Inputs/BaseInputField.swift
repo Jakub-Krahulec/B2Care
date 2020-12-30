@@ -11,6 +11,7 @@ class BaseInputField: UITextField {
 
    // MARK: - Properties
     
+    internal var hasFocus = false
     
     // MARK: - Lifecycle
     
@@ -27,14 +28,17 @@ class BaseInputField: UITextField {
     
     @objc func didBegin(_ sender: UITextField){
         sender.layer.borderColor = UIColor.mainColor.cgColor
+        hasFocus = true
     }
     
     @objc func didEnd(_ sender: UITextField){
         sender.layer.borderColor = UIColor.borderLight.cgColor
+        hasFocus = false
     }
     
     // MARK: - Helpers
     private func prepareView(){
+        self.keyboardType = .emailAddress
         backgroundColor = .backgroundLight
         layer.borderWidth = 2
         layer.borderColor = UIColor.borderLight.cgColor

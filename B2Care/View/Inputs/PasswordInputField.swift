@@ -44,6 +44,7 @@ class PasswordInputField: BaseInputField {
     // MARK: - Helpers
 
     private func prepareView(){
+        self.keyboardType = .default
         isSecureTextEntry = true
         prepareShowPasswordButtonStyle()
         
@@ -66,5 +67,13 @@ class PasswordInputField: BaseInputField {
     
     public func setErrorMode(){
         layer.borderColor = UIColor.systemPink.cgColor
+    }
+    
+    public func setNormalMode(){
+        if self.hasFocus{
+            layer.borderColor = UIColor.mainColor.cgColor
+        } else {
+            layer.borderColor = UIColor.borderLight.cgColor
+        }
     }
 }

@@ -15,7 +15,6 @@ class DocumentsViewController: UIViewController {
     private let labTable = UITableView()
     private let cellId = "CellID"
     private var fileURL: URL?
-    private lazy var previewController = QLPreviewController()
     private let documentsRefreshControl = UIRefreshControl()
     private let labRefreshControl = UIRefreshControl()
     
@@ -55,7 +54,7 @@ class DocumentsViewController: UIViewController {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
-        previewController.dataSource = self
+        
         
         prepareDocumentTableViewStyle()
         prepareLabTableStyle()
@@ -204,15 +203,16 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
         do {
             
             let dataFromUrl = try Data(contentsOf: itemURL)
-            fileURL = FileManager().temporaryDirectory.appendingPathComponent("nazev.pdf")
+            fileURL = FileManager().temporaryDirectory.appendingPathComponent("\(data.name).pdf")
             
             if let fileURL = fileURL {
                 try dataFromUrl.write(to: fileURL, options: .atomic)
                 if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
                     
+                    let previewController = QLPreviewController()
+                    previewController.dataSource = self
                     previewController.modalPresentationStyle = .popover
                     previewController.modalTransitionStyle = .flipHorizontal
-                    previewController.preferredContentSize = CGSize(width: 150, height: 150)
                     
                     present(previewController, animated: true, completion: nil)
                 }

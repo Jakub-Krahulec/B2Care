@@ -81,18 +81,18 @@ class B2CareService{
             "password" : password
         ]
         
-        let _ = NetworkService.shared.performRequest(from: url, model: UserResponse.self, method: HTTPMethod.post, parameters: params) { (result) in
+        let _ = NetworkService.shared.performRequest(from: url, model: UserResponse.self, method: HTTPMethod.post, parameters: params) { [weak self] (result) in
+            guard let this = self else {return}
             switch result{
-                
                 case .success(let data):
                     do{
-                        self.data = data.data
-                        self.save()
+                        this.data = data.data
+                        this.save()
                         completion(.success(true))
                         return
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    completion(.failure(error))
             }
         }
     }

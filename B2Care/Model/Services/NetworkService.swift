@@ -49,7 +49,6 @@ class NetworkService{
         if let image = imageCache.object(forKey: url as NSString) {
             completion(.success(image))
             return nil
-            // print("\(url): Z CACHE")
         } else {
             let request = AF.download(url)
                 .downloadProgress {(progress) in
