@@ -19,7 +19,7 @@ class NetworkService{
                                       model: T.Type,
                                       apiKey: String? = nil,
                                       method: HTTPMethod = .get,
-                                      parameters: Parameters? = nil ,
+                                      parameters: Parameters? = nil,
                                       completion: @escaping (Result<T, Error>) -> Void) -> DataRequest{
         
         var headers: HTTPHeaders? = nil

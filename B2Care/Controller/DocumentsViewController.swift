@@ -122,6 +122,7 @@ class DocumentsViewController: UIViewController {
         }
         label.font = UIFont.boldSystemFont(ofSize: 13)
         
+        view.backgroundColor = .white
         view.addSubview(image)
         image.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(15)
