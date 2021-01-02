@@ -46,6 +46,7 @@
 		2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
 		2A888FA82593CBB600B6E5DC /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA72593CBB600B6E5DC /* DateService.swift */; };
 		2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FAA2593FAC200B6E5DC /* UserButton.swift */; };
+		2A8E35AE25A114A400AE263D /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35AD25A114A400AE263D /* RequestViewController.swift */; };
 		2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEB25923EF700431A1C /* AppDelegate.swift */; };
 		2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEED25923EF700431A1C /* SceneDelegate.swift */; };
 		2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* LoginViewController.swift */; };
@@ -96,6 +97,7 @@
 		2A888FA42593799100B6E5DC /* PatientsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsResponse.swift; sourceTree = "<group>"; };
 		2A888FA72593CBB600B6E5DC /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		2A888FAA2593FAC200B6E5DC /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
+		2A8E35AD25A114A400AE263D /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		2A93CEE825923EF700431A1C /* B2Care.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2Care.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A93CEEB25923EF700431A1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A93CEED25923EF700431A1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
 				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
 				2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */,
+				2A8E35AD25A114A400AE263D /* RequestViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,
 				2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */,
 				2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */,
+				2A8E35AE25A114A400AE263D /* RequestViewController.swift in Sources */,
 				2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */,
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,

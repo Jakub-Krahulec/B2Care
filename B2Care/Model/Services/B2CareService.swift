@@ -45,8 +45,8 @@ class B2CareService{
         data = nil
     }
     
-    func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void){
-       let _ = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, apiKey: API_KEY) { (result) in
+    func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void) -> DataRequest{
+       return NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient/\(id)", model: PatientResponse.self, apiKey: API_KEY) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
@@ -57,8 +57,8 @@ class B2CareService{
         }
     }
     
-    func fetchPatients(parameters: String = "",completion: @escaping (Result<PatientsData, Error>) -> Void){
-        let _ = NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, apiKey: API_KEY) { (result) in
+    func fetchPatients(parameters: String = "",completion: @escaping (Result<PatientsData, Error>) -> Void) -> DataRequest{
+        return NetworkService.shared.performRequest(from: API_URL + "/hc/api/v1/patient" + parameters, model: PatientsResponse.self, apiKey: API_KEY) { (result) in
             switch result{
                 case .success(let data):
                     completion(.success(data.data))

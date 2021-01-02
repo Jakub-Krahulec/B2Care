@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientMenuViewController: UIViewController, BackButtonDelegate {
+class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     
     // MARK: - Properties
     private let tabbar = UITabBar()
@@ -29,15 +29,18 @@ class PatientMenuViewController: UIViewController, BackButtonDelegate {
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
-            B2CareService.shared.fetchPatient(id: id) { (result) in
+            let request = B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
+                guard let this = self else {return}
                 switch result{
                     
                     case .success(let data):
-                        self.data = data
+                        this.data = data
                     case .failure(let error):
-                        self.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
                 }
+                this.removeRequests()
             }
+            requests.insert(request)
         }
     }
     

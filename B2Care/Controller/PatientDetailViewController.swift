@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PatientDetailViewController: UIViewController {
+class PatientDetailViewController: RequestViewController {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
@@ -34,7 +34,7 @@ class PatientDetailViewController: UIViewController {
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
-            B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
+            let request = B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
                 guard let this = self else {return}
                 switch result{
                     
@@ -43,7 +43,9 @@ class PatientDetailViewController: UIViewController {
                     case .failure(let error):
                         this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
                 }
+                this.removeRequests()
             }
+            requests.insert(request)
         }
     }
     var data: Patient?{

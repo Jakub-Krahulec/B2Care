@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientListViewController: UIViewController, UserButtonDelegate {
+class PatientListViewController: RequestViewController, UserButtonDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
     private var isKeyboardShown = false
@@ -105,7 +105,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
                 params = "?search=\(text)"
             }
         }
-        B2CareService.shared.fetchPatients(parameters: params) { [weak self] (result) in
+        let request = B2CareService.shared.fetchPatients(parameters: params) { [weak self] (result) in
             guard let this = self else {return}
             switch result{
                 case .success(let data):
@@ -114,7 +114,9 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
                 case .failure(let error):
                     this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
             }
+            this.removeRequests()
         }
+        requests.insert(request)
     }
     
     private func prepareRefreshControlStyle(){

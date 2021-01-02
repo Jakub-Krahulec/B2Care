@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class SearchPatientViewController: UIViewController, UserButtonDelegate {
+class SearchPatientViewController: RequestViewController, UserButtonDelegate {
     // MARK: - Properties
     private let userButton = UserButton()
     private var header: HeaderView?
@@ -85,7 +85,7 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
             guard let patient = object.stringValue else {return}
             self.session.stopRunning()
             
-            B2CareService.shared.fetchPatients(parameters: "?search=\(patient)") { [weak self] (result) in
+            let request = B2CareService.shared.fetchPatients(parameters: "?search=\(patient)") { [weak self] (result) in
                 guard let this = self else {return}
                 switch result{
                     case .success(let data):
@@ -112,7 +112,9 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                         this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
                         this.session.startRunning()
                 }
+                this.removeRequests()
             }
+            requests.insert(request)
         }
     }
     
