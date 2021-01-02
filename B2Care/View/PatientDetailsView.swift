@@ -57,9 +57,12 @@ class PatientDetailsView: UIView {
     private func updateDepartmentLabelText(with hospitalization: Hospitalization){
         var location = ""
         if let name = hospitalization.location.name{
-            location += "\(name), "
+            location += "\(name)"
         }
         if let room = hospitalization.location.room{
+            if location.count > 0 {
+                location += ", "
+            }
             location += "Pokoj \(room)"
         }
         departmentLabel.text = location
