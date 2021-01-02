@@ -47,8 +47,8 @@ class BackButton: UIButton {
         addTarget(self, action: #selector(handleBackButtonTapped), for: .touchUpInside)
         
         self.snp.makeConstraints { (make) in
-            make.width.equalTo(20)
-            make.height.equalTo(25)
+            make.width.equalTo(15)
+            make.height.equalTo(22)
         }
     }
 }
