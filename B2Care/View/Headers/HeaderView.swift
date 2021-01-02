@@ -60,7 +60,7 @@ class HeaderView: UIView {
         addSubview(btn)
         let centerY = self.safeAreaInsets.top + (self.frame.height / 2) 
         btn.snp.makeConstraints { (make) in
-            make.left.equalTo(20)
+            make.left.equalTo(15)
             make.top.equalTo(centerY)
         }
     }
@@ -86,7 +86,7 @@ class HeaderView: UIView {
             guard let this = self else {return}
             make.bottom.equalToSuperview().inset(5)
             if this.bottomViewAlign == .left{
-                make.left.right.equalToSuperview().inset(5)
+                make.left.right.equalToSuperview().inset(10)
             } else if this.bottomViewAlign == .center {
                 make.centerX.equalToSuperview()
             }

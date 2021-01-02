@@ -27,6 +27,11 @@ class SearchField: UITextField {
     
     
     // MARK: - Helpers
+    public func setPlaceholder(_ placeholder: String){
+        attributedPlaceholder = NSAttributedString(string: placeholder,
+                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
+    
     private func prepareView(){
         backgroundColor = UIColor.black.withAlphaComponent(0.1)
         textColor = .white
