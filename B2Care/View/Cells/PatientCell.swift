@@ -55,11 +55,10 @@ class PatientCell: UITableViewCell {
     
     // MARK: - Helpers
     private func updateView(with data: Any?){
-        if let data = data as? Patient{
-            nameLabel.text = data.fullName
-            diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : "Bez diagnózy"
-            patientDetailsView.data = data
-        }
+        guard let data = data as? Patient else{return}
+        nameLabel.text = data.fullName
+        diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : "Bez diagnózy"
+        patientDetailsView.data = data
     }
     
     private func prepareView(){

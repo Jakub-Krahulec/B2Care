@@ -69,15 +69,16 @@ class PatientDetailsView: UIView {
     }
     
     private func updateView(with data: Any?){
-        if let data = data as? Patient{
-            updatePersonLabelText(with: data.person)
-            if data.hospitalizations.count > 0 {
-                updateDepartmentLabelText(with: data.hospitalizations[0])
-                
-            } else {
-                departmentLabel.text = "-"
-            }
+        guard let data = data as? Patient else {return}
+        
+        updatePersonLabelText(with: data.person)
+        if data.hospitalizations.count > 0 {
+            updateDepartmentLabelText(with: data.hospitalizations[0])
+            
+        } else {
+            departmentLabel.text = "-"
         }
+        
     }
     
     private func prepareView(){
