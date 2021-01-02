@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PatientDetailViewController: UIViewController, BaseHeaderDelegate {
+class PatientDetailViewController: UIViewController {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()

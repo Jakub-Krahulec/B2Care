@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientMenuViewController: UIViewController, BaseHeaderDelegate, BackButtonDelegate {
+class PatientMenuViewController: UIViewController, BackButtonDelegate {
     
     // MARK: - Properties
     private let tabbar = UITabBar()

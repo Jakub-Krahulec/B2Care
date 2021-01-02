@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserButtonDelegate {
+class SearchPatientViewController: UIViewController, UserButtonDelegate {
     // MARK: - Properties
     private let userButton = UserButton()
     private var header: HeaderView?
