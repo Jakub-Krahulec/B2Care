@@ -84,13 +84,14 @@ class HeaderView: UIView {
         
         view.snp.makeConstraints { [weak self] (make) in
             guard let this = self else {return}
-            make.bottom.equalToSuperview().inset(5)
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.bottom.equalToSuperview().offset(-2)
+            make.height.lessThanOrEqualTo(30)
             if this.bottomViewAlign == .left{
                 make.left.right.equalToSuperview().inset(10)
             } else if this.bottomViewAlign == .center {
                 make.centerX.equalToSuperview()
             }
-            make.height.equalTo(27)
         }
     }
 
