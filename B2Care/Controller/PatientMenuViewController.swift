@@ -7,11 +7,12 @@
 
 import UIKit
 
-class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
+class PatientMenuViewController: UIViewController, BaseHeaderDelegate, BackButtonDelegate {
     
     // MARK: - Properties
     private let tabbar = UITabBar()
-    private let headerView = DetailHeaderView()
+    private var header: HeaderView?
+    private let patientDetailView = PatientDetailsView()
     private var contentView = UIView()
     
     private lazy var patientDetailVC = PatientDetailViewController()
@@ -68,7 +69,9 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     private func updateView(with person: Patient?){
         guard let person = person else {return}
         patientDetailVC.patientId = person.id
-        headerView.data = person
+        header?.setTitle("\(person.person.firstname) \(person.person.surname)")
+        patientDetailView.data = person
+     //   headerView.data = person
     }
     
     private func prepareView(){
@@ -146,12 +149,13 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
     }
     
     private func prepareHeaderViewStyle(){
-        headerView.delegate = self
-        view.addSubview(headerView)
-        headerView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo((view.frame.height / 10) + 35)
-        }
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height / 10) + 35)
+        patientDetailView.changeStyle(color: .white)
+        let backButton = BackButton()
+        backButton.delegate = self
+        header = HeaderView(frame: frame, leftButton: backButton, title: "", bottomView: patientDetailView)
+        guard let header = header else {return}
+        view.addSubview(header)
     }
     
     func getImageWithColorPosition(color: UIColor, size: CGSize, lineSize: CGSize) -> UIImage {
@@ -191,10 +195,12 @@ class PatientMenuViewController: UIViewController, BaseHeaderDelegate {
         
         
         view.addSubview(tabbar)
-        
-        tabbar.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(headerView.snp.bottom)
+        if let header = header{
+            tabbar.snp.makeConstraints { (make) in
+                make.left.right.equalToSuperview()
+                //  make.top.equalTo(headerView.snp.bottom)
+                make.top.equalTo(header.snp.bottom)
+            }
         }
     }
 }

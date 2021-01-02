@@ -10,7 +10,8 @@ import AVFoundation
 
 class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserButtonDelegate {
     // MARK: - Properties
-    private let headerView = SearchHeaderView()
+    private let userButton = UserButton()
+    private var header: HeaderView?
   
     private var previewLayer = AVCaptureVideoPreviewLayer()
     let session  = AVCaptureSession()
@@ -63,12 +64,11 @@ class SearchPatientViewController: UIViewController, BaseHeaderDelegate, UserBut
     }
     
     private func prepareHeaderViewStyle(){
-        view.addSubview(headerView)
-        headerView.logoutButton.delegate = self
-        headerView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo((view.frame.height / 10) + 35)
-        }
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height / 10) + 35)
+        userButton.delegate = self
+        header = HeaderView(frame: frame, leftButton: userButton, title: "Vyhledání pacienta")
+        guard let header = header else {return}
+        view.addSubview(header)
     }
 
 }

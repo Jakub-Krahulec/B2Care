@@ -12,6 +12,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     private let cellId = "cellId"
     private var isKeyboardShown = false
     
+    private var header: HeaderView?
     private let table = UITableView()
     private let searchInput = SearchField()
     private let userButton = UserButton()
@@ -81,10 +82,20 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
     
     private func prepareView(){
         view.backgroundColor = .mainColor
-        prepareRefreshControlStyle()
-        prepareUserButtonStyle()
-        prepareSearchFieldStyle()
+        
+        prepareHeaderViewStyle()
         prepareTableViewStyle()
+        prepareRefreshControlStyle()
+    }
+    
+    private func prepareHeaderViewStyle(){
+        userButton.delegate = self
+        searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
+        
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height / 10) + 35)
+        header = HeaderView(frame: frame, leftButton: userButton, title: "Seznam pacientů", bottomView: searchInput, bottomViewAlign: .left)
+        guard let header = header else {return}
+        view.addSubview(header)
     }
     
     private func fetchPatients(){
@@ -125,30 +136,6 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         table.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(searchInput.snp.bottom).offset(5)
-        }
-    }
-    
-    private func prepareUserButtonStyle(){
-       // userButton.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
-        userButton.delegate = self
-        
-        view.addSubview(userButton)
-        userButton.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height / 10)
-            make.height.width.equalTo(30)
-        }
-    }
-    
-    private func prepareSearchFieldStyle(){
-        searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
-        
-        view.addSubview(searchInput)
-        searchInput.snp.makeConstraints { (make) in
-            make.left.equalTo(userButton.snp.right).offset(5)
-            make.right.equalToSuperview().inset(10)
-            make.top.equalTo(view.frame.height / 10)
-            make.height.equalTo(30)
         }
     }
 }
