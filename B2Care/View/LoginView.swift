@@ -21,6 +21,7 @@ class LoginView: UIView {
 
     // MARK: - Properties
     private var isInErrorMode = false
+    
     private let userLabel = UILabel()
     private let userTextField = BaseInputField()
     private let passwordLabel = UILabel()

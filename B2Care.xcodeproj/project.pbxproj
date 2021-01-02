@@ -154,14 +154,13 @@
 		2A0F257D259240DC0077DD02 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2A6655EF25A0E55D001BCD32 /* Cells */,
 				2A6655E625A0BD10001BCD32 /* Buttons */,
 				2A7EA39B25968D7000CD8402 /* InfoBox */,
 				2A7EA38A25966D1C00CD8402 /* Headers */,
 				2A0F25A4259342CC0077DD02 /* Inputs */,
 				2A0F258A25924CD20077DD02 /* LoginView.swift */,
-				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
 				2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */,
-				2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -233,6 +232,15 @@
 				2A6655E725A0BD52001BCD32 /* BackButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2A6655EF25A0E55D001BCD32 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
+				2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		2A7EA38A25966D1C00CD8402 /* Headers */ = {

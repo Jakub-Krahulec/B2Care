@@ -88,7 +88,7 @@ class HeaderView: UIView {
             make.bottom.equalToSuperview().offset(-2)
             make.height.lessThanOrEqualTo(30)
             if this.bottomViewAlign == .left{
-                make.left.right.equalToSuperview().inset(10)
+                make.left.right.equalToSuperview().inset(5)
             } else if this.bottomViewAlign == .center {
                 make.centerX.equalToSuperview()
             }
