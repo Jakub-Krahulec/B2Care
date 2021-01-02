@@ -33,6 +33,10 @@ extension UIColor{
 
 extension UIViewController{
     
+    var headerHeight: CGFloat {
+        return (self.view.frame.height / 10) + 35
+    }
+    
     func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {
         let tapGesture = UITapGestureRecognizer(target: self,
                                                 action: #selector(hideKeyboard))

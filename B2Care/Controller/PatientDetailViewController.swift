@@ -13,10 +13,7 @@ class PatientDetailViewController: UIViewController {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
-  //  private let tabbar = UITabBar()
-
     private let refreshControl = UIRefreshControl()
-  //  private let headerView = DetailHeaderView()
     private let verticalStack = UIStackView()
     private let insuranceInfoBox = SmallInfoBox()
     private let idNumberInfoBox = SmallInfoBox()
@@ -89,13 +86,13 @@ class PatientDetailViewController: UIViewController {
         
         insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: "-")
         idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: diagnosis, updated: getUpdatedDateString(person: person))
-        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: getAlergiesString(person: person), updated: getUpdatedDateString(person: person), tintColor: .systemRed)
-        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: getMedicationsString(person: person), updated: getUpdatedDateString(person: person), tintColor: .systemGreen)
-        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, updated: getUpdatedDateString(person: person), tintColor: .gray)
+        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: diagnosis, updated: person.updatedDateString)
+        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: person.allergiesString, updated: person.updatedDateString, tintColor: .systemRed)
+        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: person.medications, updated: person.updatedDateString, tintColor: .systemGreen)
+        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, updated:person.updatedDateString, tintColor: .gray)
         personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: person.person.contacts.count > 0 ? person.person.contacts[0].value : "-")
         doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: doctorNumber)
-        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: getAddressString(person: person))
+        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: person.fullAddress)
         proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: person.jobDescription  ?? "-")
     }
     
@@ -171,50 +168,6 @@ class PatientDetailViewController: UIViewController {
             make.top.equalToSuperview().offset(5)
             make.width.equalToSuperview()
         }
-    }
-    
-    private func getUpdatedDateString(person: Patient) -> String {
-        let updatedDate = DateService.shared.getDateFromString(person.updated ?? person.created ?? "")
-        var updated = ""
-        if let updatedDate = updatedDate{
-            updated = DateService.shared.getFormattedString(from: updatedDate)
-        }
-        return updated
-    }
-    
-    private func getAlergiesString(person: Patient) -> String{
-        var allergies = ""
-        for alergy in person.allergies{
-            allergies += alergy.code.title + "\n"
-        }
-        allergies = String(allergies.dropLast(2))
-        return allergies
-    }
-    
-    private func getMedicationsString(person: Patient) -> String {
-        var medications = ""
-        for medication in person.medicationDispenses{
-            medications += medication.medication.title + "\n"
-            //  medications += medication.medication.title.trimmingCharacters(in: .whitespaces) + "\n"
-        }
-        medications = String(medications.dropLast(2))
-        
-        return medications
-    }
-    
-    private func getAddressString(person: Patient) -> String {
-        var address = ""
-        if person.person.addresses.count > 0{
-            if let address1 = person.person.addresses[0].address1{
-                address += address1 + ", "
-            }
-            if let city = person.person.addresses[0].city{
-                address += city
-            }
-        } else {
-            address = "-"
-        }
-        return address
     }
 }
 

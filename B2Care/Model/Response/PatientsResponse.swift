@@ -14,3 +14,4 @@ struct PatientsResponse: Codable{
 struct PatientsData: Codable{
     var data: [Patient]
 }
+

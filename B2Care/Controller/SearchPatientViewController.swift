@@ -58,13 +58,12 @@ class SearchPatientViewController: UIViewController, UserButtonDelegate {
         previewLayer.session = session
         // previewLayer =  AVCaptureVideoPreviewLayer(session: session)
         
-        let headerHeight = (view.frame.height / 10) + 35
         previewLayer.frame =  CGRect(x: 0, y: headerHeight, width: view.frame.width, height: view.frame.height - headerHeight)
         view.layer.addSublayer(previewLayer)
     }
     
     private func prepareHeaderViewStyle(){
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height / 10) + 35)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
         userButton.delegate = self
         header = HeaderView(frame: frame, leftButton: userButton, title: "Vyhledání pacienta")
         guard let header = header else {return}

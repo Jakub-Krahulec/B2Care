@@ -92,7 +92,7 @@ class PatientListViewController: UIViewController, UserButtonDelegate {
         userButton.delegate = self
         searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height / 10) + 35)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
         header = HeaderView(frame: frame, leftButton: userButton, title: "Seznam pacientů", bottomView: searchInput, bottomViewAlign: .left)
         guard let header = header else {return}
         view.addSubview(header)
