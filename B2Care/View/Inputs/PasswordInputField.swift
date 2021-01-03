@@ -11,6 +11,7 @@ class PasswordInputField: BaseInputField {
 
    // MARK: - Properties
     private let showPasswordButton = UIButton()
+    private let glowAnimation = CABasicAnimation(keyPath: "shadowRadius")
       
     // MARK: - Lifecycle
     
@@ -66,10 +67,29 @@ class PasswordInputField: BaseInputField {
     }
     
     public func setErrorMode(){
-        layer.borderColor = UIColor.systemPink.cgColor
+        layer.borderColor = UIColor.systemPink.withAlphaComponent(0.7).cgColor
+        
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.systemPink.cgColor
+        layer.shadowRadius = 0
+        layer.shadowOpacity = 1
+        layer.shadowOffset = .zero
+        
+        
+        
+        glowAnimation.fromValue = 0
+        glowAnimation.toValue = 5
+        glowAnimation.beginTime = CACurrentMediaTime()+0.3
+        glowAnimation.duration = CFTimeInterval(0.3)
+        glowAnimation.fillMode = .removed
+        glowAnimation.autoreverses = true
+        glowAnimation.isRemovedOnCompletion = true
+        glowAnimation.repeatCount = .infinity
+        layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
     }
     
     public func setNormalMode(){
+        layer.removeAllAnimations()
         if self.hasFocus{
             layer.borderColor = UIColor.mainColor.cgColor
         } else {

@@ -28,6 +28,10 @@ extension UIView{
             blurLoader.removeFromSuperview()
         }
     }
+    
+    enum GlowEffect: Float {
+        case small = 0.4, normal = 2, big = 15
+    }
 }
 
 extension UIColor{
