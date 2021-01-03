@@ -32,6 +32,7 @@ class LoginView: UIView {
     private let statusLabel = UILabel()
     private let forgotPasswordButton = UIButton()
     private let loginButton = UIButton()
+    private let refreshControl = UIActivityIndicatorView()
     
     public var delegate: LoginViewDelegate?
     
@@ -54,9 +55,10 @@ class LoginView: UIView {
     
     @objc private func handleLoginButtonTapped(){
         endErrorMode()
-        
+        refreshControl.startAnimating()
         B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] res in
             guard let this = self else {return}
+            this.refreshControl.stopAnimating()
             switch res{
                 case .success(let isLoggedIn):
                     if isLoggedIn{
@@ -85,6 +87,24 @@ class LoginView: UIView {
         prepareStatusLabelStyle()
         prepareLoginButtonStyle()
         prepareAnimationStyle()
+        prepareRefreshControlStyle()
+    }
+    
+    private func prepareRefreshControlStyle(){
+        addSubview(refreshControl)
+       // refreshControl.startAnimating()
+        refreshControl.hidesWhenStopped = true
+        refreshControl.style  = .medium
+        refreshControl.color = .black
+        
+        
+        refreshControl.snp.makeConstraints { (make) in
+//            make.top.equalTo(userTextField.snp.bottom)
+//            make.centerX.equalToSuperview()
+            
+            make.left.equalTo(passwordTextField).offset(3)
+            make.centerY.equalTo(forgotPasswordButton)
+        }
     }
     
     private func prepareAnimationStyle(){

@@ -47,8 +47,26 @@ class PasswordInputField: BaseInputField {
     private func prepareView(){
         self.keyboardType = .default
         isSecureTextEntry = true
+        prepareGlowAnimationStyle()
         prepareShowPasswordButtonStyle()
         
+    }
+    
+    private func prepareGlowAnimationStyle(){
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.systemPink.cgColor
+        layer.shadowRadius = 0
+        layer.shadowOpacity = 1
+        layer.shadowOffset = .zero
+        
+        glowAnimation.fromValue = 0
+        glowAnimation.toValue = 2
+        glowAnimation.beginTime = CACurrentMediaTime()+0.3
+        glowAnimation.duration = CFTimeInterval(0.3)
+        glowAnimation.fillMode = .removed
+        glowAnimation.autoreverses = true
+        glowAnimation.isRemovedOnCompletion = true
+        glowAnimation.repeatCount = .infinity
     }
     
     private func prepareShowPasswordButtonStyle(){
@@ -68,23 +86,6 @@ class PasswordInputField: BaseInputField {
     
     public func setErrorMode(){
         layer.borderColor = UIColor.systemPink.withAlphaComponent(0.7).cgColor
-        
-        layer.masksToBounds = false
-        layer.shadowColor = UIColor.systemPink.cgColor
-        layer.shadowRadius = 0
-        layer.shadowOpacity = 1
-        layer.shadowOffset = .zero
-        
-        
-        
-        glowAnimation.fromValue = 0
-        glowAnimation.toValue = 2
-        glowAnimation.beginTime = CACurrentMediaTime()+0.3
-        glowAnimation.duration = CFTimeInterval(0.3)
-        glowAnimation.fillMode = .removed
-        glowAnimation.autoreverses = true
-        glowAnimation.isRemovedOnCompletion = true
-        glowAnimation.repeatCount = .infinity
         layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
     }
     

@@ -10,7 +10,6 @@ import UIKit
 class LoginHeaderView: UIView {
 
    // MARK: - Properties
-  //  let headerImage = UIImageView()
     let logoView = UIView()
     let logoImage = UIImageView()
     let animation = CABasicAnimation(keyPath: "colors")
