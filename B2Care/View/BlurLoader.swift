@@ -12,6 +12,7 @@ class BlurLoader: UIView {
     
     var blurEffectView: UIVisualEffectView?
     private let activityIndicator = UIActivityIndicatorView(style: .large)
+    let animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -23,19 +24,30 @@ class BlurLoader: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        animator.stopAnimation(true)
+    }
+    
     // MARK: - Actions
     
     // MARK: - Helpers
     
     private func prepareView(){
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+       
+      //  let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffectView = UIVisualEffectView(effect: nil)
         blurEffectView.frame = self.frame
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.alpha = 0.7
+        blurEffectView.alpha = 1.0
         self.blurEffectView = blurEffectView
         self.addSubview(blurEffectView)
+        
         prepareLoaderStyle()
+        
+        animator.addAnimations {
+            blurEffectView.effect = UIBlurEffect(style: .light)
+        }
+        animator.fractionComplete = 0.1
     }
     
     private func prepareLoaderStyle() {
