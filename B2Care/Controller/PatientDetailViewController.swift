@@ -34,6 +34,7 @@ class PatientDetailViewController: RequestViewController {
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
+            //  view.showBlurLoader()
             let request = B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
                 guard let this = self else {return}
                 switch result{
@@ -162,6 +163,7 @@ class PatientDetailViewController: RequestViewController {
     }
     
     private func prepareScrollViewStyle(){
+        scrollView.backgroundColor = .backgroundLight
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(5)
