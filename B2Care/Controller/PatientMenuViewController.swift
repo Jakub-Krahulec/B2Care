@@ -192,6 +192,12 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
             }
         }
     }
+    
+    override func addChild(_ childController: UIViewController) {
+        if !children.contains(childController){
+            super.addChild(childController)
+        }
+    }
 }
 
 extension PatientMenuViewController: UITabBarDelegate{
@@ -201,24 +207,31 @@ extension PatientMenuViewController: UITabBarDelegate{
                 if let data = data{
                     patientDetailVC.patientId = data.id
                 }
+                addChild(patientDetailVC)
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(patientDetailVC.view)
+                
             case 2:
+                addChild(planVC)
                 planVC.view.backgroundColor = .systemPink
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(planVC.view)
             case 3:
+                addChild(documentVC)
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(documentVC.view)
             case 4:
+                addChild(messagesVC)
                 messagesVC.view.backgroundColor = .systemGreen
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(messagesVC.view)
             case 5:
+                addChild(grphsVC)
                 grphsVC.view.backgroundColor = .systemBlue
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(grphsVC.view)
             case 6:
+                addChild(historyVC)
                 historyVC.view.backgroundColor = .systemOrange
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(historyVC.view)
