@@ -78,7 +78,7 @@ class PasswordInputField: BaseInputField {
         
         
         glowAnimation.fromValue = 0
-        glowAnimation.toValue = 5
+        glowAnimation.toValue = 2
         glowAnimation.beginTime = CACurrentMediaTime()+0.3
         glowAnimation.duration = CFTimeInterval(0.3)
         glowAnimation.fillMode = .removed
