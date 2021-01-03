@@ -52,6 +52,7 @@ class LoginHeaderView: UIView {
         animation.duration = 10.0
         animation.autoreverses = true
         animation.repeatCount = Float.infinity
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
     }
     
     private func prepareHeaderImageViewStyle(){
