@@ -32,6 +32,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     
     override func viewDidLayoutSubviews() {
         headerView.prepareGradientStyle()
+        loginView.prepareGradientStyle()
     }
     
     // MARK: - Actions
@@ -48,6 +49,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     
     @objc private func applicationWillEnterForegorund(notification: Notification){
         headerView.startAnimations()
+        loginView.startAnimations()
     }
     
     // MARK: - Helpers

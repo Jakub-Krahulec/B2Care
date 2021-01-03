@@ -22,6 +22,9 @@ class LoginView: UIView {
     // MARK: - Properties
     private var isInErrorMode = false
     
+    let gradient = CAGradientLayer()
+    let animation = CABasicAnimation(keyPath: "colors")
+    
     private let userLabel = UILabel()
     private let userTextField = BaseInputField()
     private let passwordLabel = UILabel()
@@ -81,6 +84,18 @@ class LoginView: UIView {
         prepareForgotPasswordButtonStyle()
         prepareStatusLabelStyle()
         prepareLoginButtonStyle()
+        prepareAnimationStyle()
+    }
+    
+    private func prepareAnimationStyle(){
+        animation.fromValue = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
+        animation.toValue = [UIColor.headerMainColor.withAlphaComponent(1).cgColor, UIColor.mainColor.withAlphaComponent(1).cgColor]
+        animation.duration = 4.0
+        animation.autoreverses = true
+        animation.repeatCount = Float.infinity
+        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        
+        startAnimations()
     }
     
     private func prepareUserLabelStyle(){
@@ -155,8 +170,10 @@ class LoginView: UIView {
     
     private func prepareLoginButtonStyle(){
         loginButton.setTitle("Přihlásit", for: .normal)
-        loginButton.backgroundColor = .mainColor
-        loginButton.layer.cornerRadius = 10
+        loginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//        loginButton.backgroundColor = .mainColor
+//        loginButton.layer.cornerRadius = 10
+        loginButton.backgroundColor = .clear
         loginButton.addTarget(self, action: #selector(handleLoginButtonTapped), for: .touchUpInside)
         
         addSubview(loginButton)
@@ -189,10 +206,36 @@ class LoginView: UIView {
     }
     
     private func startErrorMode(message: String){
+        shake()
         statusLabel.text = message
         statusLabel.isHidden = false
         passwordTextField.setErrorMode()
         isInErrorMode = true
+    }
+    
+    public func prepareGradientStyle(){
+        
+        gradient.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
+        gradient.frame = loginButton.bounds
+        gradient.startPoint = CGPoint(x: 0, y: 1)
+        gradient.endPoint = CGPoint(x: 0, y: 0.0)
+        gradient.cornerRadius = 10
+        loginButton.layer.insertSublayer(gradient, at: 0)
+        
+    }
+    
+    public func startAnimations(){
+        if (gradient.animationKeys()?.count ?? 0) <= 0{
+            gradient.add(animation, forKey: "colors")
+        }
+    }
+    
+    private func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        loginButton.layer.add(animation, forKey: "shake")
     }
 
 }

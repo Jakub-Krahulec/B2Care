@@ -90,8 +90,6 @@ class LoginHeaderView: UIView {
         imageGradient.cornerRadius = 20
         imageGradient.startPoint = CGPoint(x: 0, y: 0.1)
         imageGradient.endPoint = CGPoint(x: 0, y: 1)
-        imageGradient.borderWidth = 0
-        imageGradient.borderColor = UIColor.white.cgColor
         logoView.layer.insertSublayer(imageGradient, at: 0)
 
         
