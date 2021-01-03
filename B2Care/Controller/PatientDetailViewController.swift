@@ -187,8 +187,9 @@ class PatientDetailViewController: RequestViewController {
         
         scrollView.addSubview(verticalStack)
         verticalStack.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(5)
-            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+//            make.width.equalToSuperview()
         }
     }
 }
