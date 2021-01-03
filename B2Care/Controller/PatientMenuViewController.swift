@@ -40,7 +40,7 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
                 }
                 this.removeRequests()
             }
-            requests.insert(request)
+            dataRequests.insert(request)
         }
     }
     

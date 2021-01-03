@@ -11,7 +11,8 @@ import Alamofire
 class RequestViewController: UIViewController {
 
     // MARK: - Properties
-    internal var requests = Set<DataRequest>()
+    internal var dataRequests = Set<DataRequest>()
+    internal var downloadRequests = Set<DownloadRequest>()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,12 +22,19 @@ class RequestViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        for request in requests{
+        for request in dataRequests{
             if !request.isFinished{
                 request.cancel()
             }
         }
-        requests.removeAll()
+        dataRequests.removeAll()
+        
+        for request in downloadRequests{
+            if !request.isFinished{
+                request.cancel()
+            }
+        }
+        downloadRequests.removeAll()
     }
     // MARK: - Actions
     
@@ -34,9 +42,15 @@ class RequestViewController: UIViewController {
     // MARK: - Helpers
     
     internal func removeRequests(){
-        for request in requests{
+        for request in dataRequests{
             if request.isFinished{
-                requests.remove(request)
+                dataRequests.remove(request)
+            }
+        }
+        
+        for request in downloadRequests{
+            if request.isFinished{
+                downloadRequests.remove(request)
             }
         }
     }

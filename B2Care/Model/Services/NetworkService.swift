@@ -43,6 +43,23 @@ class NetworkService{
         
         return request
     }
+    
+    func downloadFile(from url: String, progressChanged: @escaping (Double) -> Void, completion: @escaping (Result<Data, Error>) -> Void) -> DownloadRequest{
+        let request  = AF.download(url)
+            .validate()
+            .downloadProgress{(progress) in
+                progressChanged(progress.fractionCompleted)
+            }
+            .responseData { (response) in
+                switch response.result{
+                    case .success(let data):
+                        completion(.success(data))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
+            }
+        return request
+    }
 
     func getImageFromURL(_ url: String, progressChanged: @escaping (Double) -> Void ,completion: @escaping (Result<UIImage?, Error>) -> Void) -> DownloadRequest?{
         

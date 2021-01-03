@@ -8,7 +8,7 @@
 import UIKit
 import QuickLook
 
-class DocumentsViewController: UIViewController {
+class DocumentsViewController: RequestViewController {
     
     // MARK: - Properties
     private let documentTable = UITableView()
@@ -142,6 +142,10 @@ class DocumentsViewController: UIViewController {
                 
         return view
     }
+    
+    private func downloadProgressChanged(value: Double){
+        
+    }
 }
 
 extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
@@ -205,29 +209,41 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
             }
         }
         
-        guard let data = document, let itemURL = URL(string: data.value) else { return }
-        do {
-            
-            let dataFromUrl = try Data(contentsOf: itemURL)
-            fileURL = FileManager().temporaryDirectory.appendingPathComponent("\(data.name).pdf")
-            
-            if let fileURL = fileURL {
-                try dataFromUrl.write(to: fileURL, options: .atomic)
-                if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
-                    
-                    let previewController = QLPreviewController()
-                    previewController.dataSource = self
-                    previewController.modalPresentationStyle = .popover
-                    previewController.modalTransitionStyle = .flipHorizontal
-                    
-                    present(previewController, animated: true, completion: nil)
-                }
-                
+        guard let documentData = document else { return } // , let itemURL = URL(string: data.value)
+        
+        
+        //let dataFromUrl = try Data(contentsOf: itemURL)
+        let request = NetworkService.shared.downloadFile(from: documentData.value, progressChanged: downloadProgressChanged(value:)) { [weak self] (result) in
+            guard let this = self else {return}
+            switch result{
+                case .success(let data):
+                    do {
+                        this.fileURL = FileManager().temporaryDirectory.appendingPathComponent("\(documentData.name).pdf")
+                        
+                        if let fileURL = this.fileURL {
+                            try data.write(to: fileURL, options: .atomic)
+                            if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
+                                
+                                let previewController = QLPreviewController()
+                                previewController.dataSource = this
+                                previewController.modalPresentationStyle = .popover
+                                previewController.modalTransitionStyle = .flipHorizontal
+                                this.present(previewController, animated: true, completion: nil)
+                            }
+                            
+                        }
+                    } catch {
+                        // cant find the url resource
+                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                    }
+                case .failure(let error):
+                    this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
             }
-        } catch {
-            // cant find the url resource
-            showMessage(withTitle: "Chyba", message: error.localizedDescription)
+            this.removeRequests()
         }
+        downloadRequests.insert(request)
+        
+        
     }
 }
 

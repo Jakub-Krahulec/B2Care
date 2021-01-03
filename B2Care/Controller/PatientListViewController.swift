@@ -117,7 +117,7 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
             }
             this.removeRequests()
         }
-        requests.insert(request)
+        dataRequests.insert(request)
     }
     
     private func prepareRefreshControlStyle(){

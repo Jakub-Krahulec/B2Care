@@ -46,7 +46,7 @@ class PatientDetailViewController: RequestViewController {
                 }
                 this.removeRequests()
             }
-            requests.insert(request)
+            dataRequests.insert(request)
         }
     }
     var data: Patient?{

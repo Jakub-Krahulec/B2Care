@@ -114,7 +114,7 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                 }
                 this.removeRequests()
             }
-            requests.insert(request)
+            dataRequests.insert(request)
         }
     }
     
