@@ -56,7 +56,10 @@ struct Patient: Codable {
                 address += address1 + ", "
             }
             if let city = self.person.addresses[0].city{
-                address += city
+                address += city + ", "
+            }
+            if let postalCode = self.person.addresses[0].postalCode{
+                address += postalCode
             }
         } else {
             address = "-"

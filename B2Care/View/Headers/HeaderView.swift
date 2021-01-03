@@ -19,7 +19,6 @@ class HeaderView: UIView {
     private var leftButton: UIButton?
     private var titleLabel = UILabel()
     private var bottomView: UIView?
-    private let topPadding: CGFloat = 20
     private var bottomViewAlign: HeaderBottomViewAlignment
     
     // MARK: - Lifecycle

@@ -84,7 +84,7 @@ class SmallInfoBox: UIView {
         addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleStack.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.left.right.equalToSuperview().inset(20)
         }
     }
     
