@@ -59,6 +59,7 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
             table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
             table.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         }
+        table.setContentOffset(.zero, animated: true)
     }
     
     @objc private func keyboardDidHide(notification: Notification){
