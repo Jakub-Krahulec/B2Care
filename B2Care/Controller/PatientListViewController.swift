@@ -21,7 +21,7 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
     private var patients: PatientsData?
     {
         didSet{
-            table.reloadSections(IndexSet(integer: 0), with: .fade)
+            table.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
     
@@ -190,13 +190,3 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension PatientListViewController: UITextFieldDelegate{
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if string.count > 0 {
-//            fetchPatients(parameters: "?search=\(string)")
-//        } else {
-//            fetchPatients()
-//        }
-//        return true
-//    }
-}

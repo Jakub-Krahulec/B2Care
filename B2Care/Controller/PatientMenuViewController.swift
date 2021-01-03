@@ -80,8 +80,8 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         prepareHeaderViewStyle()
         prepareTabBarStyle()
         
-        prepareUrgentButtonStyle()
-        prepareAddTaskButtonStyle()
+        prepareBottomButtonStyle(addTaskButton, title: "Přidat úkol", image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
+        prepareBottomButtonStyle(urgentButton, title: "Urgentní zpáva", image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
         prepareButtonStackStyle()
         prepareContentViewStyle()
         prepareBlurBackgroundStyle()
@@ -116,28 +116,15 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         }
     }
     
-    private func prepareUrgentButtonStyle(){
-        urgentButton.setTitle("Urgentní zpáva", for: .normal)
-        urgentButton.setImage(UIImage(systemName: "exclamationmark.bubble.fill"), for: .normal)
-        urgentButton.tintColor = .white
-        urgentButton.setTitleColor(.white, for: .normal)
-        urgentButton.backgroundColor = .systemRed
-        urgentButton.layer.cornerRadius = 10
+    private func prepareBottomButtonStyle(_ button: UIButton, title: String, image: UIImage?, backgroundColor: UIColor){
+        button.setTitle(title, for: .normal)
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.layer.cornerRadius = 10
         
-        urgentButton.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-        }
-    }
-    
-    private func prepareAddTaskButtonStyle(){
-        addTaskButton.setTitle("Přidat úkol", for: .normal)
-        addTaskButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        addTaskButton.tintColor = .white
-        addTaskButton.setTitleColor(.white, for: .normal)
-        addTaskButton.backgroundColor = .systemGreen
-        addTaskButton.layer.cornerRadius = 10
-        
-        addTaskButton.snp.makeConstraints { (make) in
+        button.snp.makeConstraints { (make) in
             make.height.equalTo(50)
         }
     }
