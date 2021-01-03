@@ -57,7 +57,7 @@ class ContactSmallInfoBox: SmallInfoBox {
         
         
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(callButton.snp.bottom).offset(20)
+            make.bottom.equalTo(callButton.snp.bottom).offset(15)
         }
     }
     
@@ -74,7 +74,7 @@ class ContactSmallInfoBox: SmallInfoBox {
         addSubview(callButton)
         callButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(super.valueLabel.snp.bottom).offset(10)
+            make.top.equalTo(super.valueLabel.snp.bottom).offset(15)
             make.height.equalTo(18)
         }
     }

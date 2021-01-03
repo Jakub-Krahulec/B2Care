@@ -46,7 +46,8 @@ class SmallInfoBox: UIView {
     
     func prepareDynamicHeight(){
         self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(valueLabel.snp.bottom).offset(20)
+            //make.bottom.equalTo(valueLabel.snp.bottom).offset(15)
+            make.bottom.greaterThanOrEqualTo(valueLabel.snp.bottom).offset(15)
         }
     }
     
@@ -61,7 +62,7 @@ class SmallInfoBox: UIView {
         titleStack.addArrangedSubview(titleLabel)
         titleStack.snp.makeConstraints { (make) in
           //  make.centerY.equalToSuperview().offset(-12)
-            make.top.equalTo(20)
+            make.top.equalTo(15)
             make.centerX.equalToSuperview()
         }
     }
@@ -83,8 +84,9 @@ class SmallInfoBox: UIView {
         
         addSubview(valueLabel)
         valueLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleStack.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20)
+            make.top.greaterThanOrEqualTo(titleStack.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(15)
+            
         }
     }
     
