@@ -46,6 +46,10 @@ class LoginViewController: UIViewController, LoginViewDelegate {
         loginView.moveLoginButton(to: 0)
     }
     
+    @objc private func applicationWillEnterForegorund(notification: Notification){
+        headerView.startAnimations()
+    }
+    
     // MARK: - Helpers
     
     private func prepareView(){
@@ -74,6 +78,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     private func setupNotificationObservers(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForegorund(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
 }

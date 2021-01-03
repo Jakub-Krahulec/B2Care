@@ -53,6 +53,8 @@ class LoginHeaderView: UIView {
         animation.autoreverses = true
         animation.repeatCount = Float.infinity
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        startAnimations()
     }
     
     private func prepareHeaderImageViewStyle(){
@@ -83,7 +85,7 @@ class LoginHeaderView: UIView {
         gradient.endPoint = CGPoint(x: 0.8, y: 1)
         self.layer.insertSublayer(gradient, at: 0)
         
-        imageGradient.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.withAlphaComponent(0.9).cgColor]
+        imageGradient.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.withAlphaComponent(1).cgColor]
         imageGradient.frame = logoView.bounds
         imageGradient.cornerRadius = 20
         imageGradient.startPoint = CGPoint(x: 0, y: 0.1)
@@ -91,9 +93,17 @@ class LoginHeaderView: UIView {
         imageGradient.borderWidth = 0
         imageGradient.borderColor = UIColor.white.cgColor
         logoView.layer.insertSublayer(imageGradient, at: 0)
+
         
-        gradient.add(animation, forKey: nil)
-        imageGradient.add(animation, forKey: nil)
+    }
+    
+    public func startAnimations(){
+        if (gradient.animationKeys()?.count ?? 0) <= 0{
+            gradient.add(animation, forKey: "colors")
+        }
+        if (imageGradient.animationKeys()?.count ?? 0) <= 0{
+            imageGradient.add(animation, forKey: "colors")
+        }
     }
     
 }
