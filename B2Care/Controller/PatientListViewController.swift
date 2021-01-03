@@ -188,5 +188,6 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
             navigationController?.pushViewController(controller, animated: true)
         }
     }
+    
 }
 

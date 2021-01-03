@@ -189,7 +189,6 @@ class PatientDetailViewController: RequestViewController {
         verticalStack.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
-//            make.width.equalToSuperview()
         }
     }
 }

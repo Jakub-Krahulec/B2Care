@@ -23,11 +23,18 @@ class SearchPatientViewController: RequestViewController, UserButtonDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        session.startRunning()
+        // Kvůli simulátoru
+        if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
+            session.startRunning()
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        session.stopRunning()
+        // Kvůli simulátoru
+        if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
+            session.stopRunning()
+        }
     }
     
     // MARK: - Actions
