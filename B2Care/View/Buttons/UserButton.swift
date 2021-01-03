@@ -58,7 +58,9 @@ class UserButton: UIButton {
         setBackgroundImage(UIImage(systemName: "person.circle.fill"), for: .normal)
         tintColor = .white
         self.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
-        
+        self.snp.makeConstraints { (make) in
+            make.height.width.equalTo(25)
+        }
         
     }
 }

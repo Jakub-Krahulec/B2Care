@@ -59,7 +59,7 @@ class HeaderView: UIView {
         guard let btn = leftButton else {return}
         addSubview(btn)
         btn.snp.makeConstraints { (make) in
-            make.left.equalTo(15)
+            make.left.equalTo(10)
             make.centerY.equalTo(titleLabel)
         }
     }

@@ -28,6 +28,10 @@ class RequestViewController: UIViewController {
         }
         requests.removeAll()
     }
+    // MARK: - Actions
+    
+    
+    // MARK: - Helpers
     
     internal func removeRequests(){
         for request in requests{
@@ -36,10 +40,4 @@ class RequestViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Actions
-    
-    
-    // MARK: - Helpers
-
 }
