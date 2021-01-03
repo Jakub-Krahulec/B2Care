@@ -68,8 +68,9 @@ class LoginHeaderView: UIView {
     }
     
     private func prepareLogoImageViewStyle(){
-        logoImage.image = UIImage(systemName: "sheqelsign.square") // waveform.path.ecg // staroflife.fill //circle.grid.hex
+        logoImage.image = #imageLiteral(resourceName: "medical-symbol-transparent-background-20") //"sheqelsign.square" // waveform.path.ecg // staroflife.fill //circle.grid.hex
         logoImage.tintColor = UIColor.white.withAlphaComponent(1)
+        logoImage.contentMode = .scaleAspectFit
         logoView.addSubview(logoImage)
         logoImage.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
