@@ -18,9 +18,13 @@ extension UIView{
     }
     
     func removeBluerLoader() {
-        if let blurLoader = subviews.first(where: { $0 is BlurLoader }) {
-            blurLoader.removeFromSuperview()
+        // projdu všechny kdyby mi zůstal nějaký viset kvůli výpadku internetu
+        for view in subviews.filter({$0 is BlurLoader}){
+            view.removeFromSuperview()
         }
+//        if let blurLoader = subviews.first(where: { $0 is BlurLoader }) {
+//            blurLoader.removeFromSuperview()
+//        }
     }
 }
 
