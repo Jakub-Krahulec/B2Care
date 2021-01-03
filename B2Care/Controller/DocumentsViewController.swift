@@ -81,7 +81,7 @@ class DocumentsViewController: UIViewController {
         prepareTableStyle(labTable)
         
         labTable.refreshControl = labRefreshControl
-        labRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+    //    labRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         labRefreshControl.addTarget(self, action: #selector(refreshLabs(_:)), for: .valueChanged)
         
         
@@ -97,7 +97,7 @@ class DocumentsViewController: UIViewController {
         prepareTableStyle(documentTable)
         
         documentTable.refreshControl = documentsRefreshControl
-        documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+     //   documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         documentsRefreshControl.addTarget(self, action: #selector(refreshDocuments(_:)), for: .valueChanged)
         
         

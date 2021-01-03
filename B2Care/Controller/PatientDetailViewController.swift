@@ -142,7 +142,7 @@ class PatientDetailViewController: RequestViewController {
     }
     
     private func prepareRefreshControlStyle(){
-        refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+      //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         // scrollView.addSubview(refreshControl)
         scrollView.refreshControl = refreshControl

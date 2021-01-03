@@ -120,7 +120,7 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
     }
     
     private func prepareRefreshControlStyle(){
-        refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+      //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         table.addSubview(refreshControl)
     }
