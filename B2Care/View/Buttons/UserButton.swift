@@ -52,9 +52,10 @@ class UserButton: UIButton {
     
     // MARK: - Helpers
     private func prepareView(){
-        setImage(UIImage(systemName: "person.circle.fill"), for: .normal)
-        imageView?.contentMode = .scaleAspectFill
-        imageEdgeInsets = UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22)
+//        setImage(UIImage(systemName: "person.circle.fill"), for: .normal)
+//        imageView?.contentMode = .scaleAspectFill
+//        imageEdgeInsets = UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22)
+        setBackgroundImage(UIImage(systemName: "person.circle.fill"), for: .normal)
         tintColor = .white
         self.addTarget(self, action: #selector(handleUserButtonTapped), for: .touchUpInside)
         

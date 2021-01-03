@@ -46,8 +46,8 @@ class HeaderView: UIView {
     private func prepareView(){
         backgroundColor = .mainColor
         
-        prepareLeftButtonStyle()
         prepareTitleLabelStyle()
+        prepareLeftButtonStyle()
         prepareBottomViewStyle()
     }
     
@@ -58,10 +58,9 @@ class HeaderView: UIView {
     private func prepareLeftButtonStyle(){
         guard let btn = leftButton else {return}
         addSubview(btn)
-        let centerY = self.safeAreaInsets.top + (self.frame.height / 2) 
         btn.snp.makeConstraints { (make) in
             make.left.equalTo(15)
-            make.top.equalTo(centerY)
+            make.centerY.equalTo(titleLabel)
         }
     }
     

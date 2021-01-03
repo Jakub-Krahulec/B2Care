@@ -76,7 +76,7 @@ class PatientDetailsView: UIView {
             updateDepartmentLabelText(with: data.hospitalizations[0])
             
         } else {
-            departmentLabel.text = "-"
+            departmentLabel.text = "V domácí péči"
         }
         
     }

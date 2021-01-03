@@ -100,7 +100,7 @@ class PatientDetailViewController: RequestViewController {
         guard let person = person else {return}
         // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
      //   headerView.data = person
-        let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : "-"
+        let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : ""
         let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
         
         insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: "-")
