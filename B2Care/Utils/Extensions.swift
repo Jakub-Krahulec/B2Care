@@ -7,6 +7,23 @@
 
 import UIKit
 
+extension UIView{
+    func showBlurLoader() {
+        let blurLoader = BlurLoader(frame: frame)
+        self.addSubview(blurLoader)
+        blurLoader.snp.makeConstraints { (make) in
+            make.left.right.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(250)
+        }
+    }
+    
+    func removeBluerLoader() {
+        if let blurLoader = subviews.first(where: { $0 is BlurLoader }) {
+            blurLoader.removeFromSuperview()
+        }
+    }
+}
+
 extension UIColor{
     
     static var mainColor: UIColor {

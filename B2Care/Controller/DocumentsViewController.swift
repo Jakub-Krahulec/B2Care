@@ -40,6 +40,11 @@ class DocumentsViewController: UIViewController {
         documentsData = documentsHardData
         labResultsData = laboratoryResultsHardData
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        view.showBlurLoader()
+    }
     // MARK: - Actions
     
     @objc private func refreshDocuments(_ sender: AnyObject){

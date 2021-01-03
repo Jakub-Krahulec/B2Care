@@ -65,6 +65,22 @@ class PatientDetailViewController: RequestViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let alert = UIAlertController(title: nil, message: "Stahuji data", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 7, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = .large
+//        loadingIndicator.startAnimating();
+//
+//        alert.view.addSubview(loadingIndicator)
+//        present(alert, animated: true, completion: nil)
+        
+        view.showBlurLoader()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //  navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -96,6 +112,8 @@ class PatientDetailViewController: RequestViewController {
         doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: doctorNumber)
         addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: person.fullAddress)
         proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: person.jobDescription  ?? "-")
+        
+        view.removeBluerLoader()
     }
     
     private func prepareView(){
