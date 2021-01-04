@@ -32,13 +32,13 @@ class DateService{
         return nil
     }
     
-    public func getDateFromString(_ stringDate: String) -> Date? {
-        dateformater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+    public func getDateFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Date? {
+        dateformater.dateFormat = format
         return dateformater.date(from: stringDate)
     }
     
-    public func getFormattedString(from date: Date) -> String {
-        dateformater.dateFormat = "dd.MM.yyyy 'v' HH:mm"
+    public func getFormattedString(from date: Date, format: String = "dd.MM.yyyy 'v' HH:mm") -> String {
+        dateformater.dateFormat = format
         return dateformater.string(from: date)
     }
 }
