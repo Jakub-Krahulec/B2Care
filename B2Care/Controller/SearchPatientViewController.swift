@@ -26,8 +26,7 @@ class SearchPatientViewController: RequestViewController, UserButtonDelegate {
         // Kvůli simulátoru
         if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
             session.startRunning()
-        }
-        
+        }     
     }
     
     override func viewWillDisappear(_ animated: Bool) {

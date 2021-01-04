@@ -14,8 +14,8 @@ class DateService{
     private init(){}
     
     
-    public func getAgeFromString(_ stringDate: String) -> Int? {
-        dateformater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+    public func getAgeFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Int? {
+        dateformater.dateFormat = format
         let date = dateformater.date(from: stringDate)
         
         if let date = date{
