@@ -44,13 +44,12 @@ class PatientDetailsView: UIView {
         personLabel.textColor = .white
     }
     
-    private func updatePersonLabelText(with person: Person){
-        let age = DateService.shared.getAgeFromString(person.dateOfBirth)
-        if let age = age {
-            personLabel.text = "\(age), \(person.gender.title.first ?? " ")"
+    private func updatePersonLabelText(with patient: Patient){
+        if let age = patient.age {
+            personLabel.text = "\(age), \(patient.person.gender.title.first ?? " ")"
         }
         else {
-            personLabel.text = "\(person.dateOfBirth), \(person.gender.title.first ?? " ")"
+            personLabel.text = "\(patient.person.dateOfBirth), \(patient.person.gender.title.first ?? " ")"
         }
     }
     
@@ -71,7 +70,7 @@ class PatientDetailsView: UIView {
     private func updateView(with data: Any?){
         guard let data = data as? Patient else {return}
         
-        updatePersonLabelText(with: data.person)
+        updatePersonLabelText(with: data)
         if data.hospitalizations.count > 0 {
             updateDepartmentLabelText(with: data.hospitalizations[0])
             

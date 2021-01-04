@@ -40,6 +40,14 @@ struct Patient: Codable {
         return "\(self.person.firstname) \(self.person.surname)"
     }
     
+    var age: Int?{
+        let age = DateService.shared.getAgeFromString(person.dateOfBirth)
+        if let age = age {
+            return age
+        }
+        return nil
+    }
+    
     private func getUpdatedDateString() -> String {
         let updatedDate = DateService.shared.getDateFromString(self.updated ?? self.created ?? "")
         var updated = ""
