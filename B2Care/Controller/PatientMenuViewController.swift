@@ -283,7 +283,6 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
 extension PatientMenuViewController: UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         changeContentView(index: item.tag)
-        
     }
 }
 

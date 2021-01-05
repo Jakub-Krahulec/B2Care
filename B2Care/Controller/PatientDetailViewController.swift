@@ -159,7 +159,7 @@ class PatientDetailViewController: RequestViewController {
             stack.addArrangedSubview(box)
         }
         stack.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width - 5)
+            make.width.equalTo(view.frame.width - 10)
         }
     }
     

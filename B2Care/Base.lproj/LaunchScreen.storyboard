@@ -15,19 +15,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medical-symbol-transparent-background-20" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-rx-SoT">
-                                <rect key="frame" x="15" y="0.0" width="384" height="896"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medical-symbol-transparent-background-20" translatesAutoresizingMaskIntoConstraints="NO" id="yQa-Bo-hrr">
+                                <rect key="frame" x="79" y="123" width="256" height="660"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="KfS-5b-KKv"/>
+                                    <constraint firstAttribute="width" constant="350" id="kpv-uz-8jq"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.33857387300000003" green="0.51657623050000001" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="AWa-rx-SoT" secondAttribute="bottom" id="8kQ-yp-GIf"/>
-                            <constraint firstItem="AWa-rx-SoT" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="Jya-0I-kQV"/>
-                            <constraint firstItem="AWa-rx-SoT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="NYl-LI-0ak"/>
-                            <constraint firstItem="AWa-rx-SoT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hHH-r0-aVx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yQa-Bo-hrr" secondAttribute="bottom" constant="79" id="PNl-jl-WVQ"/>
+                            <constraint firstItem="yQa-Bo-hrr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="79" id="Zeg-nb-Ybz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yQa-Bo-hrr" secondAttribute="trailing" constant="79" id="h78-9r-2R5"/>
+                            <constraint firstItem="yQa-Bo-hrr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79" id="mn3-hG-ggN"/>
                         </constraints>
                     </view>
                 </viewController>
