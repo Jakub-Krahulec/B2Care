@@ -58,6 +58,7 @@ class PatientDetailViewController: RequestViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         prepareView()
     }
     
@@ -164,6 +165,7 @@ class PatientDetailViewController: RequestViewController {
     
     private func prepareScrollViewStyle(){
         scrollView.backgroundColor = .backgroundLight
+        scrollView.isDirectionalLockEnabled = true
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(5)
@@ -211,4 +213,5 @@ extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
         }
     }
 }
+
 

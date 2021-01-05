@@ -65,7 +65,37 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     
     // MARK: - Actions
     
-    
+    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer){
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction{
+                
+                case UISwipeGestureRecognizer.Direction.right:
+                    
+                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
+                        let index = max(0, selectedItem.tag - 1)
+                        tabbar.selectedItem = items[index]
+                        changeContentView(index: index)
+                    }
+                    
+                    print("Swipe right")
+                    
+                case UISwipeGestureRecognizer.Direction.left:
+                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
+                        let total = items.count - 1
+                        let index = min(total, selectedItem.tag + 1)
+                        tabbar.selectedItem = items[index]
+                        changeContentView(index: index)
+                    }
+                    tabbar.setNeedsLayout()
+                    tabbar.reloadInputViews()
+                    print("Swipe left")
+                    
+                default:
+                    print("Default")
+                    return
+            }
+        }
+    }
     
     // MARK: - Helpers
     
@@ -130,6 +160,17 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     }
     
     private func prepareContentViewStyle(){
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeLeft.direction = .left
+        swipeLeft.delegate = self
+        self.contentView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeRight.direction = .right
+        swipeRight.delegate = self
+        self.contentView.addGestureRecognizer(swipeRight)
+        
         view.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
@@ -172,12 +213,12 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         let tabItemWidth = self.view.frame.width / 6
         tabbar.selectionIndicatorImage = getImageWithColorPosition(color: UIColor.mainColor.withAlphaComponent(0.7), size: CGSize(width: tabItemWidth, height: 49), lineSize: CGSize(width: tabItemWidth, height: 2))
         
-        let infoTabItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle.fill"), tag: 1)
-        let planTabItem = UITabBarItem(title: "Plán", image: UIImage(systemName: "list.dash"), tag: 2)
-        let documentTabItem = UITabBarItem(title: "Dokum.", image: UIImage(systemName: "doc.text.fill"), tag: 3)
-        let messageTabItem = UITabBarItem(title: "Zprávy", image: UIImage(systemName: "message.fill"), tag: 4)
-        let graphsTabItem = UITabBarItem(title: "Grafy", image: UIImage(systemName: "chart.bar.fill"), tag: 5)
-        let historyTabItem = UITabBarItem(title: "Historie", image: UIImage(systemName: "tray.full.fill"), tag: 6)
+        let infoTabItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle.fill"), tag: 0)
+        let planTabItem = UITabBarItem(title: "Plán", image: UIImage(systemName: "list.dash"), tag: 1)
+        let documentTabItem = UITabBarItem(title: "Dokum.", image: UIImage(systemName: "doc.text.fill"), tag: 2)
+        let messageTabItem = UITabBarItem(title: "Zprávy", image: UIImage(systemName: "message.fill"), tag: 3)
+        let graphsTabItem = UITabBarItem(title: "Grafy", image: UIImage(systemName: "chart.bar.fill"), tag: 4)
+        let historyTabItem = UITabBarItem(title: "Historie", image: UIImage(systemName: "tray.full.fill"), tag: 5)
         
         tabbar.items = [infoTabItem, planTabItem,documentTabItem,messageTabItem,graphsTabItem,historyTabItem]
         tabbar.selectedItem = infoTabItem
@@ -193,6 +234,45 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         }
     }
     
+    private func changeContentView(index: Int){
+        switch index {
+            case 0:
+                if let data = data{
+                    patientDetailVC.patientId = data.id
+                }
+                addChild(patientDetailVC)
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(patientDetailVC.view)
+                
+            case 1:
+                addChild(planVC)
+                planVC.view.backgroundColor = .systemPink
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(planVC.view)
+            case 2:
+                addChild(documentVC)
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(documentVC.view)
+            case 3:
+                addChild(messagesVC)
+                messagesVC.view.backgroundColor = .systemGreen
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(messagesVC.view)
+            case 4:
+                addChild(grphsVC)
+                grphsVC.view.backgroundColor = .systemBlue
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(grphsVC.view)
+            case 5:
+                addChild(historyVC)
+                historyVC.view.backgroundColor = .systemOrange
+                contentView.subviews.forEach { $0.removeFromSuperview() }
+                contentView.addSubview(historyVC.view)
+            default:
+                print("Default")
+        }
+    }
+    
     override func addChild(_ childController: UIViewController) {
         if !children.contains(childController){
             super.addChild(childController)
@@ -202,42 +282,13 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
 
 extension PatientMenuViewController: UITabBarDelegate{
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        switch item.tag {
-            case 1:
-                if let data = data{
-                    patientDetailVC.patientId = data.id
-                }
-                addChild(patientDetailVC)
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(patientDetailVC.view)
-                
-            case 2:
-                addChild(planVC)
-                planVC.view.backgroundColor = .systemPink
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(planVC.view)
-            case 3:
-                addChild(documentVC)
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(documentVC.view)
-            case 4:
-                addChild(messagesVC)
-                messagesVC.view.backgroundColor = .systemGreen
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(messagesVC.view)
-            case 5:
-                addChild(grphsVC)
-                grphsVC.view.backgroundColor = .systemBlue
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(grphsVC.view)
-            case 6:
-                addChild(historyVC)
-                historyVC.view.backgroundColor = .systemOrange
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(historyVC.view)
-            default:
-                print("Default")
-        }
+        changeContentView(index: item.tag)
         
+    }
+}
+
+extension PatientMenuViewController: UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
