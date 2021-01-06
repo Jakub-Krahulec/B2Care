@@ -261,6 +261,9 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
             case 4:
                 addChild(grphsVC)
               //  grphsVC.view.backgroundColor = .systemBlue
+                if let data = data{
+                    grphsVC.data = data
+                }
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(grphsVC.view)
             case 5:

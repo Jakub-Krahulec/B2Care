@@ -14,6 +14,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     private var headerTitle: String?
     private var headerSubView = SubTitleView()
     private let chart = BarChartView()
+
     
     public var data: Any?{
         didSet{
@@ -35,16 +36,15 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     
     // MARK: - Actions
     
-    
     // MARK: - Helpers
     
     private func updateView(with data: Any?){
-        guard let headline = data as? String else {return}
-        
+        guard let graph = data as? Graph else {return}
+        headerSubView.data = graph.name
         if let header = header{
-            header.setTitle(headline)
+            header.setTitle(graph.Patient.fullName)
         } else {
-            self.headerTitle = headline
+            self.headerTitle = graph.Patient.fullName
         }
         
     }
@@ -66,7 +66,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     
     private func prepareChartStyle(){
         
-       // chart.backgroundColor = .backgroundLight
+        chart.backgroundColor = .backgroundLight
         chart.legend.font = UIFont.italicSystemFont(ofSize: 12)
         
         view.addSubview(chart)

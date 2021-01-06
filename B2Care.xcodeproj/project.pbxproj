@@ -23,6 +23,7 @@
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
 		2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */; };
 		2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */; };
+		2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */; };
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
@@ -77,6 +78,7 @@
 		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
+		2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */,
 				2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */,
 				2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */,
+				2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */,
 				2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */,
 				2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */,
+				2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */,
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
 				2A71E204259A0A80002FE11A /* DocumentsViewController.swift in Sources */,
 				2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */,

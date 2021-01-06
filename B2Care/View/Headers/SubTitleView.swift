@@ -41,7 +41,7 @@ class SubTitleView: UIView {
     
     private func prepareTitleLabelStyle(){
         titleLabel.text = "Název grafu"
-        titleLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         
