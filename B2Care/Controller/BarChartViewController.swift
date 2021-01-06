@@ -12,6 +12,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     // MARK: - Properties
     private var header: HeaderView?
     private var headerTitle: String?
+    private var headerSubView = SubTitleView()
     private let chart = BarChartView()
     
     public var data: Any?{
@@ -58,7 +59,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
         let backButton = BackButton()
         backButton.delegate = self
-        header = HeaderView(frame: frame, leftButton: backButton, title: "Graf")
+        header = HeaderView(frame: frame, leftButton: backButton, title: "Graf", bottomView: headerSubView, bottomViewAlign: .center)
         guard let header = header else {return}
         view.addSubview(header)
     }
@@ -70,7 +71,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
         
         view.addSubview(chart)
         chart.snp.makeConstraints { (make) in
-            make.top.equalTo(headerHeight)
+            make.top.equalTo(headerHeight + 5)
             make.bottom.equalToSuperview().inset(30)
             make.left.right.equalToSuperview().inset(10)
         }

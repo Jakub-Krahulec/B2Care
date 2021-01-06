@@ -67,7 +67,7 @@ extension GraphsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = BarChartViewController()
-        controller.data = "Pokus"
+        controller.data = "Jméno"
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

@@ -22,6 +22,7 @@
 		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
 		2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */; };
+		2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */; };
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
@@ -75,6 +76,7 @@
 		2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
+		2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */,
 				2A6655E3259FD73C001BCD32 /* HeaderView.swift */,
+				2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				2A6655E825A0BD52001BCD32 /* BackButton.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
 				2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */,
+				2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */,
 				2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */,
 				2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */,
 				2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */,
