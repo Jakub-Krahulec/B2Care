@@ -44,9 +44,10 @@ class DocumentCell: UITableViewCell {
     private func prepareView(){
         backgroundColor = .white
         
-        prepareTitleLabelStyle()
+        
         prepareArrowImageStyle()
         prepareDateLabelStyle()
+        prepareTitleLabelStyle()
         
     }
     
@@ -55,11 +56,13 @@ class DocumentCell: UITableViewCell {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textColor = .black
         titleLabel.textAlignment = .left
+        titleLabel.numberOfLines = 0
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(15)
+            make.right.lessThanOrEqualTo(dateLabel.snp.left)
         }
     }
     
@@ -67,6 +70,7 @@ class DocumentCell: UITableViewCell {
        // dateLabel.text = "4.5.2020 ve 3:10"
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.textColor = .gray
+        dateLabel.numberOfLines = 0
         
         addSubview(dateLabel)
         dateLabel.snp.makeConstraints { (make) in

@@ -109,11 +109,13 @@ class PatientCell: UITableViewCell {
     private func prepareDiagnosisLabelStyle(){
       //  diagnosisLabel.text = "Pravostranná tříselná kýla"
         diagnosisLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        diagnosisLabel.numberOfLines = 0
         diagnosisLabel.textColor = .gray
         
         addSubview(diagnosisLabel)
         diagnosisLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().inset(20)
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
     }
