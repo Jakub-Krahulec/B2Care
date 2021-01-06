@@ -202,13 +202,18 @@ class LoginView: UIView {
             make.bottom.equalToSuperview().inset(10)
             make.height.equalTo(50)
         }
+        
+        forgotPasswordButton.snp.makeConstraints { (make) in
+            make.bottom.lessThanOrEqualTo(loginButton.snp.top).offset(8)
+        }
     }
     
     public func moveLoginButton(to y: CGFloat){
-        let padding: CGFloat = 10
+        let padding: CGFloat = y>0 ? 0 : 10
         let inset = padding + y
         loginButton.snp.updateConstraints { (make) in
             make.bottom.equalToSuperview().inset(inset)
+            make.height.equalTo(50)
         }
         
         UIView.animate(withDuration: 2, animations: {
