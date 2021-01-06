@@ -8,4 +8,5 @@ target 'B2Care' do
   # Pods for B2Care
 pod 'Alamofire'
 pod 'SnapKit'
+pod 'Charts'
 end

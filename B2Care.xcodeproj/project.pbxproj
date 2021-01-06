@@ -21,6 +21,7 @@
 		2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A5259342EE0077DD02 /* SearchField.swift */; };
 		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
+		2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */; };
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
@@ -54,7 +55,8 @@
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
 		2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientDetailViewController.swift */; };
-		61003584433EE3661080D064 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */; };
+		2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */; };
+		427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,7 @@
 		2A0F25A5259342EE0077DD02 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
+		2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
@@ -94,7 +97,6 @@
 		2A7EA38325965BAB00CD8402 /* GenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModel.swift; sourceTree = "<group>"; };
 		2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsView.swift; sourceTree = "<group>"; };
 		2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSmallInfoBox.swift; sourceTree = "<group>"; };
-		2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.debug.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.debug.xcconfig"; sourceTree = "<group>"; };
 		2A888FA42593799100B6E5DC /* PatientsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsResponse.swift; sourceTree = "<group>"; };
 		2A888FA72593CBB600B6E5DC /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		2A888FAA2593FAC200B6E5DC /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
@@ -108,8 +110,10 @@
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB71B3225936B6000965423 /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
-		4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.release.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.release.xcconfig"; sourceTree = "<group>"; };
-		E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
+		492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C1A9A092E7507916B288014 /* Pods-B2Care.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.debug.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.debug.xcconfig"; sourceTree = "<group>"; };
+		CD563619FBD6ECE4579FCEF2 /* Pods-B2Care.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2Care.release.xcconfig"; path = "Target Support Files/Pods-B2Care/Pods-B2Care.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61003584433EE3661080D064 /* Pods_B2Care.framework in Frameworks */,
+				427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +156,8 @@
 				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
 				2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */,
 				2A8E35AD25A114A400AE263D /* RequestViewController.swift */,
+				2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */,
+				2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -274,7 +280,7 @@
 				2A93CEEA25923EF700431A1C /* B2Care */,
 				2A93CEE925923EF700431A1C /* Products */,
 				CA971F39D8A1ABEFDDD18787 /* Pods */,
-				D16EC7817FCFFBB3F7A92DF3 /* Frameworks */,
+				5942B928F83A5B56C34E0E8C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -301,21 +307,21 @@
 			path = B2Care;
 			sourceTree = "<group>";
 		};
+		5942B928F83A5B56C34E0E8C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA971F39D8A1ABEFDDD18787 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */,
-				4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */,
+				6C1A9A092E7507916B288014 /* Pods-B2Care.debug.xcconfig */,
+				CD563619FBD6ECE4579FCEF2 /* Pods-B2Care.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		D16EC7817FCFFBB3F7A92DF3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E455FD23A50361EFB84DEB6E /* Pods_B2Care.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +331,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A93CEFC25923EF900431A1C /* Build configuration list for PBXNativeTarget "B2Care" */;
 			buildPhases = (
-				198043360072CEA15853F957 /* [CP] Check Pods Manifest.lock */,
+				0A87210A1982545C3B83B95D /* [CP] Check Pods Manifest.lock */,
 				2A93CEE425923EF700431A1C /* Sources */,
 				2A93CEE525923EF700431A1C /* Frameworks */,
 				2A93CEE625923EF700431A1C /* Resources */,
-				D72EEBED152A1FBFE9685A11 /* [CP] Embed Pods Frameworks */,
+				E4625ADF73BA1D302D2BA30C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -385,7 +391,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		198043360072CEA15853F957 /* [CP] Check Pods Manifest.lock */ = {
+		0A87210A1982545C3B83B95D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -407,7 +413,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D72EEBED152A1FBFE9685A11 /* [CP] Embed Pods Frameworks */ = {
+		E4625ADF73BA1D302D2BA30C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -450,6 +456,7 @@
 				2A02F1052594AB5300DC26E1 /* SmallInfoBox.swift in Sources */,
 				2A6655E825A0BD52001BCD32 /* BackButton.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
+				2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */,
 				2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */,
 				2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */,
 				2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */,
@@ -470,6 +477,7 @@
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */,
+				2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */,
 				2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */,
 				2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */,
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
@@ -611,7 +619,7 @@
 		};
 		2A93CEFD25923EF900431A1C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A7F09B3AF0E1BD56F8CF54D /* Pods-B2Care.debug.xcconfig */;
+			baseConfigurationReference = 6C1A9A092E7507916B288014 /* Pods-B2Care.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -632,7 +640,7 @@
 		};
 		2A93CEFE25923EF900431A1C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A03E88542570AD9C0E7D529 /* Pods-B2Care.release.xcconfig */;
+			baseConfigurationReference = CD563619FBD6ECE4579FCEF2 /* Pods-B2Care.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -19,7 +19,7 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     private lazy var planVC = UIViewController()
     private lazy var documentVC = DocumentsViewController()
     private lazy var messagesVC = UIViewController()
-    private lazy var grphsVC = UIViewController()
+    private lazy var grphsVC = GraphsViewController()
     private lazy var historyVC = UIViewController()
     
     private let buttonsStack = UIStackView()
@@ -260,7 +260,7 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
                 contentView.addSubview(messagesVC.view)
             case 4:
                 addChild(grphsVC)
-                grphsVC.view.backgroundColor = .systemBlue
+              //  grphsVC.view.backgroundColor = .systemBlue
                 contentView.subviews.forEach { $0.removeFromSuperview() }
                 contentView.addSubview(grphsVC.view)
             case 5:
