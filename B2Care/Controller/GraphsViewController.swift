@@ -38,7 +38,12 @@ class GraphsViewController: UIViewController {
     
     private func updateView(with data: Any?){
         guard let patient = data as? Patient else {return}
-        let graphs = [Graph(id: 1, name: "Průběh nemoci 2020", created: "1.1.2020 ve 13:00", updated: "", description: "Vývoj podle měsíců", Patient: patient, data: [20.0,23.0,12.0,33.0,29.0,11.0,38.0,19.0,24.0,5.0,30.0,0.0])]
+        
+        var values: [Double] = []
+        for _ in 1...12 {
+            values.append(Double.random(in: 0...50))
+        }
+        let graphs = [Graph(id: 1, name: "Průběh nemoci 2020", created: "1.1.2020 ve 13:00", updated: "", description: "Vývoj podle měsíců", Patient: patient, data: values)]
         self.graphs = graphs
         table.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
