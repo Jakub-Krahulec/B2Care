@@ -16,6 +16,7 @@ struct Graph: Codable{
     var name: String
     var created: String
     var updated: String
-    var value: String
+    var description: String
     var Patient: Patient
+    var data: [Double]
 }

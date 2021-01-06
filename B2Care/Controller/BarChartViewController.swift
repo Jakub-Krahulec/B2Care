@@ -47,6 +47,18 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
             self.headerTitle = graph.Patient.fullName
         }
         
+        var entries = [BarChartDataEntry]()
+        for (index, value) in graph.data.enumerated() {
+            entries.append(BarChartDataEntry(x: Double(index), y: value))
+        }
+        
+        let dataSet = BarChartDataSet(entries: entries, label: graph.name)
+        dataSet.colors = ChartColorTemplates.material()
+        let data = BarChartData(dataSets: [dataSet])
+        chart.data = data
+        chart.chartDescription?.text = graph.description
+        
+        chart.notifyDataSetChanged()
     }
     
     private func prepareView(){
@@ -75,26 +87,6 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
             make.bottom.equalToSuperview().inset(30)
             make.left.right.equalToSuperview().inset(10)
         }
-        
-        let entry1 = BarChartDataEntry(x: 1.0, y: 20.0)
-        let entry2 = BarChartDataEntry(x: 2.0, y: 30.0)
-        let entry3 = BarChartDataEntry(x: 3.0, y: 52.0)
-        let entry4 = BarChartDataEntry(x: 4.0, y: 2.0)
-        let entry5 = BarChartDataEntry(x: 5.0, y: 3.0)
-        let entry6 = BarChartDataEntry(x: 6.0, y: 5.0)
-        let entry7 = BarChartDataEntry(x: 7.0, y: 21.0)
-        let entry8 = BarChartDataEntry(x: 8.0, y: 33.0)
-        let entry9 = BarChartDataEntry(x: 9.0, y: 5.0)
-        let entry10 = BarChartDataEntry(x: 10.0, y: 28.0)
-        let entry11 = BarChartDataEntry(x: 11.0, y: 31.0)
-        let entry12 = BarChartDataEntry(x: 12.0, y: 11.0)
-        let dataSet = BarChartDataSet(entries: [entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11, entry12], label: "2020")
-        dataSet.colors = ChartColorTemplates.material()
-        let data = BarChartData(dataSets: [dataSet])
-        chart.data = data
-        chart.chartDescription?.text = "Vývoj nemoci po měsících"
-        
-        chart.notifyDataSetChanged()
     }
 
 }
