@@ -8,25 +8,23 @@
 import UIKit
 import QuickLook
 
-class DocumentsViewController: RequestViewController {
+class DocumentsViewController: BaseViewController {
     
     // MARK: - Properties
-    private let documentTable = UITableView()
-    private let labTable = UITableView()
+    private let table = UITableView()
     private let cellId = "CellID"
     private var fileURL: URL?
-    private let documentsRefreshControl = UIRefreshControl()
-    private let labRefreshControl = UIRefreshControl()
+    private let refreshControl = UIRefreshControl()
     
     var documentsData: DocumentsData? {
         didSet{
-            documentTable.reloadSections(IndexSet(integer: 0), with: .fade)
+            table.reloadSections(IndexSet(integer: 0), with: .fade)
         }
     }
     
     var labResultsData: DocumentsData? {
         didSet{
-            labTable.reloadSections(IndexSet(integer: 0), with: .fade)
+            table.reloadSections(IndexSet(integer: 1), with: .fade)
         }
     }
     
@@ -47,25 +45,19 @@ class DocumentsViewController: RequestViewController {
     }
     // MARK: - Actions
     
-    @objc private func refreshDocuments(_ sender: AnyObject){
-        documentsRefreshControl.endRefreshing()
-    }
-    
-    @objc private func refreshLabs(_ sender: AnyObject){
-        labRefreshControl.endRefreshing()
+    @objc private func refresh(_ sender: AnyObject){
+        refreshControl.endRefreshing()
     }
     
     // MARK: - Helpers
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
-        
-        
-        prepareDocumentTableViewStyle()
-        prepareLabTableStyle()
+
+        prepareTableStyle()
     }
     
-    private func prepareTableStyle(_ table: UITableView){
+    private func prepareTableStyle(){
         table.delegate = self
         table.dataSource = self
         table.register(DocumentCell.self, forCellReuseIdentifier: cellId)
@@ -75,46 +67,26 @@ class DocumentsViewController: RequestViewController {
         table.allowsSelection = true
         table.layer.cornerRadius = 10
         table.separatorInset = .zero
-    }
-    
-    private func prepareLabTableStyle(){
-        prepareTableStyle(labTable)
         
-        labTable.refreshControl = labRefreshControl
-    //    labRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
-        labRefreshControl.addTarget(self, action: #selector(refreshLabs(_:)), for: .valueChanged)
-        
-        
-        view.addSubview(labTable)
-        labTable.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview().inset(5)
-            make.top.equalTo(documentTable.snp.bottom).offset(10)
-            make.height.equalTo(view.frame.height / 3)
-        }
-    }
-    
-    private func prepareDocumentTableViewStyle(){
-        prepareTableStyle(documentTable)
-        
-        documentTable.refreshControl = documentsRefreshControl
+        table.refreshControl = refreshControl
      //   documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
-        documentsRefreshControl.addTarget(self, action: #selector(refreshDocuments(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
         
-        view.addSubview(documentTable)
-        documentTable.snp.makeConstraints { (make) in
+        view.addSubview(table)
+        table.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview().inset(5)
-            make.top.equalToSuperview().offset(10)
-            make.height.equalTo(view.frame.height / 3)
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
-    private func getHeaderViewForTable(_ table: UITableView) -> UIView? {
+    private func getHeaderViewForSection(_ section: Int) -> UIView? {
         let view = UIView()
         let image = UIImageView()
         let label = UILabel()
         
-        if table == documentTable{
+        if section == 0{
             image.image = UIImage(systemName: "person.fill")
             image.tintColor = .mainColor
             label.text = "DOKUMENTACE PACIENTA"
@@ -149,8 +121,12 @@ class DocumentsViewController: RequestViewController {
 }
 
 extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == documentTable{
+        if section == 0{
             
             if let data = documentsData{
                 return data.documents.count
@@ -168,9 +144,9 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = documentTable.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? DocumentCell{
+        if let cell = table.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? DocumentCell{
             
-            if tableView == documentTable{
+            if indexPath.section == 0{
                 
                 if let data = documentsData{
                     cell.data = data.documents[indexPath.row]
@@ -194,12 +170,12 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return getHeaderViewForTable(tableView)
+        return getHeaderViewForSection(section)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var document: Document?
-        if tableView == documentTable{
+        if indexPath.section == 0{
             if let data = documentsData{
                 document = data.documents[indexPath.row]
             }
@@ -223,7 +199,6 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
                         if let fileURL = this.fileURL {
                             try data.write(to: fileURL, options: .atomic)
                             if QLPreviewController.canPreview(fileURL as QLPreviewItem) {
-                                
                                 let previewController = QLPreviewController()
                                 previewController.dataSource = this
                                 previewController.modalPresentationStyle = .popover
@@ -233,7 +208,6 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
                             
                         }
                     } catch {
-                        // cant find the url resource
                         this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
                     }
                 case .failure(let error):

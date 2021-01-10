@@ -50,6 +50,7 @@ class GraphsViewController: UIViewController {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
+        title = " "
         prepareRefreshControlStyle()
         prepareTableStyle()
     }
@@ -57,16 +58,10 @@ class GraphsViewController: UIViewController {
     private func prepareRefreshControlStyle(){
         //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        table.addSubview(refreshControl)
+        table.refreshControl = refreshControl
     }
     
     private func prepareTableStyle(){
-        let headerHeight = (view.frame.height / 10) + 35
-        let tabbarHeight: CGFloat = 50
-        let buttonsHeight: CGFloat = 50
-        let padding: CGFloat = 45
-        let offset: CGFloat = view.frame.height - (headerHeight + tabbarHeight + buttonsHeight + padding) - 5
-        
         table.register(DocumentCell.self, forCellReuseIdentifier: cellId)
         table.dataSource = self
         table.delegate = self
@@ -76,7 +71,7 @@ class GraphsViewController: UIViewController {
         view.addSubview(table)
         table.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(5)
-            make.bottom.equalTo(view.snp.top).offset(offset)
+            make.bottom.equalToSuperview().inset(105)
             make.left.right.equalToSuperview().inset(5)
         }
     }

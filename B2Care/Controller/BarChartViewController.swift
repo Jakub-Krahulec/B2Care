@@ -10,9 +10,7 @@ import Charts
 
 class BarChartViewController: UIViewController, BackButtonDelegate {
     // MARK: - Properties
-    private var header: HeaderView?
-    private var headerTitle: String?
-    private var headerSubView = SubTitleView()
+    private let titleLabel = UILabel()
     private let chart = BarChartView()
 
     
@@ -28,24 +26,19 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
         prepareView()
     }
     
-    override func viewDidLayoutSubviews() {
-        if let htitle = headerTitle{
-            header?.setTitle(htitle)
-        }
-    }
-    
     // MARK: - Actions
     
     // MARK: - Helpers
     
     private func updateView(with data: Any?){
         guard let graph = data as? Graph else {return}
-        headerSubView.data = graph.name
-        if let header = header{
-            header.setTitle(graph.Patient.fullName)
-        } else {
-            self.headerTitle = graph.Patient.fullName
-        }
+        
+        let attributedString = NSMutableAttributedString(string: "\(graph.Patient.fullName)\n\(graph.name)")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        titleLabel.attributedText = attributedString
+        
         
         var entries = [BarChartDataEntry]()
         for (index, value) in graph.data.enumerated() {
@@ -63,19 +56,17 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
-        prepareHeaderStyle()
+        prepareTitleLabelStyle()
         prepareChartStyle()
     }
     
-    private func prepareHeaderStyle(){
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
-        let backButton = BackButton()
-        backButton.delegate = self
-        header = HeaderView(frame: frame, leftButton: backButton, title: "Graf", bottomView: headerSubView, bottomViewAlign: .center)
-        guard let header = header else {return}
-        view.addSubview(header)
+    private func prepareTitleLabelStyle(){
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .white
+        navigationItem.titleView = titleLabel
     }
-    
     private func prepareChartStyle(){
         
         chart.backgroundColor = .backgroundLight
@@ -83,7 +74,7 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
         
         view.addSubview(chart)
         chart.snp.makeConstraints { (make) in
-            make.top.equalTo(headerHeight + 5)
+            make.top.equalTo(5)
             make.bottom.equalToSuperview().inset(30)
             make.left.right.equalToSuperview().inset(10)
         }

@@ -47,7 +47,7 @@ class ContactSmallInfoBox: SmallInfoBox {
         }
     }
     
-    override func prepareDynamicHeight() {
+    override func setBottomMargin() {
         
     }
     

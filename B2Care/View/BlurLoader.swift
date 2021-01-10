@@ -51,15 +51,11 @@ class BlurLoader: UIView {
     }
     
     private func prepareLoaderStyle() {
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 0, height: 50)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         blurEffectView.contentView.addSubview(activityIndicator)
-        
-        let headerHeight = (self.frame.height / 10) + 35 + 49
-        let centerY = (self.frame.height / 2) - headerHeight
-        
+
         activityIndicator.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(centerY)
+            make.center.equalToSuperview()
         }
         activityIndicator.startAnimating()
     }

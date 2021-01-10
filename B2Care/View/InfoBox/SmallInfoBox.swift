@@ -41,10 +41,10 @@ class SmallInfoBox: UIView {
         prepareTitleStackStyle()
         prepareValueLabelStyle()
         
-        prepareDynamicHeight()
+        setBottomMargin()
     }
     
-    func prepareDynamicHeight(){
+    func setBottomMargin(){
         self.snp.makeConstraints { (make) in
             //make.bottom.equalTo(valueLabel.snp.bottom).offset(15)
             make.bottom.greaterThanOrEqualTo(valueLabel.snp.bottom).offset(15)

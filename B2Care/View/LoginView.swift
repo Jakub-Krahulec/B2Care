@@ -32,7 +32,7 @@ class LoginView: UIView {
     private let statusLabel = UILabel()
     private let forgotPasswordButton = UIButton()
     private let loginButton = UIButton()
-    private let refreshControl = UIActivityIndicatorView()
+   // private let refreshControl = UIActivityIndicatorView()
     
     public var delegate: LoginViewDelegate?
     
@@ -55,10 +55,12 @@ class LoginView: UIView {
     
     @objc private func handleLoginButtonTapped(){
         endErrorMode()
-        refreshControl.startAnimating()
+       // refreshControl.startAnimating()
+        showBlurLoader()
         B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] res in
             guard let this = self else {return}
-            this.refreshControl.stopAnimating()
+            //this.refreshControl.stopAnimating()
+            this.removeBluerLoader()
             switch res{
                 case .success(let isLoggedIn):
                     if isLoggedIn{
@@ -87,24 +89,6 @@ class LoginView: UIView {
         prepareStatusLabelStyle()
         prepareLoginButtonStyle()
         prepareAnimationStyle()
-        prepareRefreshControlStyle()
-    }
-    
-    private func prepareRefreshControlStyle(){
-        addSubview(refreshControl)
-       // refreshControl.startAnimating()
-        refreshControl.hidesWhenStopped = true
-        refreshControl.style  = .medium
-        refreshControl.color = .black
-        
-        
-        refreshControl.snp.makeConstraints { (make) in
-//            make.top.equalTo(userTextField.snp.bottom)
-//            make.centerX.equalToSuperview()
-            
-            make.left.equalTo(passwordTextField).offset(3)
-            make.centerY.equalTo(forgotPasswordButton)
-        }
     }
     
     private func prepareAnimationStyle(){
@@ -159,7 +143,7 @@ class LoginView: UIView {
     
     private func prepareStatusLabelStyle(){
         statusLabel.text = "Špatné heslo"
-        statusLabel.numberOfLines = 0
+        statusLabel.numberOfLines = 2
         statusLabel.textColor = .red
         
         statusLabel.isHidden = true

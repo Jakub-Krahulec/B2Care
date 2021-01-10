@@ -7,11 +7,12 @@
 
 import UIKit
 
-class PatientMenuViewController: RequestViewController, BackButtonDelegate {
+class PatientMenuViewController: BaseViewController, BackButtonDelegate {
     
     // MARK: - Properties
+    private let headerView = UIView()
     private let tabbar = UITabBar()
-    private var header: HeaderView?
+    private let titleLabel = UILabel()
     private let patientDetailView = PatientDetailsView()
     private var contentView = UIView()
     
@@ -21,6 +22,10 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     private lazy var messagesVC = UIViewController()
     private lazy var grphsVC = GraphsViewController()
     private lazy var historyVC = UIViewController()
+    private lazy var currentVC: UIViewController = UIViewController()
+    
+    lazy var blurEffect = UIBlurEffect(style: .extraLight)
+    lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
     
     private let buttonsStack = UIStackView()
     private let urgentButton = UIButton()
@@ -53,13 +58,16 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         prepareView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
-        if contentView.subviews.count < 1 {
-            contentView.addSubview(patientDetailVC.view)
-        }
         view.bringSubviewToFront(buttonsStack)
     }
     
@@ -101,9 +109,11 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
     
     private func updateView(with person: Patient?){
         guard let person = person else {return}
+        
         patientDetailVC.patientId = person.id
-        header?.setTitle(person.fullName)
+        titleLabel.text = person.fullName
         patientDetailView.data = person
+        patientDetailVC.patientId = person.id
     }
     
     private func prepareView(){
@@ -113,8 +123,31 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         prepareBottomButtonStyle(addTaskButton, title: "Přidat úkol", image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
         prepareBottomButtonStyle(urgentButton, title: "Urgentní zpáva", image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
         prepareButtonStackStyle()
-        prepareContentViewStyle()
+        
         prepareBlurBackgroundStyle()
+        prepareContentViewStyle()
+        
+        changeContentView(index: 0)
+    }
+    
+    private func prepareHeaderViewStyle(){
+        
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        headerView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        patientDetailView.changeStyle(color: .white)
+        headerView.addSubview(patientDetailView)
+        patientDetailView.snp.makeConstraints { (make) in
+            make.center.centerX.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+        }
+        
+        navigationItem.titleView = headerView
     }
     
     private func prepareButtonStackStyle(){
@@ -126,24 +159,11 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         
         buttonsStack.addArrangedSubview(urgentButton)
         buttonsStack.addArrangedSubview(addTaskButton)
-        
-        view.addSubview(buttonsStack)
-        buttonsStack.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(30)
-            make.left.right.equalToSuperview().inset(20)
-        }
     }
     
     private func prepareBlurBackgroundStyle(){
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
         
-        blurEffectView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(buttonsStack).offset(-15)
-        }
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     private func prepareBottomButtonStyle(_ button: UIButton, title: String, image: UIImage?, backgroundColor: UIColor){
@@ -171,21 +191,14 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         swipeRight.delegate = self
         self.contentView.addGestureRecognizer(swipeRight)
         
+        contentView.backgroundColor = .backgroundLight
         view.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.top.equalTo(tabbar.snp.bottom)
+          //  make.bottom.equalTo(blurEffectView.snp.top)
+            make.bottom.equalToSuperview()
         }
-    }
-    
-    private func prepareHeaderViewStyle(){
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
-        patientDetailView.changeStyle(color: .white)
-        let backButton = BackButton()
-        backButton.delegate = self
-        header = HeaderView(frame: frame, leftButton: backButton, title: "", bottomView: patientDetailView)
-        guard let header = header else {return}
-        view.addSubview(header)
     }
     
     func getImageWithColorPosition(color: UIColor, size: CGSize, lineSize: CGSize) -> UIImage {
@@ -225,60 +238,66 @@ class PatientMenuViewController: RequestViewController, BackButtonDelegate {
         
         
         view.addSubview(tabbar)
-        if let header = header{
-            tabbar.snp.makeConstraints { (make) in
-                make.left.right.equalToSuperview()
-                //  make.top.equalTo(headerView.snp.bottom)
-                make.top.equalTo(header.snp.bottom)
+        tabbar.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+    }
+    
+    private func changeChildVC(to controller: UIViewController, showButtons: Bool = true){
+        currentVC.remove()
+        add(controller)
+        currentVC = controller
+        
+        controller.view.snp.makeConstraints { (make) in
+            make.top.equalTo(tabbar.snp.bottom)
+         //   make.bottom.equalTo(buttonsStack.snp.top).offset(-10)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        if showButtons {
+            controller.view.insertSubview(blurEffectView, at: controller.view.subviews.count + 1)
+            controller.view.insertSubview(buttonsStack, at: controller.view.subviews.count + 1)
+                        
+            blurEffectView.snp.makeConstraints { (make) in
+                make.left.right.bottom.equalToSuperview()
+                make.height.equalTo(100)
+            }
+            
+            buttonsStack.snp.makeConstraints { (make) in
+                make.centerY.equalTo(blurEffectView)
+                make.left.right.equalToSuperview().inset(20)
             }
         }
     }
     
     private func changeContentView(index: Int){
+        
+        
         switch index {
             case 0:
                 if let data = data{
                     patientDetailVC.patientId = data.id
                 }
-                addChild(patientDetailVC)
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(patientDetailVC.view)
-                
+                changeChildVC(to: patientDetailVC)
             case 1:
-                addChild(planVC)
+                changeChildVC(to: planVC, showButtons: false)
                 planVC.view.backgroundColor = .systemPink
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(planVC.view)
             case 2:
-                addChild(documentVC)
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(documentVC.view)
+                changeChildVC(to: documentVC, showButtons: false)
             case 3:
-                addChild(messagesVC)
+                changeChildVC(to: messagesVC)
                 messagesVC.view.backgroundColor = .systemGreen
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(messagesVC.view)
             case 4:
-                addChild(grphsVC)
-              //  grphsVC.view.backgroundColor = .systemBlue
                 if let data = data{
                     grphsVC.data = data
                 }
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(grphsVC.view)
+                changeChildVC(to: grphsVC)
             case 5:
-                addChild(historyVC)
+                changeChildVC(to: historyVC)
                 historyVC.view.backgroundColor = .systemOrange
-                contentView.subviews.forEach { $0.removeFromSuperview() }
-                contentView.addSubview(historyVC.view)
             default:
                 print("Default")
-        }
-    }
-    
-    override func addChild(_ childController: UIViewController) {
-        if !children.contains(childController){
-            super.addChild(childController)
         }
     }
 }

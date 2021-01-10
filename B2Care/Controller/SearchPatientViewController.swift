@@ -8,11 +8,9 @@
 import UIKit
 import AVFoundation
 
-class SearchPatientViewController: RequestViewController, UserButtonDelegate {
+class SearchPatientViewController: BaseViewController {
     // MARK: - Properties
-    private let userButton = UserButton()
-    private var header: HeaderView?
-  
+    let userButton = UIButton()
     private var previewLayer = AVCaptureVideoPreviewLayer()
     let session  = AVCaptureSession()
     
@@ -26,7 +24,8 @@ class SearchPatientViewController: RequestViewController, UserButtonDelegate {
         // Kvůli simulátoru
         if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
             session.startRunning()
-        }     
+        }
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +42,7 @@ class SearchPatientViewController: RequestViewController, UserButtonDelegate {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
+        prepareUserButtonStyle(userButton)
         prepareHeaderViewStyle()
        
         let captureDevice = AVCaptureDevice.default(for: .video)
@@ -63,17 +63,13 @@ class SearchPatientViewController: RequestViewController, UserButtonDelegate {
         
         previewLayer.session = session
         // previewLayer =  AVCaptureVideoPreviewLayer(session: session)
-        
-        previewLayer.frame =  CGRect(x: 0, y: headerHeight, width: view.frame.width, height: view.frame.height - headerHeight)
+        previewLayer.frame =  CGRect(x: 0, y: -100, width: view.frame.width, height: view.frame.height)
         view.layer.addSublayer(previewLayer)
     }
     
     private func prepareHeaderViewStyle(){
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
-        userButton.delegate = self
-        header = HeaderView(frame: frame, leftButton: userButton, title: "Vyhledání pacienta")
-        guard let header = header else {return}
-        view.addSubview(header)
+        navigationItem.title = "Vyhledání pacienta"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userButton)
     }
 
 }

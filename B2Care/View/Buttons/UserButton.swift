@@ -7,23 +7,13 @@
 
 import UIKit
 
-protocol UserButtonDelegate where Self: UIViewController{
+protocol UserButtonDelegate where Self: BaseViewController{
     
 }
 
 extension UserButtonDelegate{
     func buttonTapped(){
-        B2CareService.shared.logout()
-        
-        
-        let transition = CATransition()
-        transition.duration = 1
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromBottom
-        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        
-        navigationController?.pushViewController(LoginViewController(), animated: false)
+        self.logout()
     }
 }
 

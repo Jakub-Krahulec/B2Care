@@ -24,6 +24,7 @@
 		2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */; };
 		2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */; };
 		2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */; };
+		2A4D6E1525A781AA0040CFA2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */; };
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
@@ -47,9 +48,8 @@
 		2A7EA390259670B000CD8402 /* PatientDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */; };
 		2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */; };
 		2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
-		2A888FA82593CBB600B6E5DC /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA72593CBB600B6E5DC /* DateService.swift */; };
 		2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FAA2593FAC200B6E5DC /* UserButton.swift */; };
-		2A8E35AE25A114A400AE263D /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35AD25A114A400AE263D /* RequestViewController.swift */; };
+		2A8E35AE25A114A400AE263D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35AD25A114A400AE263D /* BaseViewController.swift */; };
 		2A8E35B125A13AA500AE263D /* BlurLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35B025A13AA500AE263D /* BlurLoader.swift */; };
 		2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEB25923EF700431A1C /* AppDelegate.swift */; };
 		2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEED25923EF700431A1C /* SceneDelegate.swift */; };
@@ -79,6 +79,7 @@
 		2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
 		2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
+		2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
@@ -102,9 +103,8 @@
 		2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsView.swift; sourceTree = "<group>"; };
 		2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSmallInfoBox.swift; sourceTree = "<group>"; };
 		2A888FA42593799100B6E5DC /* PatientsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsResponse.swift; sourceTree = "<group>"; };
-		2A888FA72593CBB600B6E5DC /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		2A888FAA2593FAC200B6E5DC /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
-		2A8E35AD25A114A400AE263D /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
+		2A8E35AD25A114A400AE263D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2A8E35B025A13AA500AE263D /* BlurLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurLoader.swift; sourceTree = "<group>"; };
 		2A93CEE825923EF700431A1C /* B2Care.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2Care.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A93CEEB25923EF700431A1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,9 +159,10 @@
 				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
 				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
 				2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */,
-				2A8E35AD25A114A400AE263D /* RequestViewController.swift */,
+				2A8E35AD25A114A400AE263D /* BaseViewController.swift */,
 				2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */,
 				2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */,
+				2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -210,7 +211,6 @@
 			children = (
 				2A0F258E25925C1C0077DD02 /* NetworkService.swift */,
 				2A0F259225925C8C0077DD02 /* B2CareService.swift */,
-				2A888FA72593CBB600B6E5DC /* DateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -471,17 +471,17 @@
 				2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */,
 				2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */,
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
-				2A888FA82593CBB600B6E5DC /* DateService.swift in Sources */,
 				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,
 				2A8E35B125A13AA500AE263D /* BlurLoader.swift in Sources */,
 				2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */,
 				2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */,
-				2A8E35AE25A114A400AE263D /* RequestViewController.swift in Sources */,
+				2A8E35AE25A114A400AE263D /* BaseViewController.swift in Sources */,
 				2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */,
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
 				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
+				2A4D6E1525A781AA0040CFA2 /* MainViewController.swift in Sources */,
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */,
 				2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */,

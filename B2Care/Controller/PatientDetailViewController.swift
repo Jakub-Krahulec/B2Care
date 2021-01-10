@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PatientDetailViewController: RequestViewController {
+class PatientDetailViewController: BaseViewController {
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
@@ -60,27 +60,17 @@ class PatientDetailViewController: RequestViewController {
         super.viewDidLoad()
         
         prepareView()
+        view.showBlurLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+      //  navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        let alert = UIAlertController(title: nil, message: "Stahuji data", preferredStyle: .alert)
-//
-//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 7, width: 50, height: 50))
-//        loadingIndicator.hidesWhenStopped = true
-//        loadingIndicator.style = .large
-//        loadingIndicator.startAnimating();
-//
-//        alert.view.addSubview(loadingIndicator)
-//        present(alert, animated: true, completion: nil)
-        
-        view.showBlurLoader()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -99,8 +89,6 @@ class PatientDetailViewController: RequestViewController {
     
     private func updateView(with person: Patient?){
         guard let person = person else {return}
-        // self.navigationItem.title = "\(person.person.firstname) \(person.person.surname)"
-     //   headerView.data = person
         let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : ""
         let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
         
@@ -130,16 +118,6 @@ class PatientDetailViewController: RequestViewController {
         
         personalPhoneInfoBox.delegate = self
         doctorPhoneInfoBox.delegate = self
-        
-        let headerHeight = (view.frame.height / 10) + 35
-        let tabbarHeight: CGFloat = 50
-        let buttonsHeight: CGFloat = 50
-        let padding: CGFloat = 45
-        let offset: CGFloat = headerHeight + tabbarHeight + buttonsHeight + padding
-        
-        scrollView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(verticalStack).offset(offset)
-        }
     }
     
     private func prepareRefreshControlStyle(){
@@ -158,9 +136,6 @@ class PatientDetailViewController: RequestViewController {
         for box in smallInfos{
             stack.addArrangedSubview(box)
         }
-        stack.snp.makeConstraints { (make) in
-            make.width.equalTo(view.frame.width - 10)
-        }
     }
     
     private func prepareScrollViewStyle(){
@@ -169,7 +144,8 @@ class PatientDetailViewController: RequestViewController {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(5)
-            make.left.right.bottom.equalToSuperview().inset(5)
+            make.left.right.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().inset(105)
         }
     }
     
@@ -190,7 +166,8 @@ class PatientDetailViewController: RequestViewController {
         scrollView.addSubview(verticalStack)
         verticalStack.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalTo(scrollView)
         }
     }
 }

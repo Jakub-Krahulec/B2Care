@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController, LoginViewDelegate {
+class LoginViewController: BaseViewController, LoginViewDelegate {
     // MARK: - Properties
     private let headerView = LoginHeaderView()
     private let loginView = LoginView()
@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupKeyboardNotificationObservers()
         setupNotificationObservers()
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -37,13 +38,15 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     
     // MARK: - Actions
 
-    @objc private func keyboardWillShow(notification: Notification){
+    @objc internal override func keyboardWillShow(notification: Notification){
+        super.keyboardWillShow(notification: notification)
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
             loginView.moveLoginButton(to: keyboardHeight)
         }
     }
     
-    @objc private func keyboardWillHide(notification: Notification){
+    @objc internal override func keyboardWillHide(notification: Notification){
+        super.keyboardWillHide(notification: notification)
         loginView.moveLoginButton(to: 0)
     }
     
@@ -78,8 +81,6 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     }
 
     private func setupNotificationObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForegorund(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     

@@ -21,19 +21,46 @@ struct Patient: Codable {
     var hospitalizations: [Hospitalization]
     
     var updatedDateString: String {
-        getUpdatedDateString()
+        let updatedDate = Date.getDateFromString(self.updated ?? self.created ?? "")
+        var updated = ""
+        if let updatedDate = updatedDate{
+            updated = Date.getFormattedString(from: updatedDate)
+        }
+        return updated
     }
     
     var allergiesString: String {
-        getAlergiesString()
+        var allergies: [String] = []
+        for alergy in self.allergies{
+            allergies.append(alergy.code.title)
+        }
+        return allergies.joined(separator: "\n")
     }
     
     var medications: String {
-        getMedicationsString()
+        var medications: [String] = []
+        for medication in self.medicationDispenses{
+            medications.append(medication.medication.title)
+        }
+        return medications.joined(separator: "\n")
     }
     
     var fullAddress: String {
-        getFullAddress()
+        var address: [String] = []
+        if self.person.addresses.count > 0{
+            if let address1 = self.person.addresses[0].address1{
+                address.append(address1)
+            }
+            if let city = self.person.addresses[0].city{
+                address.append(city)
+            }
+            if let postalCode = self.person.addresses[0].postalCode{
+                address.append(postalCode)
+            }
+        } else {
+            address.append("-")
+        }
+        return address.joined(separator: ",")
     }
     
     var fullName: String{
@@ -41,59 +68,13 @@ struct Patient: Codable {
     }
     
     var age: Int?{
-        let age = DateService.shared.getAgeFromString(person.dateOfBirth)
+        let age = Date.getAgeFromString(person.dateOfBirth)
         if let age = age {
             return age
         }
         return nil
     }
     
-    private func getUpdatedDateString() -> String {
-        let updatedDate = DateService.shared.getDateFromString(self.updated ?? self.created ?? "")
-        var updated = ""
-        if let updatedDate = updatedDate{
-            updated = DateService.shared.getFormattedString(from: updatedDate)
-        }
-        return updated
-    }
-    
-    private func getFullAddress() -> String {
-        var address = ""
-        if self.person.addresses.count > 0{
-            if let address1 = self.person.addresses[0].address1{
-                address += address1 + ", "
-            }
-            if let city = self.person.addresses[0].city{
-                address += city + ", "
-            }
-            if let postalCode = self.person.addresses[0].postalCode{
-                address += postalCode
-            }
-        } else {
-            address = "-"
-        }
-        return address
-    }
-    
-    private func getMedicationsString() -> String {
-        var medications = ""
-        for medication in self.medicationDispenses{
-            medications += medication.medication.title + "\n"
-            //  medications += medication.medication.title.trimmingCharacters(in: .whitespaces) + "\n"
-        }
-        medications = String(medications.dropLast(2))
-        
-        return medications
-    }
-    
-    private func getAlergiesString() -> String{
-        var allergies = ""
-        for alergy in self.allergies{
-            allergies += alergy.code.title + "\n"
-        }
-        allergies = String(allergies.dropLast(2))
-        return allergies
-    }
 }
 
 

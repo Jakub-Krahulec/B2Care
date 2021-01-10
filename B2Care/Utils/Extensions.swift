@@ -7,16 +7,49 @@
 
 import UIKit
 
+
+extension Date{
+    
+    static var dateformater = DateFormatter()
+    
+    public static func getAgeFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Int? {
+        Date.dateformater.dateFormat = format
+        let date = Date.dateformater.date(from: stringDate)
+        
+        if let date = date{
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year], from: date)
+            let date2 = calendar.date(from: components)
+            let now = Date()
+            if let date2 = date2{
+                let ageComponents = calendar.dateComponents([.year], from: date2, to: now)
+                let age = ageComponents.year
+                return age
+            }
+        }
+        return nil
+    }
+    
+    public static func getDateFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Date? {
+        Date.dateformater.dateFormat = format
+        return Date.dateformater.date(from: stringDate)
+    }
+    
+    public static func getFormattedString(from date: Date, format: String = "dd.MM.yyyy 'v' HH:mm") -> String {
+        Date.dateformater.dateFormat = format
+        return Date.dateformater.string(from: date)
+    }
+}
+
 extension UIView{
     func showBlurLoader() {
         if let _ = subviews.first(where: { $0 is BlurLoader }) {
             return
         }
-        let blurLoader = BlurLoader(frame: frame)
+        let blurLoader = BlurLoader()
         self.addSubview(blurLoader)
         blurLoader.snp.makeConstraints { (make) in
-            make.left.right.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.edges.equalTo(self)
         }
     }
     
@@ -64,9 +97,12 @@ extension UIViewController{
         return (self.view.frame.height / 10) + 35
     }
     
-    func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {
+    @objc func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {
         let tapGesture = UITapGestureRecognizer(target: self,
                                                 action: #selector(hideKeyboard))
+        if let this = self as? UIGestureRecognizerDelegate{
+            tapGesture.delegate = this
+        }
         tapGesture.cancelsTouchesInView = cancelsTouchesInView
         view.addGestureRecognizer(tapGesture)
     }
@@ -81,6 +117,30 @@ extension UIViewController{
         present(alert, animated: true, completion: nil)
     }
     
+    func prepareNavigationControllerStyle(nav: UINavigationController){
+        nav.navigationBar.barTintColor = .mainColor
+        nav.navigationBar.isTranslucent = false
+        nav.navigationBar.tintColor = .white
+        nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        nav.navigationBar.topItem?.title = " "
+//        nav.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+    }
+    
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    func remove() {
+        guard parent != nil else {
+            return
+        }
+        
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }
 
 extension UITextField {

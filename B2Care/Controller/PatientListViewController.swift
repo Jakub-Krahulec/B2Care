@@ -7,15 +7,13 @@
 
 import UIKit
 
-class PatientListViewController: RequestViewController, UserButtonDelegate {
+class PatientListViewController: BaseViewController, UserButtonDelegate, UISearchControllerDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
-    private var isKeyboardShown = false
     
-    private var header: HeaderView?
     private let table = UITableView()
-    private let searchInput = SearchField()
-    private let userButton = UserButton()
+    private let userButton = UIButton()
+    private let searchBar = UISearchBar()
     private var refreshControl = UIRefreshControl()
     
     private var patients: PatientsData?
@@ -34,8 +32,8 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-        setupNotificationObservers()
+        self.tabBarController?.tabBar.isHidden = false
+        setupKeyboardNotificationObservers()
         fetchPatients()
     }
     
@@ -50,58 +48,61 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
         fetchPatients()
     }
     
-    @objc private func handleSearchChangedValue(){
+    private func handleSearchChangedValue(){
         fetchPatients()
     }
     
-    @objc private func keyboardWillShow(notification: Notification){
+    override func keyboardDidHide(notification: Notification) {
+        super.keyboardDidHide(notification: notification)
+        table.scrollIndicatorInsets = .zero
+        table.contentInset = .zero
+        table.layoutIfNeeded()
+    }
+    
+    override func keyboardWillShow(notification: Notification) {
+        super.keyboardWillShow(notification: notification)
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-            table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - tabbarHeight, right: 0)
             table.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         }
         table.setContentOffset(.zero, animated: true)
     }
     
-    @objc private func keyboardDidHide(notification: Notification){
-        table.scrollIndicatorInsets = .zero
-        table.contentInset = .zero
-        table.layoutIfNeeded()
-        isKeyboardShown = false
-    }
-    
-    @objc private func keyboardDidShow(notification: Notification){
-        isKeyboardShown = true
-    }
-    
     
     // MARK: - Helpers
-    private func setupNotificationObservers(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+    override func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {
+        searchBar.resignFirstResponder()
+        super.hideKeyboardWhenTappedAround(cancelsTouchesInView: cancelsTouchesInView)
     }
     
+    
     private func prepareView(){
-        view.backgroundColor = .mainColor
+        view.backgroundColor = .backgroundLight
         
-        prepareHeaderViewStyle()
+        prepareUserButtonStyle(userButton)
+        prepareSearchInputStyle()
         prepareTableViewStyle()
         prepareRefreshControlStyle()
     }
     
-    private func prepareHeaderViewStyle(){
-        userButton.delegate = self
-        searchInput.addTarget(self, action: #selector(handleSearchChangedValue), for: .editingChanged)
+    private func prepareSearchInputStyle(){
+        searchBar.delegate = self
+        searchBar.searchTextField.leftView?.tintColor = .white
+        searchBar.searchTextField.textColor = .white
+        searchBar.backgroundColor = .clear
+        searchBar.searchTextField.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Vyhledat pacienta",
+                                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
-        header = HeaderView(frame: frame, leftButton: userButton, title: "Seznam pacientů", bottomView: searchInput, bottomViewAlign: .left)
-        guard let header = header else {return}
-        view.addSubview(header)
+        
+       // searchBar.showsCancelButton = true
+        navigationItem.titleView = searchBar
     }
     
     private func fetchPatients(){
         var params = ""
-        if let text = searchInput.text  {
+        if let text = searchBar.text  {
             if text.count > 0{
                 params = "?search=\(text)"
             }
@@ -123,7 +124,7 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
     private func prepareRefreshControlStyle(){
       //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        table.addSubview(refreshControl)
+        table.refreshControl = refreshControl
     }
       
     private func prepareTableViewStyle(){
@@ -134,11 +135,12 @@ class PatientListViewController: RequestViewController, UserButtonDelegate {
         table.rowHeight = UITableView.automaticDimension
         table.separatorStyle = .none
         table.allowsSelection = true
+        table.keyboardDismissMode = .interactive
         
         view.addSubview(table)
         table.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(searchInput.snp.bottom).offset(5)
+            make.top.equalToSuperview().offset(5)
         }
     }
 }
@@ -191,3 +193,21 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
+extension PatientListViewController: UISearchBarDelegate, UISearchDisplayDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        handleSearchChangedValue()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.resignFirstResponder()
+//        self.isEditing = false
+    }
+}
+
+extension PatientListViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        searchBar.resignFirstResponder()
+       // searchBar.endEditing(true)
+        return true
+    }
+}

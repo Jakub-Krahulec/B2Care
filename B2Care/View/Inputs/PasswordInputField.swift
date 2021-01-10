@@ -34,12 +34,12 @@ class PasswordInputField: BaseInputField {
     
     override func didBegin(_ sender: UITextField) {
         super.didBegin(sender)
-        showPasswordButton.isHidden = false
+     //   showPasswordButton.isHidden = false
     }
     
     override func didEnd(_ sender: UITextField) {
         super.didEnd(sender)
-        showPasswordButton.isHidden = true
+      //  showPasswordButton.isHidden = true
     }
     
     // MARK: - Helpers
@@ -72,7 +72,7 @@ class PasswordInputField: BaseInputField {
     private func prepareShowPasswordButtonStyle(){
         showPasswordButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         showPasswordButton.tintColor = .gray
-        showPasswordButton.isHidden = true
+     //   showPasswordButton.isHidden = true
         showPasswordButton.addTarget(self, action: #selector(handleShowPasswordTapped), for: .touchUpInside)
         showPasswordButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         

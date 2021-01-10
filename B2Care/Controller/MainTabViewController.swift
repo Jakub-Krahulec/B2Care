@@ -18,6 +18,11 @@ class MainTabViewController: UITabBarController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+        
     // MARK: - Actions
     
     
@@ -34,7 +39,15 @@ class MainTabViewController: UITabBarController {
         cameraVC.tabBarItem.title = "Vyhledání pacienta"
         cameraVC.tabBarItem.image = UIImage(systemName: "qrcode.viewfinder")
         
-        viewControllers = [patientListVC, cameraVC]
+        let nav1 = UINavigationController(rootViewController: patientListVC)
+        prepareNavigationControllerStyle(nav: nav1)
+        
+        let nav2 = UINavigationController(rootViewController: cameraVC)
+        prepareNavigationControllerStyle(nav: nav2)
+        
+        viewControllers = [nav1 , nav2 ]
     }
+    
+    
     
 }
