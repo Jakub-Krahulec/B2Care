@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        prepareView()
         
         // Do any additional setup after loading the view.
     }
@@ -35,4 +35,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Helpers
 
+    private func prepareView(){
+        view.showBlurLoader()
+    }
 }
