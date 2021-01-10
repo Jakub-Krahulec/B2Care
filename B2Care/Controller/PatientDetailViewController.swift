@@ -60,7 +60,7 @@ class PatientDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         prepareView()
-        view.showBlurLoader()
+        showBlurLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {

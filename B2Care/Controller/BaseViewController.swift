@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
     internal var dataRequests = Set<DataRequest>()
     internal var downloadRequests = Set<DownloadRequest>()
     internal var isKeyboardShown = false
+    private let blurLoader = BlurLoader()
     
     internal var tabbarHeight: CGFloat{
         return self.tabBarController?.tabBar.frame.height ?? 0
@@ -49,6 +50,12 @@ class BaseViewController: UIViewController {
     
     private func prepareView(){
         self.navigationItem.backButtonTitle = ""
+        
+        self.view.addSubview(blurLoader)
+        blurLoader.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        blurLoader.isHidden = true
     }
     
     internal func removeRequests(){
@@ -88,6 +95,15 @@ class BaseViewController: UIViewController {
                 vc.popToRootViewController(animated: true)
             }
         }
+    }
+    
+    internal func showBlurLoader() {
+        view.bringSubviewToFront(blurLoader)
+        blurLoader.isHidden = false
+    }
+    
+    internal func removeBluerLoader() {
+        blurLoader.isHidden = true
     }
     
     internal func setupKeyboardNotificationObservers(){
