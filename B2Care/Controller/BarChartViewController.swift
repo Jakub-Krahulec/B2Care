@@ -8,9 +8,9 @@
 import UIKit
 import Charts
 
-class BarChartViewController: UIViewController, BackButtonDelegate {
+class BarChartViewController: BaseViewController {
     // MARK: - Properties
-    private let titleLabel = UILabel()
+    private let titleView = SubTitleView()
     private let chart = BarChartView()
 
     
@@ -32,13 +32,9 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     
     private func updateView(with data: Any?){
         guard let graph = data as? Graph else {return}
-        
-        let attributedString = NSMutableAttributedString(string: "\(graph.Patient.fullName)\n\(graph.name)")
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 2
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-        titleLabel.attributedText = attributedString
-        
+ 
+        titleView.setTitle(graph.Patient.fullName)
+        titleView.setSubTitle(graph.name)
         
         var entries = [BarChartDataEntry]()
         for (index, value) in graph.data.enumerated() {
@@ -56,16 +52,12 @@ class BarChartViewController: UIViewController, BackButtonDelegate {
     
     private func prepareView(){
         view.backgroundColor = .backgroundLight
-        prepareTitleLabelStyle()
+        prepareTitleViewStyle()
         prepareChartStyle()
     }
     
-    private func prepareTitleLabelStyle(){
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
-        navigationItem.titleView = titleLabel
+    private func prepareTitleViewStyle(){
+        navigationItem.titleView = titleView
     }
     private func prepareChartStyle(){
         

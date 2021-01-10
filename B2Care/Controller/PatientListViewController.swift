@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientListViewController: BaseViewController, UserButtonDelegate, UISearchControllerDelegate {
+class PatientListViewController: BaseViewController, UISearchControllerDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
     

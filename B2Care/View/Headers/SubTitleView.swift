@@ -11,12 +11,7 @@ class SubTitleView: UIView {
 
     // MARK: - Properties
     private let titleLabel = UILabel()
-    
-    var data: Any? {
-        didSet{
-            updateView(with: data)
-        }
-    }
+    private let subTitleLabel = UILabel()
     
     // MARK: - Lifecycle
     
@@ -28,26 +23,46 @@ class SubTitleView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+        
+    // MARK: - Actions
+    
     
     // MARK: - Helpers
-    private func updateView(with data: Any?){
-        guard let headline = data as? String else {return}
-        titleLabel.text = headline
-    }
-
+    
     private func prepareView(){
         prepareTitleLabelStyle()
+        prepareSubTitleLabelStyle()
     }
     
     private func prepareTitleLabelStyle(){
-       // titleLabel.text = "Název grafu"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        titleLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.textAlignment = .center
+        titleLabel.textColor = .white
         
-        addSubview(titleLabel)
+        self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.left.top.bottom.right.equalToSuperview()
+            make.left.right.top.equalToSuperview()
         }
     }
+    
+    private func prepareSubTitleLabelStyle(){
+        subTitleLabel.font = UIFont.systemFont(ofSize: 16)
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.textColor = .white
+        
+        self.addSubview(subTitleLabel)
+        subTitleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.left.right.equalToSuperview()
+        }
+    }
+    
+    public func setTitle(_ title: String){
+        titleLabel.text = title
+    }
+    
+    public func setSubTitle(_ title: String){
+        subTitleLabel.text = title
+    }
+  
 }

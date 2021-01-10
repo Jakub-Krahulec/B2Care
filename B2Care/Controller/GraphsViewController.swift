@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GraphsViewController: UIViewController {
+class GraphsViewController: BaseViewController {
     // MARK: - Properties
     private let table = UITableView()
     private let refreshControl = UIRefreshControl()

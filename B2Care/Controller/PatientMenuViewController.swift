@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientMenuViewController: BaseViewController, BackButtonDelegate {
+class PatientMenuViewController: BaseViewController {
     
     // MARK: - Properties
     private let headerView = UIView()

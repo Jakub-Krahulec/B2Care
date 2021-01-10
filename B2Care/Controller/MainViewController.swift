@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController{
     // MARK: - Propeties
     
     // MARK: - Lifecycle

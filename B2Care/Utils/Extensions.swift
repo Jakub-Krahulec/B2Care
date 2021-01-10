@@ -54,9 +54,6 @@ extension UIView{
     }
     
     func removeBluerLoader() {
-//        for view in subviews.filter({$0 is BlurLoader}){
-//            view.removeFromSuperview()
-//        }
         if let blurLoader = subviews.first(where: { $0 is BlurLoader }) {
             blurLoader.removeFromSuperview()
         }
