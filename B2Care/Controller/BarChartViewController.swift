@@ -67,7 +67,7 @@ class BarChartViewController: BaseViewController {
         view.addSubview(chart)
         chart.snp.makeConstraints { (make) in
             make.top.equalTo(5)
-            make.bottom.equalToSuperview().inset(30)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(5)
             make.left.right.equalToSuperview().inset(10)
         }
     }

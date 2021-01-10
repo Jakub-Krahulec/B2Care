@@ -77,7 +77,7 @@ class DocumentsViewController: BaseViewController {
         table.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview().inset(5)
             make.top.equalToSuperview().offset(5)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(5)
         }
     }
     
