@@ -42,7 +42,7 @@ class PatientDetailViewController: BaseViewController {
                     case .success(let data):
                         this.data = data
                     case .failure(let error):
-                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
                 }
                 this.removeRequests()
             }
@@ -92,16 +92,16 @@ class PatientDetailViewController: BaseViewController {
         let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : ""
         let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
         
-        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "POJIŠŤOVNA", value: "-")
-        idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: "RODNÉ ČÍSLO", value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: "DIAGNÓZA", value: diagnosis, updated: person.updatedDateString)
-        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: "ALERGIE", value: person.allergiesString, updated: person.updatedDateString, tintColor: .systemRed)
-        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: "MEDIKACE", value: person.medications, updated: person.updatedDateString, tintColor: .systemGreen)
-        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: "DŮLEŽITÉ INFORMACE", value: person.importantInfo, updated:person.updatedDateString, tintColor: .gray)
-        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OSOBNÍ TELEFON", value: person.person.contacts.count > 0 ? person.person.contacts[0].value : "-")
-        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: "OŠETŘUJÍCÍ LÉKAŘ", value: doctorNumber)
-        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: "ADRESA", value: person.fullAddress)
-        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: "PROFESE", value: person.jobDescription  ?? "-")
+        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: NSLocalizedString("insurance-company", comment: ""), value: "-")
+        idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: NSLocalizedString("personal-id", comment: ""), value: person.birthNumber)
+        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: NSLocalizedString("diagnosis", comment: ""), value: diagnosis, updated: person.updatedDateString)
+        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: NSLocalizedString("allergy", comment: ""), value: person.allergiesString, updated: person.updatedDateString, tintColor: .systemRed)
+        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: NSLocalizedString("medication", comment: ""), value: person.medications, updated: person.updatedDateString, tintColor: .systemGreen)
+        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: NSLocalizedString("important-info", comment: ""), value: person.importantInfo, updated:person.updatedDateString, tintColor: .gray)
+        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: NSLocalizedString("personal-phone", comment: ""), value: person.person.contacts.count > 0 ? person.person.contacts[0].value : "-")
+        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: NSLocalizedString("attending-doctor", comment: ""), value: doctorNumber)
+        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: NSLocalizedString("address", comment: ""), value: person.fullAddress)
+        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: NSLocalizedString("proffession", comment: ""), value: person.jobDescription  ?? "-")
         
         view.removeBluerLoader()
     }

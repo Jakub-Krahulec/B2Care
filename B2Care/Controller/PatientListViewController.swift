@@ -93,7 +93,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
         searchBar.searchTextField.textColor = .white
         searchBar.backgroundColor = .clear
         searchBar.searchTextField.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Vyhledat pacienta",
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search-patient", comment: ""),
                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
        // searchBar.showsCancelButton = true
@@ -114,7 +114,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
                     this.patients = data
                     this.refreshControl.endRefreshing()
                 case .failure(let error):
-                    this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                    this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
             }
             this.removeRequests()
         }
@@ -165,14 +165,14 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let urgentMessageAction = UIContextualAction(style: .normal, title: "Urgentní zpráva OL") { (action, sourceView, completionHandler) in
+        let urgentMessageAction = UIContextualAction(style: .normal, title: NSLocalizedString("urgent-message", comment: "")) { (action, sourceView, completionHandler) in
             completionHandler(true)
         }
         urgentMessageAction.image = UIImage(systemName: "exclamationmark.bubble.fill")
         urgentMessageAction.image?.withTintColor(.white)
         urgentMessageAction.backgroundColor = .systemPink
         
-        let addTaskAction = UIContextualAction(style: .normal, title: "Nový úkol") { (action, sourceView, completionHandler) in
+        let addTaskAction = UIContextualAction(style: .normal, title: NSLocalizedString("add-task", comment: "")) { (action, sourceView, completionHandler) in
             completionHandler(true)
         }
         addTaskAction.image = UIImage(systemName: "plus")

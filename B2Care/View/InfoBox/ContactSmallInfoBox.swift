@@ -63,7 +63,7 @@ class ContactSmallInfoBox: SmallInfoBox {
     
     private func prepareCallButtonStyle(){
         callButton.tintColor = .mainColor
-        callButton.setTitle(" VOLAT", for: .normal)
+        callButton.setTitle(" \(NSLocalizedString("call", comment: ""))", for: .normal)
         callButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         callButton.setTitleColor(.mainColor, for: .normal)
         callButton.setTitleColor(.darkGray, for: .disabled)

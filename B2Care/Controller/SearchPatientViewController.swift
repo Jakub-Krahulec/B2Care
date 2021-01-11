@@ -68,7 +68,7 @@ class SearchPatientViewController: BaseViewController {
     }
     
     private func prepareHeaderViewStyle(){
-        navigationItem.title = "Vyhledání pacienta"
+        navigationItem.title = NSLocalizedString("patient-search", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: userButton)
     }
 
@@ -93,13 +93,13 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                     case .success(let data):
                         if data.data.count > 1{
                             
-                            this.showMessage(withTitle: "Chyba", message: "Nalezen víc než jeden pacient")
+                            this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: NSLocalizedString("more-patients-found", comment: ""))
                             this.session.startRunning()
                             
                             return
                         } else if data.data.count < 1{
                             
-                            this.showMessage(withTitle: "Chyba", message: "Pacient nenalezen")
+                            this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: NSLocalizedString("patient-not-found", comment: ""))
                             this.session.startRunning()
                             
                         } else {
@@ -112,7 +112,7 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                         }   
                     case .failure(let error):
                         
-                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
                         this.session.startRunning()
                 }
                 this.removeRequests()

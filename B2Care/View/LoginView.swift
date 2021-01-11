@@ -103,7 +103,7 @@ class LoginView: UIView {
     }
     
     private func prepareUserLabelStyle(){
-        userLabel.text = "Uživatelské jméno"
+        userLabel.text = NSLocalizedString("user-name", comment: "")
         addSubview(userLabel)
         userLabel.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
@@ -122,7 +122,7 @@ class LoginView: UIView {
     }
     
     private func preparePasswordLabelStyle(){
-        passwordLabel.text = "Heslo"
+        passwordLabel.text = NSLocalizedString("password", comment: "")
         addSubview(passwordLabel)
         passwordLabel.snp.makeConstraints { (make) in
             make.top.equalTo(userTextField.snp.bottom).offset(15)
@@ -142,7 +142,7 @@ class LoginView: UIView {
     }
     
     private func prepareStatusLabelStyle(){
-        statusLabel.text = "Špatné heslo"
+       // statusLabel.text = "Špatné heslo"
         statusLabel.numberOfLines = 2
         statusLabel.textColor = .red
         
@@ -158,7 +158,7 @@ class LoginView: UIView {
     }
     
     private func prepareForgotPasswordButtonStyle(){
-        forgotPasswordButton.setTitle("Zapomenuté heslo ", for: .normal)
+        forgotPasswordButton.setTitle(NSLocalizedString("forgotten-password", comment: ""), for: .normal)
         forgotPasswordButton.setTitleColor(.gray, for: .normal)
         forgotPasswordButton.tintColor = .gray
         forgotPasswordButton.setImage(UIImage(systemName: "arrow.right"), for: .normal)
@@ -173,7 +173,7 @@ class LoginView: UIView {
     }
     
     private func prepareLoginButtonStyle(){
-        loginButton.setTitle("Přihlásit", for: .normal)
+        loginButton.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
         loginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
 //        loginButton.backgroundColor = .mainColor
 //        loginButton.layer.cornerRadius = 10

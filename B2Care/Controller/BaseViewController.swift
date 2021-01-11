@@ -35,7 +35,7 @@ class BaseViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        blurLoader.isHidden = true
+      //  blurLoader.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,10 +63,10 @@ class BaseViewController: UIViewController {
     private func prepareView(){
         self.navigationItem.backButtonTitle = ""
         
-        self.view.addSubview(blurLoader)
-        blurLoader.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
+//        self.view.addSubview(blurLoader)
+//        blurLoader.snp.makeConstraints { (make) in
+//            make.edges.equalTo(self.view)
+//        }
         //blurLoader.isHidden = true
     }
     

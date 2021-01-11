@@ -89,12 +89,12 @@ class DocumentsViewController: BaseViewController {
         if section == 0{
             image.image = UIImage(systemName: "person.fill")
             image.tintColor = .mainColor
-            label.text = "DOKUMENTACE PACIENTA"
+            label.text = NSLocalizedString("documentation", comment: "")
             label.textColor = .mainColor
         } else {
             image.image = UIImage(systemName: "doc.fill")
             image.tintColor = .systemGreen
-            label.text = "LABORATORNÍ VÝSLEDKY"
+            label.text = NSLocalizedString("lab-results", comment: "")
             label.textColor = .systemGreen
         }
         label.font = UIFont.boldSystemFont(ofSize: 13)
@@ -208,10 +208,10 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
                             
                         }
                     } catch {
-                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
                     }
                 case .failure(let error):
-                    this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                    this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
             }
             this.removeRequests()
         }

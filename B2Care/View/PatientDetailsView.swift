@@ -62,7 +62,7 @@ class PatientDetailsView: UIView {
             if location.count > 0 {
                 location += ", "
             }
-            location += "Pokoj \(room)"
+            location += "\(NSLocalizedString("room", comment: "")) \(room)"
         }
         departmentLabel.text = location
     }
@@ -75,7 +75,7 @@ class PatientDetailsView: UIView {
             updateDepartmentLabelText(with: data.hospitalizations[0])
             
         } else {
-            departmentLabel.text = "V domácí péči"
+            departmentLabel.text = "N/A"
         }
         
     }

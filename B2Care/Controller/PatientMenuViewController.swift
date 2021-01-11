@@ -41,7 +41,7 @@ class PatientMenuViewController: BaseViewController {
                     case .success(let data):
                         this.data = data
                     case .failure(let error):
-                        this.showMessage(withTitle: "Chyba", message: error.localizedDescription)
+                        this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
                 }
                 this.removeRequests()
             }
@@ -118,8 +118,8 @@ class PatientMenuViewController: BaseViewController {
         prepareHeaderViewStyle()
         prepareTabBarStyle()
         
-        prepareBottomButtonStyle(addTaskButton, title: "Přidat úkol", image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
-        prepareBottomButtonStyle(urgentButton, title: "Urgentní zpáva", image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
+        prepareBottomButtonStyle(addTaskButton, title: NSLocalizedString("add-task", comment: ""), image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
+        prepareBottomButtonStyle(urgentButton, title: NSLocalizedString("urgent-message", comment: ""), image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
         prepareButtonStackStyle()
         
         prepareBlurBackgroundStyle()
@@ -224,12 +224,12 @@ class PatientMenuViewController: BaseViewController {
         let tabItemWidth = self.view.frame.width / 6
         tabbar.selectionIndicatorImage = getImageWithColorPosition(color: UIColor.mainColor.withAlphaComponent(0.7), size: CGSize(width: tabItemWidth, height: 49), lineSize: CGSize(width: tabItemWidth, height: 2))
         
-        let infoTabItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle.fill"), tag: 0)
-        let planTabItem = UITabBarItem(title: "Plán", image: UIImage(systemName: "list.dash"), tag: 1)
-        let documentTabItem = UITabBarItem(title: "Dokum.", image: UIImage(systemName: "doc.text.fill"), tag: 2)
-        let messageTabItem = UITabBarItem(title: "Zprávy", image: UIImage(systemName: "message.fill"), tag: 3)
-        let graphsTabItem = UITabBarItem(title: "Grafy", image: UIImage(systemName: "chart.bar.fill"), tag: 4)
-        let historyTabItem = UITabBarItem(title: "Historie", image: UIImage(systemName: "tray.full.fill"), tag: 5)
+        let infoTabItem = UITabBarItem(title: NSLocalizedString("info", comment: ""), image: UIImage(systemName: "info.circle.fill"), tag: 0)
+        let planTabItem = UITabBarItem(title: NSLocalizedString("plan", comment: ""), image: UIImage(systemName: "list.dash"), tag: 1)
+        let documentTabItem = UITabBarItem(title: NSLocalizedString("doc", comment: ""), image: UIImage(systemName: "doc.text.fill"), tag: 2)
+        let messageTabItem = UITabBarItem(title: NSLocalizedString("messages", comment: ""), image: UIImage(systemName: "message.fill"), tag: 3)
+        let graphsTabItem = UITabBarItem(title: NSLocalizedString("graphs", comment: ""), image: UIImage(systemName: "chart.bar.fill"), tag: 4)
+        let historyTabItem = UITabBarItem(title: NSLocalizedString("history", comment: ""), image: UIImage(systemName: "tray.full.fill"), tag: 5)
         
         tabbar.items = [infoTabItem, planTabItem,documentTabItem,messageTabItem,graphsTabItem,historyTabItem]
         tabbar.selectedItem = infoTabItem

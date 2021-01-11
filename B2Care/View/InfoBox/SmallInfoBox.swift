@@ -75,6 +75,7 @@ class SmallInfoBox: UIView {
         titleLabel.textColor = .gray
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 15)
+        
     }
     
     private func prepareValueLabelStyle(){

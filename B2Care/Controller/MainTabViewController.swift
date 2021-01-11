@@ -32,11 +32,11 @@ class MainTabViewController: UITabBarController {
         view.backgroundColor = .clear
         
         let patientListVC = PatientListViewController()
-        patientListVC.tabBarItem.title = "Seznam pacientů"
+        patientListVC.tabBarItem.title = NSLocalizedString("patient-list", comment: "")
         patientListVC.tabBarItem.image = UIImage(systemName: "person.3.fill")
 
         let cameraVC = SearchPatientViewController()
-        cameraVC.tabBarItem.title = "Vyhledání pacienta"
+        cameraVC.tabBarItem.title = NSLocalizedString("patient-search", comment: "")
         cameraVC.tabBarItem.image = UIImage(systemName: "qrcode.viewfinder")
         
         let nav1 = UINavigationController(rootViewController: patientListVC)

@@ -57,7 +57,7 @@ class PatientCell: UITableViewCell {
     private func updateView(with data: Any?){
         guard let data = data as? Patient else{return}
         nameLabel.text = data.fullName
-        diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : "Bez diagnózy"
+        diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : NSLocalizedString("without-diagnosis", comment: "")
         patientDetailsView.data = data
     }
     
