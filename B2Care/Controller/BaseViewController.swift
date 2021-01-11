@@ -26,6 +26,18 @@ class BaseViewController: UIViewController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Při změně výšky navigace neudělá takový skok při zobrazení
+        self.navigationController?.view.layoutSubviews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        blurLoader.isHidden = true
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -55,7 +67,7 @@ class BaseViewController: UIViewController {
         blurLoader.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
-        blurLoader.isHidden = true
+        //blurLoader.isHidden = true
     }
     
     internal func removeRequests(){

@@ -106,6 +106,7 @@ extension SearchPatientViewController: AVCaptureMetadataOutputObjectsDelegate {
                             
                             let controller = PatientMenuViewController()
                             controller.patientId = data.data[0].id
+                            controller.hidesBottomBarWhenPushed = true
                             this.navigationController?.pushViewController(controller, animated: true)
                             
                         }   

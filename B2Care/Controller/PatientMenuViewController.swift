@@ -64,9 +64,9 @@ class PatientMenuViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
-        // Při změně výšky navigace neudělá takový skok při zobrazení
-        self.navigationController?.view.layoutSubviews()
+        super.viewWillAppear(animated)
+      //  self.tabBarController?.tabBar.isHidden = true
+        
     }
     
     // MARK: - Actions

@@ -32,7 +32,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+       // self.tabBarController?.tabBar.isHidden = false
         setupKeyboardNotificationObservers()
         fetchPatients()
     }
@@ -80,6 +80,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
     private func prepareView(){
         view.backgroundColor = .backgroundLight
         
+        
         prepareUserButtonStyle(userButton)
         prepareSearchInputStyle()
         prepareTableViewStyle()
@@ -94,7 +95,6 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
         searchBar.searchTextField.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Vyhledat pacienta",
                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        
         
        // searchBar.showsCancelButton = true
         navigationItem.titleView = searchBar
@@ -187,6 +187,7 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         if !isKeyboardShown{
             let controller = PatientMenuViewController()
             controller.patientId = patients?.data[indexPath.row].id
+            controller.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(controller, animated: true)
         }
     }
