@@ -31,6 +31,14 @@ extension UIView{
     enum GlowEffect: Float {
         case small = 0.4, normal = 2, big = 15
     }
+    
+    func addSpacer(width: CGFloat, color: UIColor){
+        let spacer = CALayer()
+        spacer.backgroundColor = color.cgColor
+        
+        spacer.frame = CGRect(x: 0, y: 0, width: self.superview?.frame.size.width ?? self.frame.size.width, height: width)
+        self.layer.addSublayer(spacer)
+    }
 }
 
 extension UIViewController{

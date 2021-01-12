@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class PatientCell: UITableViewCell {
+class PatientCell: MGSwipeTableCell {
 
    // MARK: - Properties
     
@@ -44,10 +45,10 @@ class PatientCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.layer.cornerRadius = 13
-        
-        self.contentView.layer.borderColor = UIColor.backgroundLight.cgColor
-        self.contentView.layer.borderWidth = 5
+//        self.contentView.layer.cornerRadius = 13
+//
+//        self.contentView.layer.borderColor = UIColor.backgroundLight.cgColor
+//        self.contentView.layer.borderWidth = 5
     }
     
     // MARK: - Actions
@@ -62,16 +63,16 @@ class PatientCell: UITableViewCell {
     }
     
     private func prepareView(){
-        backgroundColor = .backgroundLight
-        addSubview(bgView)
+       // backgroundColor = .backgroundLight
+        
 //        contentView.layer.cornerRadius = 13
 //        contentView.layer.borderWidth = 5
 //        contentView.layer.borderColor = UIColor.backgroundLight.cgColor
         
-        
+       // prepareBackgroundViewStyle()
         prepareNameLabelStyle()
         prepareDiagnosisLabelStyle()
-        prepareBackgroundViewStyle()
+       
         preparePatientDetailsViewStyle()
     }
     
@@ -86,7 +87,8 @@ class PatientCell: UITableViewCell {
     
     private func prepareBackgroundViewStyle(){
         bgView.backgroundColor = .white
-        bgView.layer.cornerRadius = 8
+        bgView.layer.cornerRadius = 0
+        addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview().inset(3)
             make.left.right.equalToSuperview().inset(6)

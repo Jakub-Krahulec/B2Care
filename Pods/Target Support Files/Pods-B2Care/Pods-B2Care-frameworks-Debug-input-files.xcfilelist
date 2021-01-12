@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-B2Care/Pods-B2Care-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/MGSwipeTableCell/MGSwipeTableCell.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

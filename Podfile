@@ -9,6 +9,7 @@ target 'B2Care' do
 pod 'Alamofire'
 pod 'SnapKit'
 pod 'Charts'
+pod 'MGSwipeTableCell'
 end
 
 target 'B2CareWidgetExtension' do

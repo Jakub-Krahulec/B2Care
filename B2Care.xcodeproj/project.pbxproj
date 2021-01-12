@@ -21,6 +21,7 @@
 		2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A5259342EE0077DD02 /* SearchField.swift */; };
 		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
+		2A15AAA925AE2CF900B0209F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A4D6E2025AD00A70040CFA2 /* Localizable.strings */; };
 		2A210E1C25ADCB230059E4B8 /* PatientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3752596590A00CD8402 /* PatientResponse.swift */; };
 		2A210E1F25ADCCCB0059E4B8 /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
 		2A2932BC25ADAE8A00E3A71B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2932BB25ADAE8A00E3A71B /* Colors.swift */; };
@@ -520,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A4D6E3125AD115C0040CFA2 /* Assets.xcassets in Resources */,
+				2A15AAA925AE2CF900B0209F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

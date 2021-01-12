@@ -1,9 +1,3 @@
-//
-//  B2CareWidget.swift
-//  B2CareWidget
-//
-//  Created by Jakub Krahulec on 12.01.2021.
-//
 
 import WidgetKit
 import SwiftUI

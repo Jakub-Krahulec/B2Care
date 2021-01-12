@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
 class PatientListViewController: BaseViewController, UISearchControllerDelegate {
     // MARK: - Properties
@@ -139,7 +140,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
         
         view.addSubview(table)
         table.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.bottom.equalToSuperview().inset(5)
             make.top.equalToSuperview().offset(5)
         }
     }
@@ -156,6 +157,35 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = table.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? PatientCell{
             cell.selectionStyle = .none
+            
+            let urgentMessage = MGSwipeButton(title: NSLocalizedString("urgent-message", comment: ""), backgroundColor: .systemRed) { (sender) -> Bool in
+                return true
+            }
+            urgentMessage.setImage(UIImage(systemName: "exclamationmark.bubble.fill"), for: .normal)
+            urgentMessage.tintColor = .white
+            urgentMessage.buttonWidth = 115
+            
+            let addTask = MGSwipeButton(title: NSLocalizedString("add-task", comment: ""),backgroundColor: .systemGreen) { (sender) -> Bool in
+                return true
+            }
+            addTask.setImage(UIImage(systemName: "plus"), for: .normal)
+            addTask.tintColor = .white
+            addTask.buttonWidth = 115
+            
+  
+            cell.rightButtons = [addTask, urgentMessage]
+            
+            cell.rightSwipeSettings.transition = .border
+            cell.backgroundColor = UIColor.white
+            cell.layer.cornerRadius = 12
+            cell.layer.borderColor = UIColor.backgroundLight.cgColor
+            cell.layer.borderWidth = 2.5
+            cell.clipsToBounds = true
+            cell.layer.masksToBounds = true
+            cell.swipeBackgroundColor = UIColor.white
+            cell.swipeContentView.layer.borderWidth = 8
+            cell.swipeContentView.layer.borderColor = UIColor.white.cgColor
+            
             if let data = patients {
                 cell.data = data.data[indexPath.row]
             }
@@ -164,24 +194,24 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let urgentMessageAction = UIContextualAction(style: .normal, title: NSLocalizedString("urgent-message", comment: "")) { (action, sourceView, completionHandler) in
-            completionHandler(true)
-        }
-        urgentMessageAction.image = UIImage(systemName: "exclamationmark.bubble.fill")
-        urgentMessageAction.image?.withTintColor(.white)
-        urgentMessageAction.backgroundColor = .systemPink
-        
-        let addTaskAction = UIContextualAction(style: .normal, title: NSLocalizedString("add-task", comment: "")) { (action, sourceView, completionHandler) in
-            completionHandler(true)
-        }
-        addTaskAction.image = UIImage(systemName: "plus")
-        addTaskAction.image?.withTintColor(.white)
-        addTaskAction.backgroundColor = .systemGreen
-        
-        
-        return UISwipeActionsConfiguration(actions: [addTaskAction,urgentMessageAction])
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let urgentMessageAction = UIContextualAction(style: .normal, title: NSLocalizedString("urgent-message", comment: "")) { (action, sourceView, completionHandler) in
+//            completionHandler(true)
+//        }
+//        urgentMessageAction.image = UIImage(systemName: "exclamationmark.bubble.fill")
+//        urgentMessageAction.image?.withTintColor(.white)
+//        urgentMessageAction.backgroundColor = .systemPink
+//
+//        let addTaskAction = UIContextualAction(style: .normal, title: NSLocalizedString("add-task", comment: "")) { (action, sourceView, completionHandler) in
+//            completionHandler(true)
+//        }
+//        addTaskAction.image = UIImage(systemName: "plus")
+//        addTaskAction.image?.withTintColor(.white)
+//        addTaskAction.backgroundColor = .systemGreen
+//
+//
+//        return UISwipeActionsConfiguration(actions: [addTaskAction,urgentMessageAction])
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isKeyboardShown{
