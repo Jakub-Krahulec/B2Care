@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import WidgetKit
 
 class B2CareService{
     
@@ -46,6 +47,7 @@ class B2CareService{
         guard let defaults = defaults else { return }
         if let encoded = try? encoder.encode(data){
             defaults.setValue(encoded, forKey: "patient")
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     
@@ -63,6 +65,7 @@ class B2CareService{
         guard let defaults = defaults else {return}
         defaults.removeObject(forKey: "user")
         data = nil
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void) -> DataRequest{
@@ -107,6 +110,7 @@ class B2CareService{
                     do{
                         this.data = data.data
                         this.save()
+                        WidgetCenter.shared.reloadAllTimelines()
                         completion(.success(true))
                         return
                     }
