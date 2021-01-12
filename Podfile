@@ -10,3 +10,9 @@ pod 'Alamofire'
 pod 'SnapKit'
 pod 'Charts'
 end
+
+target 'B2CareWidgetExtension' do
+use_frameworks!
+pod 'Alamofire'
+end
+

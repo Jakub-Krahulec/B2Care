@@ -16,7 +16,7 @@ class B2CareService{
     
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    private let defaults = UserDefaults.standard
+    private let defaults = UserDefaults(suiteName: "group.cz.jkrahulec.B2Care")
     
     private var data: UserData?{
         didSet {
@@ -25,6 +25,7 @@ class B2CareService{
     }
     
     private init(){
+        guard let defaults = defaults else {return}
         if let user = defaults.object(forKey: "user") as? Data {
             if let decoded = try? decoder.decode(UserData.self, from: user){
                 data = decoded
@@ -35,12 +36,31 @@ class B2CareService{
     }
     
     fileprivate func save(){
+        guard let defaults = defaults else {return}
         if let encoded = try? encoder.encode(data){
             defaults.setValue(encoded, forKey: "user")
         }
     }
     
+    func savePatient(_ data: Patient){
+        guard let defaults = defaults else { return }
+        if let encoded = try? encoder.encode(data){
+            defaults.setValue(encoded, forKey: "patient")
+        }
+    }
+    
+    func getLastSelectedPatient() -> Patient? {
+        guard let defaults = defaults else {return nil}
+        if let patient = defaults.object(forKey: "patient") as? Data {
+            if let decoded = try? decoder.decode(Patient.self, from: patient){
+                return decoded
+            }
+        }
+        return nil
+    }
+    
     func logout(){
+        guard let defaults = defaults else {return}
         defaults.removeObject(forKey: "user")
         data = nil
     }
@@ -62,7 +82,6 @@ class B2CareService{
             switch result{
                 case .success(let data):
                     completion(.success(data.data))
-                    
                 case .failure(let error):
                     completion(.failure(error))
             }

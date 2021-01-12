@@ -8,38 +8,7 @@
 import UIKit
 
 
-extension Date{
-    
-    static var dateformater = DateFormatter()
-    
-    public static func getAgeFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Int? {
-        Date.dateformater.dateFormat = format
-        let date = Date.dateformater.date(from: stringDate)
-        
-        if let date = date{
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year], from: date)
-            let date2 = calendar.date(from: components)
-            let now = Date()
-            if let date2 = date2{
-                let ageComponents = calendar.dateComponents([.year], from: date2, to: now)
-                let age = ageComponents.year
-                return age
-            }
-        }
-        return nil
-    }
-    
-    public static func getDateFromString(_ stringDate: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ") -> Date? {
-        Date.dateformater.dateFormat = format
-        return Date.dateformater.date(from: stringDate)
-    }
-    
-    public static func getFormattedString(from date: Date, format: String = "dd.MM.yyyy 'v' HH:mm") -> String {
-        Date.dateformater.dateFormat = format
-        return Date.dateformater.string(from: date)
-    }
-}
+
 
 extension UIView{
     func showBlurLoader() {
@@ -62,30 +31,6 @@ extension UIView{
     enum GlowEffect: Float {
         case small = 0.4, normal = 2, big = 15
     }
-}
-
-extension UIColor{
-    
-    static var mainColor: UIColor {
-        return UIColor(red: 71/255, green: 99/255, blue: 228/255, alpha: 1.0)
-    }
-    
-    static var headerMainColor: UIColor {
-        return UIColor(red: 48/255, green: 40/255, blue: 119/255, alpha: 1.0)
-    }
-    
-    static var headerSecondaryColor: UIColor {
-        return UIColor(red: 79/255, green: 66/255, blue: 186/255, alpha: 1.0)
-    }
-    
-    static var backgroundLight: UIColor {
-        return UIColor(red: 241/255, green: 241/255, blue: 246/255, alpha: 1.0)
-    }
-    
-    static var borderLight: UIColor {
-        return UIColor(red: 232/255, green: 237/255, blue: 243/255, alpha: 1.0)
-    }
-    
 }
 
 extension UIViewController{

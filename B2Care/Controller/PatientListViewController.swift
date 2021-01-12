@@ -185,6 +185,9 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isKeyboardShown{
+            if let patient = patients?.data[indexPath.row]{
+                B2CareService.shared.savePatient(patient)
+            }
             let controller = PatientMenuViewController()
             controller.patientId = patients?.data[indexPath.row].id
             controller.hidesBottomBarWhenPushed = true
