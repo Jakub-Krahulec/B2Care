@@ -23,3 +23,4 @@ var laboratoryResultsHardData = DocumentsData(documents:  [
     Document(id: 3, name: "EKG", created: "4.5.2020 ve 3:10", updated: "", value: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"),
     Document(id: 4, name: "Sono", created: "4.5.2020 ve 3:10", updated: "", value: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"),
 ])
+
