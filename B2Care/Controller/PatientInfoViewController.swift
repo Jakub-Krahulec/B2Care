@@ -61,21 +61,6 @@ class PatientInfoViewController: BaseViewController {
         view.showBlurLoader()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-      //  navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //  navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
     // MARK: - Actions
     
     @objc private func refresh(_ sender: AnyObject){
@@ -119,9 +104,7 @@ class PatientInfoViewController: BaseViewController {
     }
     
     private func prepareRefreshControlStyle(){
-      //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        // scrollView.addSubview(refreshControl)
         scrollView.refreshControl = refreshControl
     }
     

@@ -12,7 +12,7 @@ class SmallInfoBox: UIView {
 
     // MARK: - Properties
     internal let titleStack = UIStackView()
-    internal let imageView = UIImageView()
+    internal let titleImageView = UIImageView()
     internal let titleLabel = UILabel()
     internal let valueLabel = UILabel()
     
@@ -35,20 +35,10 @@ class SmallInfoBox: UIView {
         backgroundColor = .white
         layer.cornerRadius = 10
         
-        
         prepareTitleLabelStyle()
         prepareImageViewStyle()
         prepareTitleStackStyle()
         prepareValueLabelStyle()
-        
-        setBottomMargin()
-    }
-    
-    func setBottomMargin(){
-        self.snp.makeConstraints { (make) in
-            //make.bottom.equalTo(valueLabel.snp.bottom).offset(15)
-            make.bottom.greaterThanOrEqualTo(valueLabel.snp.bottom).offset(15)
-        }
     }
     
     private func prepareTitleStackStyle(){
@@ -58,27 +48,25 @@ class SmallInfoBox: UIView {
         titleStack.alignment = .center
         
         addSubview(titleStack)
-        titleStack.addArrangedSubview(imageView)
+        titleStack.addArrangedSubview(titleImageView)
         titleStack.addArrangedSubview(titleLabel)
         titleStack.snp.makeConstraints { (make) in
-          //  make.centerY.equalToSuperview().offset(-12)
-            make.top.equalTo(15)
+            make.top.equalTo(20)
             make.centerX.equalToSuperview()
         }
     }
     
     private func prepareImageViewStyle(){
-        imageView.tintColor = .mainColor
+        titleImageView.tintColor = .mainColor
     }
     
     private func prepareTitleLabelStyle(){
         titleLabel.textColor = .gray
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.systemFont(ofSize: 15)
-        
     }
     
-    private func prepareValueLabelStyle(){
+    internal func prepareValueLabelStyle(){
         valueLabel.textAlignment = .center
         valueLabel.font = UIFont.boldSystemFont(ofSize: 15)
         valueLabel.numberOfLines = 0
@@ -87,12 +75,12 @@ class SmallInfoBox: UIView {
         valueLabel.snp.makeConstraints { (make) in
             make.top.greaterThanOrEqualTo(titleStack.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(15)
-            
+            make.bottom.lessThanOrEqualToSuperview().inset(20)
         }
     }
     
     public func updateView(image: UIImage?, title: String, value: String){
-        imageView.image = image
+        titleImageView.image = image
         titleLabel.text = title
         valueLabel.text = value
     }

@@ -14,8 +14,6 @@ class StartingViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

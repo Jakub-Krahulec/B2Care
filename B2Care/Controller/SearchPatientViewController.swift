@@ -21,6 +21,7 @@ class SearchPatientViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Kvůli simulátoru
         if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
             session.startRunning()
@@ -29,6 +30,7 @@ class SearchPatientViewController: BaseViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         // Kvůli simulátoru
         if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
             session.stopRunning()

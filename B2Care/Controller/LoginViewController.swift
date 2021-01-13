@@ -21,17 +21,20 @@ class LoginViewController: BaseViewController, LoginViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupKeyboardNotificationObservers()
         setupNotificationObservers()
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         headerView.prepareGradientStyle()
         loginView.prepareGradientStyle()
     }

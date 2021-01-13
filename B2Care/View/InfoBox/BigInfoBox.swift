@@ -11,7 +11,7 @@ class BigInfoBox: UIView {
 
     // MARK: - Properties
     private let updatedLabel = UILabel()
-    private let imageView = UIImageView()
+    private let titleImageView = UIImageView()
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
     
@@ -38,10 +38,6 @@ class BigInfoBox: UIView {
         prepareImageViewStyle()
         prepareTitleLabelStyle()
         prepareValueLabelStyle()
-        
-        self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(valueLabel.snp.bottom).offset(20)
-        }
     }
     
     private func prepareUpdatedLabelStyle(){
@@ -59,11 +55,11 @@ class BigInfoBox: UIView {
     }
     
     private func prepareImageViewStyle(){
-        imageView.tintColor = .mainColor
+        titleImageView.tintColor = .mainColor
       // imageView.image = UIImage(systemName: "waveform.path.ecg")
         
-        addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
+        addSubview(titleImageView)
+        titleImageView.snp.makeConstraints { (make) in
            // make.centerY.equalToSuperview().offset(-12)
             make.top.equalToSuperview().offset(20)
             make.left.equalToSuperview().offset(10)
@@ -81,7 +77,7 @@ class BigInfoBox: UIView {
         titleLabel.snp.makeConstraints { (make) in
             //make.centerY.equalToSuperview().offset(-12)
             make.top.equalToSuperview().offset(20)
-            make.left.equalTo(imageView.snp.right).offset(5)
+            make.left.equalTo(titleImageView.snp.right).offset(5)
         }
     }
     
@@ -96,12 +92,13 @@ class BigInfoBox: UIView {
             make.top.equalTo(titleLabel.snp.bottom).offset(10) //.equalToSuperview().offset(12)
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(20)
         }
     }
     
     public func updateView(image: UIImage?, title: String, value: String, updated: String, tintColor: UIColor = .mainColor){
-        imageView.image = image
-        imageView.tintColor = tintColor
+        titleImageView.image = image
+        titleImageView.tintColor = tintColor
         titleLabel.text = title
         valueLabel.text = value
         updatedLabel.text = "Aktualizováno \(updated)"

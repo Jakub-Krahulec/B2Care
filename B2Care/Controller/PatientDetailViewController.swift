@@ -13,8 +13,7 @@ class PatientDetailViewController: BaseViewController {
     private let headerView = UIView()
     private let tabbar = UITabBar()
     private let titleLabel = UILabel()
-    private let patientDetailView = PatientDetailLine()
-    private var contentView = UIView()
+    private let patientDetailLine = PatientDetailLine()
     
     private lazy var patientDetailVC = PatientInfoViewController()
     private lazy var planVC = UIViewController()
@@ -25,8 +24,7 @@ class PatientDetailViewController: BaseViewController {
     private lazy var currentVC: UIViewController = UIViewController()
     
     lazy var blurEffect = UIBlurEffect(style: .extraLight)
-    lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
-    
+    lazy var buttonsBlurBackground = UIVisualEffectView(effect: blurEffect)
     private let buttonsStack = UIStackView()
     private let urgentButton = UIButton()
     private let addTaskButton = UIButton()
@@ -58,51 +56,11 @@ class PatientDetailViewController: BaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         prepareView()
-        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-      //  self.tabBarController?.tabBar.isHidden = true
-        
-    }
-    
     // MARK: - Actions
     
-    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer){
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction{
-                
-                case UISwipeGestureRecognizer.Direction.right:
-                    
-                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
-                        let index = max(0, selectedItem.tag - 1)
-                        tabbar.selectedItem = items[index]
-                        changeContentView(index: index)
-                    }
-                    
-                    print("Swipe right")
-                    
-                case UISwipeGestureRecognizer.Direction.left:
-                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
-                        let total = items.count - 1
-                        let index = min(total, selectedItem.tag + 1)
-                        tabbar.selectedItem = items[index]
-                        changeContentView(index: index)
-                    }
-                    tabbar.setNeedsLayout()
-                    tabbar.reloadInputViews()
-                    print("Swipe left")
-                    
-                default:
-                    print("Default")
-                    return
-            }
-        }
-    }
-    
+   
     // MARK: - Helpers
     
     private func updateView(with person: Patient?){
@@ -110,21 +68,17 @@ class PatientDetailViewController: BaseViewController {
         
         patientDetailVC.patientId = person.id
         titleLabel.text = person.fullName
-        patientDetailView.data = person
+        patientDetailLine.data = person
         patientDetailVC.patientId = person.id
     }
     
     private func prepareView(){
         prepareHeaderViewStyle()
         prepareTabBarStyle()
-        
         prepareBottomButtonStyle(addTaskButton, title: NSLocalizedString("add-task", comment: ""), image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
         prepareBottomButtonStyle(urgentButton, title: NSLocalizedString("urgent-message", comment: ""), image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
         prepareButtonStackStyle()
-        
         prepareBlurBackgroundStyle()
-        prepareContentViewStyle()
-        
         changeContentView(index: 0)
     }
     
@@ -138,9 +92,9 @@ class PatientDetailViewController: BaseViewController {
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
         }
-        patientDetailView.changeStyle(color: .white)
-        headerView.addSubview(patientDetailView)
-        patientDetailView.snp.makeConstraints { (make) in
+        patientDetailLine.changeStyle(color: .white)
+        headerView.addSubview(patientDetailLine)
+        patientDetailLine.snp.makeConstraints { (make) in
             make.center.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
         }
@@ -153,7 +107,6 @@ class PatientDetailViewController: BaseViewController {
         buttonsStack.spacing = 15
         buttonsStack.distribution = .fillEqually
         buttonsStack.alignment = .center
-     //   buttonsStack.backgroundColor = .green
         
         buttonsStack.addArrangedSubview(urgentButton)
         buttonsStack.addArrangedSubview(addTaskButton)
@@ -161,7 +114,7 @@ class PatientDetailViewController: BaseViewController {
     
     private func prepareBlurBackgroundStyle(){
         
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        buttonsBlurBackground.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     private func prepareBottomButtonStyle(_ button: UIButton, title: String, image: UIImage?, backgroundColor: UIColor){
@@ -177,27 +130,7 @@ class PatientDetailViewController: BaseViewController {
         }
     }
     
-    private func prepareContentViewStyle(){
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-        swipeLeft.direction = .left
-        swipeLeft.delegate = self
-        self.contentView.addGestureRecognizer(swipeLeft)
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-        swipeRight.direction = .right
-        swipeRight.delegate = self
-        self.contentView.addGestureRecognizer(swipeRight)
-        
-        contentView.backgroundColor = .backgroundLight
-        view.addSubview(contentView)
-        contentView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(tabbar.snp.bottom)
-          //  make.bottom.equalTo(blurEffectView.snp.top)
-            make.bottom.equalToSuperview()
-        }
-    }
+
     
     func getImageWithColorPosition(color: UIColor, size: CGSize, lineSize: CGSize) -> UIImage {
         // vytvořím čteverec o velikosti tabbaritemu
@@ -249,21 +182,20 @@ class PatientDetailViewController: BaseViewController {
         
         controller.view.snp.makeConstraints { (make) in
             make.top.equalTo(tabbar.snp.bottom)
-         //   make.bottom.equalTo(buttonsStack.snp.top).offset(-10)
             make.left.right.bottom.equalToSuperview()
         }
         
         if showButtons {
-            controller.view.insertSubview(blurEffectView, at: controller.view.subviews.count + 1)
+            controller.view.insertSubview(buttonsBlurBackground, at: controller.view.subviews.count + 1)
             controller.view.insertSubview(buttonsStack, at: controller.view.subviews.count + 1)
                         
-            blurEffectView.snp.makeConstraints { (make) in
+            buttonsBlurBackground.snp.makeConstraints { (make) in
                 make.left.right.bottom.equalToSuperview()
                 make.height.equalTo(100)
             }
             
             buttonsStack.snp.makeConstraints { (make) in
-                make.centerY.equalTo(blurEffectView)
+                make.centerY.equalTo(buttonsBlurBackground)
                 make.left.right.equalToSuperview().inset(20)
             }
         }

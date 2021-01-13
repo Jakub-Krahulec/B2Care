@@ -12,10 +12,9 @@ class PatientCell: MGSwipeTableCell {
 
    // MARK: - Properties
     
-    private let bgView = UIView()
     private let nameLabel = UILabel()
     private let diagnosisLabel = UILabel()
-    private let patientDetailsView = PatientDetailLine()
+    private let detailLine = PatientDetailLine()
    
     
     public var data: Any?{
@@ -43,19 +42,19 @@ class PatientCell: MGSwipeTableCell {
         guard let data = data as? Patient else{return}
         nameLabel.text = data.fullName
         diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : NSLocalizedString("without-diagnosis", comment: "")
-        patientDetailsView.data = data
+        detailLine.data = data
     }
     
     private func prepareView(){
         prepareNameLabelStyle()
         prepareDiagnosisLabelStyle()
-        preparePatientDetailsViewStyle()
+        prepareDetailLineStyle()
         
     }
     
-    private func preparePatientDetailsViewStyle(){
-        addSubview(patientDetailsView)
-        patientDetailsView.snp.makeConstraints { (make) in
+    private func prepareDetailLineStyle(){
+        addSubview(detailLine)
+        detailLine.snp.makeConstraints { (make) in
             make.top.equalTo(diagnosisLabel.snp.bottom).offset(15)
             make.left.equalTo(20)
             make.height.equalTo(15)

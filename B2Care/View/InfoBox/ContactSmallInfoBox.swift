@@ -47,18 +47,9 @@ class ContactSmallInfoBox: SmallInfoBox {
         }
     }
     
-    override func setBottomMargin() {
-        
-    }
-    
     private func prepareView(){
-        super.imageView.removeFromSuperview()
+        super.titleImageView.removeFromSuperview()
         prepareCallButtonStyle()
-        
-        
-        self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(callButton.snp.bottom).offset(15)
-        }
     }
     
     private func prepareCallButtonStyle(){
@@ -76,6 +67,7 @@ class ContactSmallInfoBox: SmallInfoBox {
             make.centerX.equalToSuperview()
             make.top.equalTo(super.valueLabel.snp.bottom).offset(15)
             make.height.equalTo(18)
+            make.bottom.equalToSuperview().inset(15)
         }
     }
 }

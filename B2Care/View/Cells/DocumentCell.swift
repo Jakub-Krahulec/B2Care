@@ -43,12 +43,10 @@ class DocumentCell: UITableViewCell {
     
     private func prepareView(){
         backgroundColor = .white
-        
-        
+
         prepareArrowImageStyle()
         prepareDateLabelStyle()
         prepareTitleLabelStyle()
-        
     }
     
     private func prepareTitleLabelStyle(){

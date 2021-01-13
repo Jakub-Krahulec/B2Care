@@ -36,14 +36,11 @@ class PatientDocumentsViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         documentsData = documentsHardData
         labResultsData = laboratoryResultsHardData
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        view.showBlurLoader()
-    }
+
     // MARK: - Actions
     
     @objc private func refresh(_ sender: AnyObject){
@@ -97,9 +94,7 @@ class PatientDocumentsViewController: BaseViewController {
         table.separatorInset = .zero
         
         table.refreshControl = refreshControl
-     //   documentsRefreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        
         
         view.addSubview(table)
         table.snp.makeConstraints { (make) in

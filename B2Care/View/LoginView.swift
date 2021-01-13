@@ -22,8 +22,8 @@ class LoginView: UIView {
     // MARK: - Properties
     private var isInErrorMode = false
     
-    let gradient = CAGradientLayer()
-    let animation = CABasicAnimation(keyPath: "colors")
+    let gradientButtonBackground = CAGradientLayer()
+    let gradientButtonAnimation = CABasicAnimation(keyPath: "colors")
     
     private let userLabel = UILabel()
     private let userTextField = BaseInputField()
@@ -32,7 +32,6 @@ class LoginView: UIView {
     private let statusLabel = UILabel()
     private let forgotPasswordButton = UIButton()
     private let loginButton = UIButton()
-   // private let refreshControl = UIActivityIndicatorView()
     
     public var delegate: LoginViewDelegate?
     
@@ -92,12 +91,12 @@ class LoginView: UIView {
     }
     
     private func prepareAnimationStyle(){
-        animation.fromValue = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
-        animation.toValue = [UIColor.headerMainColor.withAlphaComponent(1).cgColor, UIColor.mainColor.withAlphaComponent(1).cgColor]
-        animation.duration = 4.0
-        animation.autoreverses = true
-        animation.repeatCount = Float.infinity
-        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        gradientButtonAnimation.fromValue = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
+        gradientButtonAnimation.toValue = [UIColor.headerMainColor.withAlphaComponent(1).cgColor, UIColor.mainColor.withAlphaComponent(1).cgColor]
+        gradientButtonAnimation.duration = 4.0
+        gradientButtonAnimation.autoreverses = true
+        gradientButtonAnimation.repeatCount = Float.infinity
+        gradientButtonAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         
         startAnimations()
     }
@@ -175,8 +174,6 @@ class LoginView: UIView {
     private func prepareLoginButtonStyle(){
         loginButton.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
         loginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-//        loginButton.backgroundColor = .mainColor
-//        loginButton.layer.cornerRadius = 10
         loginButton.backgroundColor = .clear
         loginButton.addTarget(self, action: #selector(handleLoginButtonTapped), for: .touchUpInside)
         
@@ -224,18 +221,18 @@ class LoginView: UIView {
     
     public func prepareGradientStyle(){
         
-        gradient.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
-        gradient.frame = loginButton.bounds
-        gradient.startPoint = CGPoint(x: 0, y: 1)
-        gradient.endPoint = CGPoint(x: 0, y: 0.0)
-        gradient.cornerRadius = 10
-        loginButton.layer.insertSublayer(gradient, at: 0)
+        gradientButtonBackground.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.cgColor]
+        gradientButtonBackground.frame = loginButton.bounds
+        gradientButtonBackground.startPoint = CGPoint(x: 0, y: 1)
+        gradientButtonBackground.endPoint = CGPoint(x: 0, y: 0.0)
+        gradientButtonBackground.cornerRadius = 10
+        loginButton.layer.insertSublayer(gradientButtonBackground, at: 0)
         
     }
     
     public func startAnimations(){
-        if (gradient.animationKeys()?.count ?? 0) <= 0{
-            gradient.add(animation, forKey: "colors")
+        if (gradientButtonBackground.animationKeys()?.count ?? 0) <= 0{
+            gradientButtonBackground.add(gradientButtonAnimation, forKey: "colors")
         }
     }
     
