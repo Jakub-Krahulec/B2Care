@@ -31,6 +31,7 @@ class B2CareService{
             if let decoded = try? decoder.decode(UserData.self, from: user){
                 data = decoded
                 API_KEY = decoded.apiKey
+                WidgetCenter.shared.reloadAllTimelines()
                 return
             }
         }
@@ -40,6 +41,7 @@ class B2CareService{
         guard let defaults = defaults else {return}
         if let encoded = try? encoder.encode(data){
             defaults.setValue(encoded, forKey: "user")
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

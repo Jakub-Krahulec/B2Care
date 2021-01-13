@@ -33,7 +33,7 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // self.tabBarController?.tabBar.isHidden = false
+        // self.tabBarController?.tabBar.isHidden = false
         setupKeyboardNotificationObservers()
         fetchPatients()
     }
@@ -72,6 +72,10 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     
     // MARK: - Helpers
     
+    private func downloadProgressChanged(value: Double){
+        
+    }
+    
     override func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {
         searchBar.resignFirstResponder()
         super.hideKeyboardWhenTappedAround(cancelsTouchesInView: cancelsTouchesInView)
@@ -95,9 +99,9 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
         searchBar.backgroundColor = .clear
         searchBar.searchTextField.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search-patient", comment: ""),
-                                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
-       // searchBar.showsCancelButton = true
+        // searchBar.showsCancelButton = true
         navigationItem.titleView = searchBar
     }
     
@@ -123,11 +127,11 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     }
     
     private func prepareRefreshControlStyle(){
-      //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+        //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         table.refreshControl = refreshControl
     }
-      
+    
     private func prepareTableViewStyle(){
         table.delegate = self
         table.dataSource = self
@@ -159,8 +163,29 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.selectionStyle = .none
             
             let urgentMessage = MGSwipeButton(title: NSLocalizedString("urgent-message", comment: ""), backgroundColor: .systemRed) { (sender) -> Bool in
+                
+               let request = NetworkService.shared.downloadFile(from: "https://soundbible.com/grab.php?id=2185&type=mp3", progressChanged: self.downloadProgressChanged(value:)) { [weak self] (result) in
+                    guard let this = self else {return}
+                    switch result{
+                        case .success(let data):
+                            do{
+                                let fileURL = FileManager().temporaryDirectory.appendingPathComponent("sound.mp3")
+                                
+                                try data.write(to: fileURL, options: .atomic)
+                                this.playSound(url: fileURL)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                    }
+                
+                }
+                self.downloadRequests.insert(request)
                 return true
             }
+            
+            
             urgentMessage.setImage(UIImage(systemName: "exclamationmark.bubble.fill"), for: .normal)
             urgentMessage.tintColor = .white
             urgentMessage.buttonWidth = 115
@@ -172,7 +197,7 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
             addTask.tintColor = .white
             addTask.buttonWidth = 115
             
-  
+            
             cell.rightButtons = [addTask, urgentMessage]
             
             cell.rightSwipeSettings.transition = .border
@@ -214,15 +239,15 @@ extension PatientsListViewController: UISearchBarDelegate, UISearchDisplayDelega
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
-//        self.isEditing = false
+        //        searchBar.resignFirstResponder()
+        //        self.isEditing = false
     }
 }
 
 extension PatientsListViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         searchBar.resignFirstResponder()
-       // searchBar.endEditing(true)
+        // searchBar.endEditing(true)
         return true
     }
 }

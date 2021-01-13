@@ -7,10 +7,12 @@
 
 import UIKit
 import Alamofire
+import AVFoundation
 
 class BaseViewController: UIViewController {
 
     // MARK: - Properties
+    private var player = AVAudioPlayer()
     internal var dataRequests = Set<DataRequest>()
     internal var downloadRequests = Set<DownloadRequest>()
     internal var isKeyboardShown = false
@@ -139,5 +141,19 @@ class BaseViewController: UIViewController {
     
     @objc internal func keyboardDidShow(notification: Notification){
         isKeyboardShown = true
+    }
+    
+    internal func playSound(url: URL) {
+        print("playing \(url)")
+        
+        do {
+            self.player = try AVAudioPlayer(contentsOf: url)
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
     }
 }
