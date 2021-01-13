@@ -34,7 +34,7 @@ class PatientDetailViewController: BaseViewController {
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
-            //  view.showBlurLoader()
+            view.showBlurLoader()
             let request = B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
                 guard let this = self else {return}
                 switch result{
@@ -60,7 +60,7 @@ class PatientDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         prepareView()
-        showBlurLoader()
+       // showBlurLoader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
