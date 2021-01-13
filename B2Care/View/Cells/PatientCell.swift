@@ -74,6 +74,7 @@ class PatientCell: MGSwipeTableCell {
         prepareDiagnosisLabelStyle()
        
         preparePatientDetailsViewStyle()
+        
     }
     
     private func preparePatientDetailsViewStyle(){
@@ -81,7 +82,8 @@ class PatientCell: MGSwipeTableCell {
         patientDetailsView.snp.makeConstraints { (make) in
             make.top.equalTo(diagnosisLabel.snp.bottom).offset(15)
             make.left.equalTo(20)
-            make.bottom.equalToSuperview().inset(30)
+            make.height.equalTo(15)
+            make.bottom.equalToSuperview().inset(20)
         }
     }
     
@@ -104,7 +106,7 @@ class PatientCell: MGSwipeTableCell {
         addSubview(nameLabel)
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(20)
         }
     }
     
