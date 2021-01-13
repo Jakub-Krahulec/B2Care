@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PatientDetailsView: UIView {
+class PatientDetailLine: UIView {
 
     // MARK: - Properties
     var data: Any? {

@@ -1,40 +1,39 @@
 //
-//  PatientDetailViewController.swift
+//  PatientMenuViewController.swift
 //  B2Care
 //
-//  Created by Jakub Krahulec on 23.12.2020.
+//  Created by Jakub Krahulec on 27.12.2020.
 //
 
 import UIKit
 
-
-
 class PatientDetailViewController: BaseViewController {
     
     // MARK: - Properties
-    private let scrollView = UIScrollView()
-    private let refreshControl = UIRefreshControl()
-    private let verticalStack = UIStackView()
-    private let insuranceInfoBox = SmallInfoBox()
-    private let idNumberInfoBox = SmallInfoBox()
-    private let firstLine = UIStackView()
+    private let headerView = UIView()
+    private let tabbar = UITabBar()
+    private let titleLabel = UILabel()
+    private let patientDetailView = PatientDetailLine()
+    private var contentView = UIView()
     
-    private let diagnosisInfoBox = BigInfoBox()
-    private let alergiesInfoBox = BigInfoBox()
-    private let medicationsInfoBox = BigInfoBox()
-    private let importantInfoBox = BigInfoBox()
+    private lazy var patientDetailVC = PatientInfoViewController()
+    private lazy var planVC = UIViewController()
+    private lazy var documentVC = PatientDocumentsViewController()
+    private lazy var messagesVC = UIViewController()
+    private lazy var grphsVC = PatientGraphsViewController()
+    private lazy var historyVC = UIViewController()
+    private lazy var currentVC: UIViewController = UIViewController()
     
-    private let personalPhoneInfoBox = ContactSmallInfoBox()
-    private let doctorPhoneInfoBox = ContactSmallInfoBox()
-    private let addressInfoBox = SmallInfoBox()
-    private let proffesionInfoBox = SmallInfoBox()
-    private let contactsStack = UIStackView()
-    private let addressStack = UIStackView()
+    lazy var blurEffect = UIBlurEffect(style: .extraLight)
+    lazy var blurEffectView = UIVisualEffectView(effect: blurEffect)
+    
+    private let buttonsStack = UIStackView()
+    private let urgentButton = UIButton()
+    private let addTaskButton = UIButton()
     
     var patientId: Int? {
         didSet{
             guard let id = patientId else {return}
-            //view.showBlurLoader()
             let request = B2CareService.shared.fetchPatient(id: id) { [weak self] (result) in
                 guard let this = self else {return}
                 switch result{
@@ -49,6 +48,7 @@ class PatientDetailViewController: BaseViewController {
             dataRequests.insert(request)
         }
     }
+    
     var data: Patient?{
         didSet{
             updateView(with: data)
@@ -60,135 +60,254 @@ class PatientDetailViewController: BaseViewController {
         super.viewDidLoad()
         
         prepareView()
-        view.showBlurLoader()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-      //  navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+      //  self.tabBarController?.tabBar.isHidden = true
         
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //  navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - Actions
     
-    @objc private func refresh(_ sender: AnyObject){
-        refreshControl.endRefreshing()
-        patientId = data?.id
+    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer){
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction{
+                
+                case UISwipeGestureRecognizer.Direction.right:
+                    
+                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
+                        let index = max(0, selectedItem.tag - 1)
+                        tabbar.selectedItem = items[index]
+                        changeContentView(index: index)
+                    }
+                    
+                    print("Swipe right")
+                    
+                case UISwipeGestureRecognizer.Direction.left:
+                    if let items = self.tabbar.items, let selectedItem = self.tabbar.selectedItem{
+                        let total = items.count - 1
+                        let index = min(total, selectedItem.tag + 1)
+                        tabbar.selectedItem = items[index]
+                        changeContentView(index: index)
+                    }
+                    tabbar.setNeedsLayout()
+                    tabbar.reloadInputViews()
+                    print("Swipe left")
+                    
+                default:
+                    print("Default")
+                    return
+            }
+        }
     }
     
     // MARK: - Helpers
     
     private func updateView(with person: Patient?){
         guard let person = person else {return}
-        let diagnosis = person.hospitalizations.count > 0 ? person.hospitalizations[0].diagnosis.value : ""
-        let doctorNumber = person.generalPractitioners.count > 0 && person.generalPractitioners[0].person.contacts.count > 0 ? person.generalPractitioners[0].person.contacts[0].value : "-"
         
-        insuranceInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: NSLocalizedString("insurance-company", comment: ""), value: "-")
-        idNumberInfoBox.updateView(image: UIImage(systemName: "doc.fill"), title: NSLocalizedString("personal-id", comment: ""), value: person.birthNumber)
-        diagnosisInfoBox.updateView(image: UIImage(systemName: "waveform.path.ecg"), title: NSLocalizedString("diagnosis", comment: ""), value: diagnosis, updated: person.updatedDateString)
-        alergiesInfoBox.updateView(image: UIImage(systemName: "heart.slash.fill"), title: NSLocalizedString("allergy", comment: ""), value: person.allergiesString, updated: person.updatedDateString, tintColor: .systemRed)
-        medicationsInfoBox.updateView(image: UIImage(systemName: "staroflife.fill"), title: NSLocalizedString("medication", comment: ""), value: person.medications, updated: person.updatedDateString, tintColor: .systemGreen)
-        importantInfoBox.updateView(image: UIImage(systemName: "info.circle.fill"), title: NSLocalizedString("important-info", comment: ""), value: person.importantInfo, updated:person.updatedDateString, tintColor: .gray)
-        personalPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: NSLocalizedString("personal-phone", comment: ""), value: person.person.contacts.count > 0 ? person.person.contacts[0].value : "-")
-        doctorPhoneInfoBox.updateView(image: UIImage(systemName: ""), title: NSLocalizedString("attending-doctor", comment: ""), value: doctorNumber)
-        addressInfoBox.updateView(image: UIImage(systemName: "house.fill"), title: NSLocalizedString("address", comment: ""), value: person.fullAddress)
-        proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: NSLocalizedString("proffession", comment: ""), value: person.jobDescription  ?? "-")
-        
-        view.removeBluerLoader()
+        patientDetailVC.patientId = person.id
+        titleLabel.text = person.fullName
+        patientDetailView.data = person
+        patientDetailVC.patientId = person.id
     }
     
     private func prepareView(){
-        view.backgroundColor = .backgroundLight
+        prepareHeaderViewStyle()
+        prepareTabBarStyle()
         
-        prepareScrollViewStyle()
-        prepareRefreshControlStyle()
-        prepareHorizontalStack(firstLine, smallInfos: [insuranceInfoBox,idNumberInfoBox])
-        prepareHorizontalStack(contactsStack, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
-        prepareHorizontalStack(addressStack, smallInfos: [addressInfoBox,proffesionInfoBox])
-        prepareVerticalStackStyle()
+        prepareBottomButtonStyle(addTaskButton, title: NSLocalizedString("add-task", comment: ""), image: UIImage(systemName: "plus"), backgroundColor: .systemGreen)
+        prepareBottomButtonStyle(urgentButton, title: NSLocalizedString("urgent-message", comment: ""), image: UIImage(systemName: "exclamationmark.bubble.fill"), backgroundColor: .systemRed)
+        prepareButtonStackStyle()
         
-        personalPhoneInfoBox.delegate = self
-        doctorPhoneInfoBox.delegate = self
+        prepareBlurBackgroundStyle()
+        prepareContentViewStyle()
+        
+        changeContentView(index: 0)
     }
     
-    private func prepareRefreshControlStyle(){
-      //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        // scrollView.addSubview(refreshControl)
-        scrollView.refreshControl = refreshControl
-    }
-    
-    private func prepareHorizontalStack(_ stack: UIStackView, smallInfos: [SmallInfoBox]){
-        stack.axis = .horizontal
-        stack.spacing = 5
-        stack.distribution = .fillEqually
-        stack.alignment = .fill
+    private func prepareHeaderViewStyle(){
         
-        for box in smallInfos{
-            stack.addArrangedSubview(box)
-        }
-    }
-    
-    private func prepareScrollViewStyle(){
-        scrollView.backgroundColor = .backgroundLight
-        scrollView.isDirectionalLockEnabled = true
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(5)
-            make.left.right.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(105)
-        }
-    }
-    
-    private func prepareVerticalStackStyle(){
-        verticalStack.axis = .vertical
-        verticalStack.spacing = 5
-        verticalStack.distribution = .equalSpacing
-        verticalStack.alignment = .fill
-        
-        verticalStack.addArrangedSubview(firstLine)
-        verticalStack.addArrangedSubview(diagnosisInfoBox)
-        verticalStack.addArrangedSubview(alergiesInfoBox)
-        verticalStack.addArrangedSubview(medicationsInfoBox)
-        verticalStack.addArrangedSubview(importantInfoBox)
-        verticalStack.addArrangedSubview(contactsStack)
-        verticalStack.addArrangedSubview(addressStack)
-        
-        scrollView.addSubview(verticalStack)
-        verticalStack.snp.makeConstraints { (make) in
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        headerView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.width.equalToSuperview()
-            make.bottom.equalTo(scrollView)
+        }
+        patientDetailView.changeStyle(color: .white)
+        headerView.addSubview(patientDetailView)
+        patientDetailView.snp.makeConstraints { (make) in
+            make.center.centerX.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+        }
+        
+        navigationItem.titleView = headerView
+    }
+    
+    private func prepareButtonStackStyle(){
+        buttonsStack.axis = .horizontal
+        buttonsStack.spacing = 15
+        buttonsStack.distribution = .fillEqually
+        buttonsStack.alignment = .center
+     //   buttonsStack.backgroundColor = .green
+        
+        buttonsStack.addArrangedSubview(urgentButton)
+        buttonsStack.addArrangedSubview(addTaskButton)
+    }
+    
+    private func prepareBlurBackgroundStyle(){
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    private func prepareBottomButtonStyle(_ button: UIButton, title: String, image: UIImage?, backgroundColor: UIColor){
+        button.setTitle(title, for: .normal)
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.layer.cornerRadius = 10
+        
+        button.snp.makeConstraints { (make) in
+            make.height.equalTo(50)
         }
     }
-}
-
-extension PatientDetailViewController: ContactSmallInfoBoxDelegate{
-    func callButtonTapped(phoneNumber: String) {
-        let number = phoneNumber.filter { !$0.isWhitespace }
+    
+    private func prepareContentViewStyle(){
         
-        if let phoneCallURL = URL(string: "telprompt://\(number)") {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeLeft.direction = .left
+        swipeLeft.delegate = self
+        self.contentView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+        swipeRight.direction = .right
+        swipeRight.delegate = self
+        self.contentView.addGestureRecognizer(swipeRight)
+        
+        contentView.backgroundColor = .backgroundLight
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(tabbar.snp.bottom)
+          //  make.bottom.equalTo(blurEffectView.snp.top)
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    func getImageWithColorPosition(color: UIColor, size: CGSize, lineSize: CGSize) -> UIImage {
+        // vytvořím čteverec o velikosti tabbaritemu
+        let rect = CGRect(x:0, y: 0, width: size.width, height: size.height)
+        // vytvořím čáru na spodu
+        let rectLine = CGRect(x:0, y:size.height-lineSize.height,width: lineSize.width,height: lineSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIColor.clear.setFill()
+        UIRectFill(rect)
+        color.setFill()
+        UIRectFill(rectLine)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    private func prepareTabBarStyle(){
+        tabbar.delegate = self
+        tabbar.backgroundColor = .white
+        tabbar.tintColor = .mainColor
+        
+        let tabItemWidth = self.view.frame.width / 6
+        tabbar.selectionIndicatorImage = getImageWithColorPosition(color: UIColor.mainColor.withAlphaComponent(0.7), size: CGSize(width: tabItemWidth, height: 49), lineSize: CGSize(width: tabItemWidth, height: 2))
+        
+        let infoTabItem = UITabBarItem(title: NSLocalizedString("info", comment: ""), image: UIImage(systemName: "info.circle.fill"), tag: 0)
+        let planTabItem = UITabBarItem(title: NSLocalizedString("plan", comment: ""), image: UIImage(systemName: "list.dash"), tag: 1)
+        let documentTabItem = UITabBarItem(title: NSLocalizedString("doc", comment: ""), image: UIImage(systemName: "doc.text.fill"), tag: 2)
+        let messageTabItem = UITabBarItem(title: NSLocalizedString("messages", comment: ""), image: UIImage(systemName: "message.fill"), tag: 3)
+        let graphsTabItem = UITabBarItem(title: NSLocalizedString("graphs", comment: ""), image: UIImage(systemName: "chart.bar.fill"), tag: 4)
+        let historyTabItem = UITabBarItem(title: NSLocalizedString("history", comment: ""), image: UIImage(systemName: "tray.full.fill"), tag: 5)
+        
+        tabbar.items = [infoTabItem, planTabItem,documentTabItem,messageTabItem,graphsTabItem,historyTabItem]
+        tabbar.selectedItem = infoTabItem
+        
+        
+        view.addSubview(tabbar)
+        tabbar.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+    }
+    
+    private func changeChildVC(to controller: UIViewController, showButtons: Bool = true){
+        currentVC.remove()
+        add(controller)
+        currentVC = controller
+        
+        controller.view.snp.makeConstraints { (make) in
+            make.top.equalTo(tabbar.snp.bottom)
+         //   make.bottom.equalTo(buttonsStack.snp.top).offset(-10)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        if showButtons {
+            controller.view.insertSubview(blurEffectView, at: controller.view.subviews.count + 1)
+            controller.view.insertSubview(buttonsStack, at: controller.view.subviews.count + 1)
+                        
+            blurEffectView.snp.makeConstraints { (make) in
+                make.left.right.bottom.equalToSuperview()
+                make.height.equalTo(100)
+            }
             
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL)) {
-                if #available(iOS 10.0, *) {
-                    application.open(phoneCallURL, options: [:], completionHandler: nil)
-                } else {
-                    application.openURL(phoneCallURL as URL)
-                    
-                }
+            buttonsStack.snp.makeConstraints { (make) in
+                make.centerY.equalTo(blurEffectView)
+                make.left.right.equalToSuperview().inset(20)
             }
         }
     }
+    
+    private func changeContentView(index: Int){
+        
+        
+        switch index {
+            case 0:
+                if let data = data{
+                    patientDetailVC.patientId = data.id
+                }
+                changeChildVC(to: patientDetailVC)
+            case 1:
+                changeChildVC(to: planVC, showButtons: false)
+                planVC.view.backgroundColor = .systemPink
+            case 2:
+                changeChildVC(to: documentVC, showButtons: false)
+            case 3:
+                changeChildVC(to: messagesVC)
+                messagesVC.view.backgroundColor = .systemGreen
+            case 4:
+                if let data = data{
+                    grphsVC.data = data
+                }
+                changeChildVC(to: grphsVC)
+            case 5:
+                changeChildVC(to: historyVC)
+                historyVC.view.backgroundColor = .systemOrange
+            default:
+                print("Default")
+        }
+    }
 }
 
+extension PatientDetailViewController: UITabBarDelegate{
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        changeContentView(index: item.tag)
+    }
+}
 
+extension PatientDetailViewController: UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

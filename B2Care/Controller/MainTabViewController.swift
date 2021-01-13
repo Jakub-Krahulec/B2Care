@@ -31,7 +31,7 @@ class MainTabViewController: UITabBarController {
     private func prepareView(){
         view.backgroundColor = .clear
         
-        let patientListVC = PatientListViewController()
+        let patientListVC = PatientsListViewController()
         patientListVC.tabBarItem.title = NSLocalizedString("patient-list", comment: "")
         patientListVC.tabBarItem.image = UIImage(systemName: "person.3.fill")
 

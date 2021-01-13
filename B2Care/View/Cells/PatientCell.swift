@@ -13,10 +13,9 @@ class PatientCell: MGSwipeTableCell {
    // MARK: - Properties
     
     private let bgView = UIView()
-    private let searchField = SearchField()
     private let nameLabel = UILabel()
     private let diagnosisLabel = UILabel()
-    private let patientDetailsView = PatientDetailsView()
+    private let patientDetailsView = PatientDetailLine()
    
     
     public var data: Any?{
@@ -36,21 +35,6 @@ class PatientCell: MGSwipeTableCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        let padding = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-//        bounds = bounds.inset(by: padding)
-//        contentView.frame = contentView.frame.inset(by: padding)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-//        self.contentView.layer.cornerRadius = 13
-//
-//        self.contentView.layer.borderColor = UIColor.backgroundLight.cgColor
-//        self.contentView.layer.borderWidth = 5
-    }
-    
     // MARK: - Actions
     
     
@@ -63,16 +47,8 @@ class PatientCell: MGSwipeTableCell {
     }
     
     private func prepareView(){
-       // backgroundColor = .backgroundLight
-        
-//        contentView.layer.cornerRadius = 13
-//        contentView.layer.borderWidth = 5
-//        contentView.layer.borderColor = UIColor.backgroundLight.cgColor
-        
-       // prepareBackgroundViewStyle()
         prepareNameLabelStyle()
         prepareDiagnosisLabelStyle()
-       
         preparePatientDetailsViewStyle()
         
     }
@@ -85,17 +61,6 @@ class PatientCell: MGSwipeTableCell {
             make.height.equalTo(15)
             make.bottom.equalToSuperview().inset(20)
         }
-    }
-    
-    private func prepareBackgroundViewStyle(){
-        bgView.backgroundColor = .white
-        bgView.layer.cornerRadius = 0
-        addSubview(bgView)
-        bgView.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview().inset(3)
-            make.left.right.equalToSuperview().inset(6)
-        }
-        
     }
     
     private func prepareNameLabelStyle(){

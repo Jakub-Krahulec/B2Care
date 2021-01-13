@@ -8,7 +8,7 @@
 import UIKit
 import QuickLook
 
-class DocumentsViewController: BaseViewController {
+class PatientDocumentsViewController: BaseViewController {
     
     // MARK: - Properties
     private let table = UITableView()
@@ -152,7 +152,7 @@ class DocumentsViewController: BaseViewController {
     }
 }
 
-extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
+extension PatientDocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -257,7 +257,7 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 
-extension DocumentsViewController: QLPreviewControllerDataSource{
+extension PatientDocumentsViewController: QLPreviewControllerDataSource{
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return 1
     }

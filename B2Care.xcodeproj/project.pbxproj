@@ -9,23 +9,21 @@
 /* Begin PBXBuildFile section */
 		2A02F1052594AB5300DC26E1 /* SmallInfoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02F1042594AB5300DC26E1 /* SmallInfoBox.swift */; };
 		2A02F1082594B5FF00DC26E1 /* BigInfoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A02F1072594B5FF00DC26E1 /* BigInfoBox.swift */; };
-		2A0F2583259241850077DD02 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F2582259241850077DD02 /* Extensions.swift */; };
 		2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258A25924CD20077DD02 /* LoginView.swift */; };
 		2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258E25925C1C0077DD02 /* NetworkService.swift */; };
 		2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259225925C8C0077DD02 /* B2CareService.swift */; };
 		2A0F259625926BD00077DD02 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259525926BD00077DD02 /* UserModel.swift */; };
 		2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F2598259333070077DD02 /* PasswordInputField.swift */; };
 		2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259B259335010077DD02 /* BaseInputField.swift */; };
-		2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */; };
+		2A0F259F25933FAF0077DD02 /* PatientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259E25933FAF0077DD02 /* PatientsListViewController.swift */; };
 		2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A1259340B90077DD02 /* PatientCell.swift */; };
-		2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A5259342EE0077DD02 /* SearchField.swift */; };
 		2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */; };
 		2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */; };
 		2A15AAA925AE2CF900B0209F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A4D6E2025AD00A70040CFA2 /* Localizable.strings */; };
 		2A210E1C25ADCB230059E4B8 /* PatientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3752596590A00CD8402 /* PatientResponse.swift */; };
 		2A210E1F25ADCCCB0059E4B8 /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
-		2A2932BC25ADAE8A00E3A71B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2932BB25ADAE8A00E3A71B /* Colors.swift */; };
-		2A2932BF25ADAE8F00E3A71B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2932BB25ADAE8A00E3A71B /* Colors.swift */; };
+		2A2932BC25ADAE8A00E3A71B /* ColorsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2932BB25ADAE8A00E3A71B /* ColorsExtensions.swift */; };
+		2A2932BF25ADAE8F00E3A71B /* ColorsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2932BB25ADAE8A00E3A71B /* ColorsExtensions.swift */; };
 		2A2932C225ADB4FB00E3A71B /* B2CareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259225925C8C0077DD02 /* B2CareService.swift */; };
 		2A2932CC25ADB63900E3A71B /* PatientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37825965B5A00CD8402 /* PatientModel.swift */; };
 		2A2932CF25ADB65000E3A71B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F259525926BD00077DD02 /* UserModel.swift */; };
@@ -42,12 +40,12 @@
 		2A2932F025ADB67600E3A71B /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A2932F325ADB67900E3A71B /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */; };
 		2A2932FC25ADB68500E3A71B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258E25925C1C0077DD02 /* NetworkService.swift */; };
-		2A29330825ADB7C400E3A71B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtension.swift */; };
-		2A29330D25ADB7D200E3A71B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtension.swift */; };
-		2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */; };
+		2A29330825ADB7C400E3A71B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtensions.swift */; };
+		2A29330D25ADB7D200E3A71B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtensions.swift */; };
+		2A4D6DE225A5BF050040CFA2 /* PatientGraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */; };
 		2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */; };
 		2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */; };
-		2A4D6E1525A781AA0040CFA2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */; };
+		2A4D6E1525A781AA0040CFA2 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6E1425A781AA0040CFA2 /* StartingViewController.swift */; };
 		2A4D6E1E25AD00A70040CFA2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A4D6E2025AD00A70040CFA2 /* Localizable.strings */; };
 		2A4D6E2925AD11580040CFA2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A4D6E2825AD11580040CFA2 /* WidgetKit.framework */; };
 		2A4D6E2B25AD11580040CFA2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A4D6E2A25AD11580040CFA2 /* SwiftUI.framework */; };
@@ -56,11 +54,13 @@
 		2A4D6E3325AD115C0040CFA2 /* B2CareWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6E2F25AD11580040CFA2 /* B2CareWidget.intentdefinition */; };
 		2A4D6E3425AD115D0040CFA2 /* B2CareWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6E2F25AD11580040CFA2 /* B2CareWidget.intentdefinition */; };
 		2A4D6E3725AD115D0040CFA2 /* B2CareWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2A4D6E2725AD11570040CFA2 /* B2CareWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2A58BCC925AF83940072DCE4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A58BCC825AF83940072DCE4 /* UIViewExtensions.swift */; };
+		2A58BCCD25AF83B50072DCE4 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A58BCCC25AF83B50072DCE4 /* UIViewControllerExtensions.swift */; };
+		2A58BCD125AF83D10072DCE4 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A58BCD025AF83D10072DCE4 /* UITextFieldExtensions.swift */; };
+		2A58BCD525AF83EC0072DCE4 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A58BCD425AF83EC0072DCE4 /* UIApplicationExtensions.swift */; };
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
-		2A6655E4259FD73C001BCD32 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6655E3259FD73C001BCD32 /* HeaderView.swift */; };
-		2A6655E825A0BD52001BCD32 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6655E725A0BD52001BCD32 /* BackButton.swift */; };
 		2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */; };
 		2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1EA2598DB80002FE11A /* MedicationModel.swift */; };
 		2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1ED2598DBFD002FE11A /* AddressModel.swift */; };
@@ -69,17 +69,16 @@
 		2A71E1F72598F2D4002FE11A /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F62598F2D4002FE11A /* LocationModel.swift */; };
 		2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */; };
 		2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */; };
-		2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */; };
-		2A71E204259A0A80002FE11A /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */; };
+		2A71E20025993904002FE11A /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FF25993904002FE11A /* PatientDetailViewController.swift */; };
+		2A71E204259A0A80002FE11A /* PatientDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */; };
 		2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3752596590A00CD8402 /* PatientResponse.swift */; };
 		2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37825965B5A00CD8402 /* PatientModel.swift */; };
 		2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */; };
 		2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38025965B9100CD8402 /* PersonModel.swift */; };
 		2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38325965BAB00CD8402 /* GenderModel.swift */; };
-		2A7EA390259670B000CD8402 /* PatientDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */; };
+		2A7EA390259670B000CD8402 /* PatientDetailLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA38F259670B000CD8402 /* PatientDetailLine.swift */; };
 		2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */; };
 		2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FA42593799100B6E5DC /* PatientsResponse.swift */; };
-		2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A888FAA2593FAC200B6E5DC /* UserButton.swift */; };
 		2A8E35AE25A114A400AE263D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35AD25A114A400AE263D /* BaseViewController.swift */; };
 		2A8E35B125A13AA500AE263D /* BlurLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E35B025A13AA500AE263D /* BlurLoader.swift */; };
 		2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEB25923EF700431A1C /* AppDelegate.swift */; };
@@ -87,7 +86,7 @@
 		2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* LoginViewController.swift */; };
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
-		2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientDetailViewController.swift */; };
+		2AB71B3325936B6000965423 /* PatientInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientInfoViewController.swift */; };
 		2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */; };
 		427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */; };
 		6CF4EC9BEB732B577EDBCA0D /* Pods_B2CareWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2EBD2067EAC21B9F07FB22 /* Pods_B2CareWidgetExtension.framework */; };
@@ -120,26 +119,24 @@
 /* Begin PBXFileReference section */
 		2A02F1042594AB5300DC26E1 /* SmallInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallInfoBox.swift; sourceTree = "<group>"; };
 		2A02F1072594B5FF00DC26E1 /* BigInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigInfoBox.swift; sourceTree = "<group>"; };
-		2A0F2582259241850077DD02 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2A0F258A25924CD20077DD02 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2A0F258E25925C1C0077DD02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2A0F259225925C8C0077DD02 /* B2CareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B2CareService.swift; sourceTree = "<group>"; };
 		2A0F259525926BD00077DD02 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2A0F2598259333070077DD02 /* PasswordInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputField.swift; sourceTree = "<group>"; };
 		2A0F259B259335010077DD02 /* BaseInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInputField.swift; sourceTree = "<group>"; };
-		2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListViewController.swift; sourceTree = "<group>"; };
+		2A0F259E25933FAF0077DD02 /* PatientsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsListViewController.swift; sourceTree = "<group>"; };
 		2A0F25A1259340B90077DD02 /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
-		2A0F25A5259342EE0077DD02 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPatientViewController.swift; sourceTree = "<group>"; };
 		2A1BE7AB25ADC0A800BA70D0 /* B2Care.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = B2Care.entitlements; sourceTree = "<group>"; };
 		2A210E2225ADD1670059E4B8 /* B2CareWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = B2CareWidgetExtension.entitlements; sourceTree = "<group>"; };
-		2A2932BB25ADAE8A00E3A71B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		2A29330725ADB7C400E3A71B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
+		2A2932BB25ADAE8A00E3A71B /* ColorsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsExtensions.swift; sourceTree = "<group>"; };
+		2A29330725ADB7C400E3A71B /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientGraphsViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
 		2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
-		2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2A4D6E1425A781AA0040CFA2 /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
 		2A4D6E1925AD006B0040CFA2 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2A4D6E1F25AD00A70040CFA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2A4D6E2125AD00A90040CFA2 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -150,11 +147,13 @@
 		2A4D6E2F25AD11580040CFA2 /* B2CareWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = B2CareWidget.intentdefinition; sourceTree = "<group>"; };
 		2A4D6E3025AD115C0040CFA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A4D6E3225AD115C0040CFA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A58BCC825AF83940072DCE4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		2A58BCCC25AF83B50072DCE4 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		2A58BCD025AF83D10072DCE4 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		2A58BCD425AF83EC0072DCE4 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
-		2A6655E3259FD73C001BCD32 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		2A6655E725A0BD52001BCD32 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		2A71E1EA2598DB80002FE11A /* MedicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationModel.swift; sourceTree = "<group>"; };
 		2A71E1ED2598DBFD002FE11A /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
@@ -163,17 +162,16 @@
 		2A71E1F62598F2D4002FE11A /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		2A71E1F92598F2EB002FE11A /* DiagnosisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisModel.swift; sourceTree = "<group>"; };
 		2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalizationModel.swift; sourceTree = "<group>"; };
-		2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMenuViewController.swift; sourceTree = "<group>"; };
-		2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		2A71E1FF25993904002FE11A /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
+		2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDocumentsViewController.swift; sourceTree = "<group>"; };
 		2A7EA3752596590A00CD8402 /* PatientResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientResponse.swift; sourceTree = "<group>"; };
 		2A7EA37825965B5A00CD8402 /* PatientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientModel.swift; sourceTree = "<group>"; };
 		2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlergyModel.swift; sourceTree = "<group>"; };
 		2A7EA38025965B9100CD8402 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2A7EA38325965BAB00CD8402 /* GenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModel.swift; sourceTree = "<group>"; };
-		2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsView.swift; sourceTree = "<group>"; };
+		2A7EA38F259670B000CD8402 /* PatientDetailLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailLine.swift; sourceTree = "<group>"; };
 		2A7EA39825968D4900CD8402 /* ContactSmallInfoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSmallInfoBox.swift; sourceTree = "<group>"; };
 		2A888FA42593799100B6E5DC /* PatientsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsResponse.swift; sourceTree = "<group>"; };
-		2A888FAA2593FAC200B6E5DC /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		2A8E35AD25A114A400AE263D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2A8E35B025A13AA500AE263D /* BlurLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurLoader.swift; sourceTree = "<group>"; };
 		2A93CEE825923EF700431A1C /* B2Care.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2Care.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +181,7 @@
 		2A93CEF425923EF900431A1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2AB71B3225936B6000965423 /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
+		2AB71B3225936B6000965423 /* PatientInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientInfoViewController.swift; sourceTree = "<group>"; };
 		2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		3ADEEFED0B0820B57371846E /* Pods-B2CareWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2CareWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-B2CareWidgetExtension/Pods-B2CareWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,9 +225,12 @@
 		2A0F257B259240CD0077DD02 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2A0F2582259241850077DD02 /* Extensions.swift */,
-				2A2932BB25ADAE8A00E3A71B /* Colors.swift */,
-				2A29330725ADB7C400E3A71B /* DateExtension.swift */,
+				2A2932BB25ADAE8A00E3A71B /* ColorsExtensions.swift */,
+				2A29330725ADB7C400E3A71B /* DateExtensions.swift */,
+				2A58BCC825AF83940072DCE4 /* UIViewExtensions.swift */,
+				2A58BCCC25AF83B50072DCE4 /* UIViewControllerExtensions.swift */,
+				2A58BCD025AF83D10072DCE4 /* UITextFieldExtensions.swift */,
+				2A58BCD425AF83EC0072DCE4 /* UIApplicationExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -237,17 +238,17 @@
 		2A0F257C259240D40077DD02 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2A8E35AD25A114A400AE263D /* BaseViewController.swift */,
+				2A4D6E1425A781AA0040CFA2 /* StartingViewController.swift */,
 				2A93CEEF25923EF700431A1C /* LoginViewController.swift */,
-				2A0F259E25933FAF0077DD02 /* PatientListViewController.swift */,
 				2A0F25A925935F3A0077DD02 /* MainTabViewController.swift */,
 				2A0F25AC259360980077DD02 /* SearchPatientViewController.swift */,
-				2AB71B3225936B6000965423 /* PatientDetailViewController.swift */,
-				2A71E1FF25993904002FE11A /* PatientMenuViewController.swift */,
-				2A71E203259A0A7F002FE11A /* DocumentsViewController.swift */,
-				2A8E35AD25A114A400AE263D /* BaseViewController.swift */,
+				2A0F259E25933FAF0077DD02 /* PatientsListViewController.swift */,
+				2A71E1FF25993904002FE11A /* PatientDetailViewController.swift */,
+				2AB71B3225936B6000965423 /* PatientInfoViewController.swift */,
+				2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */,
+				2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */,
 				2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */,
-				2A4D6DE125A5BF050040CFA2 /* GraphsViewController.swift */,
-				2A4D6E1425A781AA0040CFA2 /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -256,13 +257,13 @@
 			isa = PBXGroup;
 			children = (
 				2A6655EF25A0E55D001BCD32 /* Cells */,
-				2A6655E625A0BD10001BCD32 /* Buttons */,
 				2A7EA39B25968D7000CD8402 /* InfoBox */,
 				2A7EA38A25966D1C00CD8402 /* Headers */,
 				2A0F25A4259342CC0077DD02 /* Inputs */,
 				2A0F258A25924CD20077DD02 /* LoginView.swift */,
-				2A7EA38F259670B000CD8402 /* PatientDetailsView.swift */,
+				2A7EA38F259670B000CD8402 /* PatientDetailLine.swift */,
 				2A8E35B025A13AA500AE263D /* BlurLoader.swift */,
+				2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,7 +306,6 @@
 			children = (
 				2A0F2598259333070077DD02 /* PasswordInputField.swift */,
 				2A0F259B259335010077DD02 /* BaseInputField.swift */,
-				2A0F25A5259342EE0077DD02 /* SearchField.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -338,15 +338,6 @@
 			path = "Hard Coded Data";
 			sourceTree = "<group>";
 		};
-		2A6655E625A0BD10001BCD32 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				2A888FAA2593FAC200B6E5DC /* UserButton.swift */,
-				2A6655E725A0BD52001BCD32 /* BackButton.swift */,
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
 		2A6655EF25A0E55D001BCD32 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,7 +351,6 @@
 			isa = PBXGroup;
 			children = (
 				2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */,
-				2A6655E3259FD73C001BCD32 /* HeaderView.swift */,
 				2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */,
 			);
 			path = Headers;
@@ -407,7 +397,6 @@
 				2A0F257B259240CD0077DD02 /* Utils */,
 				2A0F257A259240C30077DD02 /* Helping Files */,
 				2A93CEF425923EF900431A1C /* Assets.xcassets */,
-				2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */,
 				2A93CEF925923EF900431A1C /* Info.plist */,
 				2A4D6E2025AD00A70040CFA2 /* Localizable.strings */,
 			);
@@ -613,7 +602,7 @@
 				2A2932D825ADB65B00E3A71B /* GenderModel.swift in Sources */,
 				2A2932E125ADB66500E3A71B /* ContactModel.swift in Sources */,
 				2A4D6E2E25AD11580040CFA2 /* B2CareWidget.swift in Sources */,
-				2A2932BF25ADAE8F00E3A71B /* Colors.swift in Sources */,
+				2A2932BF25ADAE8F00E3A71B /* ColorsExtensions.swift in Sources */,
 				2A2932D225ADB65400E3A71B /* AlergyModel.swift in Sources */,
 				2A210E1C25ADCB230059E4B8 /* PatientResponse.swift in Sources */,
 				2A2932F325ADB67900E3A71B /* GraphModel.swift in Sources */,
@@ -623,7 +612,7 @@
 				2A2932C225ADB4FB00E3A71B /* B2CareService.swift in Sources */,
 				2A2932D525ADB65700E3A71B /* PersonModel.swift in Sources */,
 				2A4D6E3325AD115C0040CFA2 /* B2CareWidget.intentdefinition in Sources */,
-				2A29330D25ADB7D200E3A71B /* DateExtension.swift in Sources */,
+				2A29330D25ADB7D200E3A71B /* DateExtensions.swift in Sources */,
 				2A2932CF25ADB65000E3A71B /* UserModel.swift in Sources */,
 				2A2932EA25ADB66F00E3A71B /* DiagnosisModel.swift in Sources */,
 				2A2932E725ADB66C00E3A71B /* LocationModel.swift in Sources */,
@@ -639,52 +628,51 @@
 				2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */,
 				2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */,
 				2A71E1F72598F2D4002FE11A /* LocationModel.swift in Sources */,
-				2A7EA390259670B000CD8402 /* PatientDetailsView.swift in Sources */,
-				2A29330825ADB7C400E3A71B /* DateExtension.swift in Sources */,
+				2A7EA390259670B000CD8402 /* PatientDetailLine.swift in Sources */,
+				2A29330825ADB7C400E3A71B /* DateExtensions.swift in Sources */,
+				2A58BCD525AF83EC0072DCE4 /* UIApplicationExtensions.swift in Sources */,
 				2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */,
 				2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */,
 				2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */,
 				2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */,
-				2A6655E4259FD73C001BCD32 /* HeaderView.swift in Sources */,
 				2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */,
 				2A71E1F42598DD13002FE11A /* DoctorModel.swift in Sources */,
 				2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */,
 				2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */,
 				2A02F1082594B5FF00DC26E1 /* BigInfoBox.swift in Sources */,
-				2A0F259F25933FAF0077DD02 /* PatientListViewController.swift in Sources */,
+				2A58BCD125AF83D10072DCE4 /* UITextFieldExtensions.swift in Sources */,
+				2A0F259F25933FAF0077DD02 /* PatientsListViewController.swift in Sources */,
 				2A02F1052594AB5300DC26E1 /* SmallInfoBox.swift in Sources */,
-				2A6655E825A0BD52001BCD32 /* BackButton.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
-				2A4D6DE225A5BF050040CFA2 /* GraphsViewController.swift in Sources */,
+				2A4D6DE225A5BF050040CFA2 /* PatientGraphsViewController.swift in Sources */,
 				2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */,
 				2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */,
-				2A0F25A6259342EE0077DD02 /* SearchField.swift in Sources */,
 				2A0F25AA25935F3A0077DD02 /* MainTabViewController.swift in Sources */,
 				2A71E1F12598DC78002FE11A /* ContactModel.swift in Sources */,
 				2A0F25A2259340B90077DD02 /* PatientCell.swift in Sources */,
 				2A93CEEC25923EF700431A1C /* AppDelegate.swift in Sources */,
 				2A4D6E3425AD115D0040CFA2 /* B2CareWidget.intentdefinition in Sources */,
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
-				2A0F2583259241850077DD02 /* Extensions.swift in Sources */,
 				2A8E35B125A13AA500AE263D /* BlurLoader.swift in Sources */,
-				2A71E20025993904002FE11A /* PatientMenuViewController.swift in Sources */,
+				2A58BCC925AF83940072DCE4 /* UIViewExtensions.swift in Sources */,
+				2A71E20025993904002FE11A /* PatientDetailViewController.swift in Sources */,
 				2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */,
 				2A8E35AE25A114A400AE263D /* BaseViewController.swift in Sources */,
 				2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */,
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
-				2A2932BC25ADAE8A00E3A71B /* Colors.swift in Sources */,
+				2A2932BC25ADAE8A00E3A71B /* ColorsExtensions.swift in Sources */,
 				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
-				2A4D6E1525A781AA0040CFA2 /* MainViewController.swift in Sources */,
+				2A4D6E1525A781AA0040CFA2 /* StartingViewController.swift in Sources */,
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */,
+				2A58BCCD25AF83B50072DCE4 /* UIViewControllerExtensions.swift in Sources */,
 				2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */,
-				2AB71B3325936B6000965423 /* PatientDetailViewController.swift in Sources */,
-				2A888FAB2593FAC200B6E5DC /* UserButton.swift in Sources */,
+				2AB71B3325936B6000965423 /* PatientInfoViewController.swift in Sources */,
 				2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */,
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
-				2A71E204259A0A80002FE11A /* DocumentsViewController.swift in Sources */,
+				2A71E204259A0A80002FE11A /* PatientDocumentsViewController.swift in Sources */,
 				2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */,
 				2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */,
 			);

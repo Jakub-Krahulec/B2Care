@@ -8,7 +8,7 @@
 import UIKit
 import MGSwipeTableCell
 
-class PatientListViewController: BaseViewController, UISearchControllerDelegate {
+class PatientsListViewController: BaseViewController, UISearchControllerDelegate {
     // MARK: - Properties
     private let cellId = "cellId"
     
@@ -146,7 +146,7 @@ class PatientListViewController: BaseViewController, UISearchControllerDelegate 
     }
 }
 
-extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
+extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let data = patients{
             return data.data.count
@@ -194,31 +194,12 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let urgentMessageAction = UIContextualAction(style: .normal, title: NSLocalizedString("urgent-message", comment: "")) { (action, sourceView, completionHandler) in
-//            completionHandler(true)
-//        }
-//        urgentMessageAction.image = UIImage(systemName: "exclamationmark.bubble.fill")
-//        urgentMessageAction.image?.withTintColor(.white)
-//        urgentMessageAction.backgroundColor = .systemPink
-//
-//        let addTaskAction = UIContextualAction(style: .normal, title: NSLocalizedString("add-task", comment: "")) { (action, sourceView, completionHandler) in
-//            completionHandler(true)
-//        }
-//        addTaskAction.image = UIImage(systemName: "plus")
-//        addTaskAction.image?.withTintColor(.white)
-//        addTaskAction.backgroundColor = .systemGreen
-//
-//
-//        return UISwipeActionsConfiguration(actions: [addTaskAction,urgentMessageAction])
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !isKeyboardShown{
             if let patient = patients?.data[indexPath.row]{
                 B2CareService.shared.savePatient(patient)
             }
-            let controller = PatientMenuViewController()
+            let controller = PatientDetailViewController()
             controller.patientId = patients?.data[indexPath.row].id
             controller.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(controller, animated: true)
@@ -227,7 +208,7 @@ extension PatientListViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-extension PatientListViewController: UISearchBarDelegate, UISearchDisplayDelegate{
+extension PatientsListViewController: UISearchBarDelegate, UISearchDisplayDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         handleSearchChangedValue()
     }
@@ -238,7 +219,7 @@ extension PatientListViewController: UISearchBarDelegate, UISearchDisplayDelegat
     }
 }
 
-extension PatientListViewController: UIGestureRecognizerDelegate {
+extension PatientsListViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         searchBar.resignFirstResponder()
        // searchBar.endEditing(true)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GraphsViewController: BaseViewController {
+class PatientGraphsViewController: BaseViewController {
     // MARK: - Properties
     private let table = UITableView()
     private let refreshControl = UIRefreshControl()
@@ -77,7 +77,7 @@ class GraphsViewController: BaseViewController {
     }
 }
 
-extension GraphsViewController: UITableViewDelegate, UITableViewDataSource {
+extension PatientGraphsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return graphs.count
     }
