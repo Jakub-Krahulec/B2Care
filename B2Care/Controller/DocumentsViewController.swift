@@ -15,6 +15,7 @@ class DocumentsViewController: BaseViewController {
     private let cellId = "CellID"
     private var fileURL: URL?
     private let refreshControl = UIRefreshControl()
+    var sectionsOpened = [true, true]
     
     var documentsData: DocumentsData? {
         didSet{
@@ -47,6 +48,33 @@ class DocumentsViewController: BaseViewController {
     
     @objc private func refresh(_ sender: AnyObject){
         refreshControl.endRefreshing()
+    }
+    
+    @objc private func handleSectionCollapse(sender: UITapGestureRecognizer){
+        guard let view = sender.view else {return}
+        let section = view.tag
+        var indexPaths = [IndexPath]()
+        
+        if section == 0 {
+            guard let data = documentsData else {return}
+            for row in data.documents.indices{
+                let indexPath = IndexPath(row: row, section: section)
+                indexPaths.append(indexPath)
+            }
+        } else {
+            guard let data = labResultsData else {return}
+            for row in data.documents.indices{
+                let indexPath = IndexPath(row: row, section: section)
+                indexPaths.append(indexPath)
+            }
+        }
+        sectionsOpened[section].toggle()
+        
+        if sectionsOpened[section] {
+            table.insertRows(at: indexPaths, with: .fade)
+        } else {
+            table.deleteRows(at: indexPaths, with: .fade)
+        }
     }
     
     // MARK: - Helpers
@@ -105,12 +133,16 @@ class DocumentsViewController: BaseViewController {
             make.left.equalToSuperview().offset(15)
             make.centerY.equalToSuperview()
         }
+        view.tag = section
+        
         
         view.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.left.equalTo(image.snp.right).offset(5)
             make.centerY.equalToSuperview()
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSectionCollapse(sender:)))
+        view.addGestureRecognizer(tapGesture)
                 
         return view
     }
@@ -126,7 +158,10 @@ extension DocumentsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
+        if !sectionsOpened[section]{
+            return 0
+        }
+        if section == 0 {
             
             if let data = documentsData{
                 return data.documents.count
