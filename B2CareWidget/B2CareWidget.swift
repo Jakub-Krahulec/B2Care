@@ -25,7 +25,7 @@ struct Provider: TimelineProvider{
         
         var entry = PatientEntry(date: Date(),error: "")
         
-        if let _ = B2CareService.shared.getUserData() {
+        if let _ = B2CareService.shared.fetchUserData() {
             if let patient = B2CareService.shared.getLastSelectedPatient(){
                 entry.error = ""
                 entry.patient = patient
@@ -36,15 +36,13 @@ struct Provider: TimelineProvider{
             entry.error = "Přístup odepřen"
         }
         
-        
-                
         let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
 }
 
 struct WidgetEntryView: View{
-    let entry: Provider.Entry
+    var entry: Provider.Entry
     private var diagnosis: String {
         if let patient = entry.patient {
             return patient.hospitalizations.count > 0 ? patient.hospitalizations[0].diagnosis.value : "N/A"

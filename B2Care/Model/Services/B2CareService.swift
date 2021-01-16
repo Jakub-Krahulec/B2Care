@@ -54,6 +54,7 @@ class B2CareService{
     }
     
     func getLastSelectedPatient() -> Patient? {
+        guard let _ = data else {return nil}
         guard let defaults = defaults else {return nil}
         if let patient = defaults.object(forKey: "patient") as? Data {
             if let decoded = try? decoder.decode(Patient.self, from: patient){
@@ -83,7 +84,7 @@ class B2CareService{
         guard let defaults = defaults else {return}
         defaults.removeObject(forKey: "user")
         data = nil
-        WidgetCenter.shared.reloadAllTimelines()
+        save()
     }
     
     func fetchPatient(id: Int, completion: @escaping (Result<Patient, Error>) -> Void) -> DataRequest{
@@ -107,6 +108,16 @@ class B2CareService{
                     completion(.failure(error))
             }
         }
+    }
+    
+    func fetchUserData() -> UserData?{
+        guard let defaults = defaults else {return nil}
+        if let user = defaults.object(forKey: "user") as? Data {
+            if let decoded = try? decoder.decode(UserData.self, from: user){
+                return decoded
+            }
+        }
+        return nil
     }
     
     func getUserData() -> UserData? {
