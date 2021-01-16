@@ -17,4 +17,6 @@ struct UserData: Codable{
     var surname: String
     var email: String
     var apiKey: String
+    var enablePrivacy: Bool?
+    var privacyError: String?
 }

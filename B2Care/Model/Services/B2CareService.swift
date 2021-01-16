@@ -63,6 +63,22 @@ class B2CareService{
         return nil
     }
     
+    func setPrivacyMode(enabled: Bool){
+        if var user = data{
+            user.enablePrivacy = enabled
+            data = user
+            save()
+        }
+    }
+    
+    func setPrivacyError(message: String){
+        if var user = data{
+            user.privacyError = message
+            data = user
+            save()
+        }
+    }
+    
     func logout(){
         guard let defaults = defaults else {return}
         defaults.removeObject(forKey: "user")

@@ -87,6 +87,8 @@
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
 		2AB71B3325936B6000965423 /* PatientInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientInfoViewController.swift */; };
+		2AC9310725B0D40300AD4B56 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310625B0D40300AD4B56 /* UserViewController.swift */; };
+		2AC9310F25B20FFB00AD4B56 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */; };
 		2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */; };
 		427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */; };
 		6CF4EC9BEB732B577EDBCA0D /* Pods_B2CareWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2EBD2067EAC21B9F07FB22 /* Pods_B2CareWidgetExtension.framework */; };
@@ -182,6 +184,8 @@
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB71B3225936B6000965423 /* PatientInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientInfoViewController.swift; sourceTree = "<group>"; };
+		2AC9310625B0D40300AD4B56 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		3ADEEFED0B0820B57371846E /* Pods-B2CareWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2CareWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-B2CareWidgetExtension/Pods-B2CareWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +253,8 @@
 				2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */,
 				2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */,
 				2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */,
+				2AC9310625B0D40300AD4B56 /* UserViewController.swift */,
+				2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -635,6 +641,7 @@
 				2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */,
 				2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */,
 				2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */,
+				2AC9310F25B20FFB00AD4B56 /* SecurityViewController.swift in Sources */,
 				2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */,
 				2A71E1F42598DD13002FE11A /* DoctorModel.swift in Sources */,
 				2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */,
@@ -665,6 +672,7 @@
 				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
 				2A4D6E1525A781AA0040CFA2 /* StartingViewController.swift in Sources */,
+				2AC9310725B0D40300AD4B56 /* UserViewController.swift in Sources */,
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */,
 				2A58BCCD25AF83B50072DCE4 /* UIViewControllerExtensions.swift in Sources */,

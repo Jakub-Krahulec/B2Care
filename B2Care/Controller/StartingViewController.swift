@@ -35,5 +35,14 @@ class StartingViewController: BaseViewController{
 
     private func prepareView(){
         view.showBlurLoader()
+        
+        let user = B2CareService.shared.getUserData()
+        if let _ = user {
+            if user?.enablePrivacy ?? false{
+                let controller = SecurityViewController()
+                controller.modalPresentationStyle = .fullScreen
+                self.present(controller, animated: false, completion: nil)
+            }
+        }
     }
 }
