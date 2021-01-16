@@ -8,7 +8,7 @@
 import LocalAuthentication
 import UIKit
 
-class SecurityViewController: UIViewController {
+class SecurityViewController: BaseViewController {
     // MARK: - Properties
     private let titleLabel = UILabel()
     private let errorLabel = UILabel()
@@ -94,7 +94,7 @@ class SecurityViewController: UIViewController {
     }
     
     private func prepareIdentifyButtonStyle(){
-        identifyButton.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+        identifyButton.setBackgroundImage(UIImage(systemName: isFaceIDSupported ? "faceid" : "touchid"), for: .normal)
         identifyButton.tintColor = .mainColor
         identifyButton.addTarget(self, action: #selector(identifyUser), for: .touchUpInside)
         

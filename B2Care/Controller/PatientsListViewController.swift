@@ -160,11 +160,24 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = table.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? PatientCell{
+            if let data = patients {
             cell.selectionStyle = .none
             
-            let urgentMessage = MGSwipeButton(title: NSLocalizedString("urgent-message", comment: ""), backgroundColor: .systemRed) { (sender) -> Bool in
+            let urgentMessage = MGSwipeButton(title: NSLocalizedString("urgent-message", comment: ""), backgroundColor: .systemRed) { [weak self] (sender) -> Bool in
+               
+                self?.scheduleLocalNotification(title: "Urgentní zpráva", body: "Změna stavu \(data.data[indexPath.row].fullName)", categoryIdentifier: "Pokus", sound: UNNotificationSound.default)
+               
+                return true
+            }
+            
+            
+            urgentMessage.setImage(UIImage(systemName: "exclamationmark.bubble.fill"), for: .normal)
+            urgentMessage.tintColor = .white
+            urgentMessage.buttonWidth = 115
+            
+            let addTask = MGSwipeButton(title: NSLocalizedString("add-task", comment: ""),backgroundColor: .systemGreen) { (sender) -> Bool in
                 
-               let request = NetworkService.shared.downloadFile(from: "https://soundbible.com/grab.php?id=2185&type=mp3", progressChanged: self.downloadProgressChanged(value:)) { [weak self] (result) in
+                let request = NetworkService.shared.downloadFile(from: "https://soundbible.com/grab.php?id=2185&type=mp3", progressChanged: self.downloadProgressChanged(value:)) { [weak self] (result) in
                     guard let this = self else {return}
                     switch result{
                         case .success(let data):
@@ -179,18 +192,10 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
                         case .failure(let error):
                             print(error.localizedDescription)
                     }
-                
+                    
                 }
                 self.downloadRequests.insert(request)
-                return true
-            }
-            
-            
-            urgentMessage.setImage(UIImage(systemName: "exclamationmark.bubble.fill"), for: .normal)
-            urgentMessage.tintColor = .white
-            urgentMessage.buttonWidth = 115
-            
-            let addTask = MGSwipeButton(title: NSLocalizedString("add-task", comment: ""),backgroundColor: .systemGreen) { (sender) -> Bool in
+                
                 return true
             }
             addTask.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -211,7 +216,7 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.swipeContentView.layer.borderWidth = 8
             cell.swipeContentView.layer.borderColor = UIColor.white.cgColor
             
-            if let data = patients {
+            
                 cell.data = data.data[indexPath.row]
             }
             return cell

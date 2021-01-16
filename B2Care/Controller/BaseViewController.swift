@@ -8,6 +8,8 @@
 import UIKit
 import Alamofire
 import AVFoundation
+import UserNotifications
+import LocalAuthentication
 
 class BaseViewController: UIViewController {
 
@@ -17,6 +19,17 @@ class BaseViewController: UIViewController {
     internal var downloadRequests = Set<DownloadRequest>()
     internal var isKeyboardShown = false
     private let blurLoader = BlurLoader()
+    
+    var isFaceIDSupported: Bool {
+        if #available(iOS 11.0, *) {
+            let localAuthenticationContext = LAContext()
+            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                return localAuthenticationContext.biometryType == .faceID
+            }
+        }
+        return false
+    }
+    
     private var isPrivacyEnabled: Bool {
         return B2CareService.shared.getUserData()?.enablePrivacy ?? false
     }
@@ -106,6 +119,29 @@ class BaseViewController: UIViewController {
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated: false, completion: nil)
         }
+    }
+    
+    @objc func scheduleLocalNotification(
+        title: String,
+        body: String,
+        categoryIdentifier: String,
+        sound: UNNotificationSound){
+        let center = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.categoryIdentifier = categoryIdentifier
+        content.sound = sound
+        
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 10
+//        dateComponents.minute = 30
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
     }
     
     // MARK: - Helpers
