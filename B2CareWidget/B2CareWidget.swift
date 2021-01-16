@@ -25,12 +25,16 @@ struct Provider: TimelineProvider{
         
         var entry = PatientEntry(date: Date(),error: "")
         
-        if let _ = B2CareService.shared.fetchUserData() {
-            if let patient = B2CareService.shared.getLastSelectedPatient(){
-                entry.error = ""
-                entry.patient = patient
-            } else {
-                entry.error = "Žádná data"
+        if let user = B2CareService.shared.fetchUserData() {
+            if user.enablePrivacy ?? false{
+                entry.error = "Pro zobrazení dat vypněte režim soukromí"
+            } else{
+                if let patient = B2CareService.shared.getLastSelectedPatient(){
+                    entry.error = ""
+                    entry.patient = patient
+                } else {
+                    entry.error = "Žádná data"
+                }
             }
         } else {
             entry.error = "Přístup odepřen"
