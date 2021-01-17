@@ -11,9 +11,6 @@ import LocalAuthentication
 class UserViewController: BaseViewController {
     // MARK: - Properties
     
-    private let navigationView = UIView()
-    private let titleImageView = UIImageView()
-    private let nameLabel = UILabel()
     private let backButton = UIButton()
     
     private let settingsTitleLabel = UILabel()
@@ -110,29 +107,14 @@ class UserViewController: BaseViewController {
     }
     
     private func prepareNavigationView(){
+        var title = ""
         if let user = user{
-            nameLabel.text = " \(user.name) \(user.surname)"
+            title = " \(user.name) \(user.surname)"
         }
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        nameLabel.textColor = .white
-        nameLabel.textAlignment = .center
-        
-        navigationView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-        
-        titleImageView.image = UIImage(systemName: "person.fill")
-        titleImageView.tintColor = .white
-        
-        navigationView.addSubview(titleImageView)
-        titleImageView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(23)
-            make.right.equalTo(nameLabel.snp.left)
-            make.centerY.equalTo(nameLabel)
-        }
-        
-        navigationItem.titleView = navigationView
+        let titleView = TitleWithImageView()
+        titleView.setImage(UIImage(systemName: "person.fill"), color: .white)
+        titleView.setTitle(title, color: .white)
+        navigationItem.titleView = titleView
         
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .done, target: self, action: #selector(back(sender:)))

@@ -47,9 +47,8 @@ class PatientDocumentsViewController: BaseViewController {
         refreshControl.endRefreshing()
     }
     
-    @objc private func handleSectionCollapse(sender: UITapGestureRecognizer){
-        guard let view = sender.view else {return}
-        let section = view.tag
+    @objc private func handleSectionCollapse(sender: UIButton){
+        let section = sender.tag
         var indexPaths = [IndexPath]()
         
         if section == 0 {
@@ -102,44 +101,6 @@ class PatientDocumentsViewController: BaseViewController {
             make.top.equalToSuperview().offset(5)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(5)
         }
-    }
-    
-    private func getHeaderViewForSection(_ section: Int) -> UIView? {
-        let view = UIView()
-        let image = UIImageView()
-        let label = UILabel()
-        
-        if section == 0{
-            image.image = UIImage(systemName: "person.fill")
-            image.tintColor = .mainColor
-            label.text = NSLocalizedString("documentation", comment: "")
-            label.textColor = .mainColor
-        } else {
-            image.image = UIImage(systemName: "doc.fill")
-            image.tintColor = .systemGreen
-            label.text = NSLocalizedString("lab-results", comment: "")
-            label.textColor = .systemGreen
-        }
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        
-        view.backgroundColor = .white
-        view.addSubview(image)
-        image.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(15)
-            make.centerY.equalToSuperview()
-        }
-        view.tag = section
-        
-        
-        view.addSubview(label)
-        label.snp.makeConstraints { (make) in
-            make.left.equalTo(image.snp.right).offset(5)
-            make.centerY.equalToSuperview()
-        }
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSectionCollapse(sender:)))
-        view.addGestureRecognizer(tapGesture)
-                
-        return view
     }
     
     private func downloadProgressChanged(value: Double){
@@ -200,7 +161,31 @@ extension PatientDocumentsViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return getHeaderViewForSection(section)
+        let view = UIView()
+        let button = UIButton()
+        if section == 0{
+            button.setImage(UIImage(systemName: "person.fill"), for: .normal)
+            button.tintColor = .mainColor
+            button.setTitle(NSLocalizedString("documentation", comment: ""), for: .normal)
+            button.setTitleColor(.mainColor, for: .normal)
+        } else {
+            button.setImage(UIImage(systemName: "doc.fill"), for: .normal)
+            button.tintColor = .systemGreen
+            button.setTitle(NSLocalizedString("lab-results", comment: ""), for: .normal)
+            button.setTitleColor(.systemGreen, for: .normal)
+        }
+        
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.backgroundColor = .white
+        button.tag = section
+        
+        button.addTarget(self, action: #selector(handleSectionCollapse(sender:)), for: .touchUpInside)
+        view.addSubview(button)
+        button.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(15)
+            make.centerY.equalToSuperview()
+        }
+        return view
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
