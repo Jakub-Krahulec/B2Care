@@ -48,8 +48,7 @@ class PasswordInputField: BaseInputField {
         self.keyboardType = .default
         isSecureTextEntry = true
         prepareGlowAnimationStyle()
-        prepareShowPasswordButtonStyle()
-        
+        prepareShowPasswordButtonStyle() 
     }
     
     private func prepareGlowAnimationStyle(){

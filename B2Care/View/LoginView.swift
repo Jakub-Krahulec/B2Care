@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol LoginViewDelegate where Self: UIViewController{
-   // func userDidLogIn()
+protocol LoginViewDelegate{
+    func userDidLogIn()
 }
 
-extension LoginViewDelegate{
+extension LoginViewDelegate where Self: UIViewController{
     func userDidLogIn(){
         navigationController?.pushViewController(MainTabViewController(), animated: true)
     }
@@ -49,18 +49,17 @@ class LoginView: UIView {
     // MARK: - Actions
     
     @objc private func handleForgotPasswordButtonTapped(){
-        print("Smůla")
+        print("Forgot button tapped")
     }
     
     @objc private func handleLoginButtonTapped(){
         endErrorMode()
        // refreshControl.startAnimating()
         showBlurLoader()
-        B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] res in
+        B2CareService.shared.login(userName: userTextField.text ?? "", password: passwordTextField.text ?? "") { [weak self] result in
             guard let this = self else {return}
             //this.refreshControl.stopAnimating()
-            this.removeBluerLoader()
-            switch res{
+            switch result{
                 case .success(let isLoggedIn):
                     if isLoggedIn{
                         this.delegate?.userDidLogIn()
@@ -70,6 +69,7 @@ class LoginView: UIView {
                     this.startErrorMode(message: error.localizedDescription)
                     return
             }
+            this.removeBluerLoader()
         }
     }
     
@@ -182,10 +182,6 @@ class LoginView: UIView {
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().inset(10)
             make.height.equalTo(50)
-        }
-        
-        forgotPasswordButton.snp.makeConstraints { (make) in
-            make.bottom.lessThanOrEqualTo(loginButton.snp.top).offset(8)
         }
     }
     

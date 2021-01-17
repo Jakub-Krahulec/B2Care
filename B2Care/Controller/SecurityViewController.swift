@@ -8,7 +8,7 @@
 import LocalAuthentication
 import UIKit
 
-class SecurityViewController: BaseViewController {
+class SecurityViewController: UIViewController {
     // MARK: - Properties
     private let titleLabel = UILabel()
     private let errorLabel = UILabel()

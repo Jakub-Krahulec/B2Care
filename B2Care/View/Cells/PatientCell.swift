@@ -15,7 +15,6 @@ class PatientCell: MGSwipeTableCell {
     private let nameLabel = UILabel()
     private let diagnosisLabel = UILabel()
     private let detailLine = PatientDetailLine()
-   
     
     public var data: Any?{
         didSet{
@@ -39,17 +38,16 @@ class PatientCell: MGSwipeTableCell {
     
     // MARK: - Helpers
     private func updateView(with data: Any?){
-        guard let data = data as? Patient else{return}
-        nameLabel.text = data.fullName
-        diagnosisLabel.text = data.hospitalizations.count > 0 ? data.hospitalizations[0].diagnosis.value : NSLocalizedString("without-diagnosis", comment: "")
-        detailLine.data = data
+        guard let patient = data as? Patient else{return}
+        nameLabel.text = patient.fullName
+        diagnosisLabel.text = patient.hospitalizations.count > 0 ? patient.hospitalizations[0].diagnosis.value : NSLocalizedString("without-diagnosis", comment: "")
+        detailLine.data = patient
     }
     
     private func prepareView(){
         prepareNameLabelStyle()
         prepareDiagnosisLabelStyle()
         prepareDetailLineStyle()
-        
     }
     
     private func prepareDetailLineStyle(){

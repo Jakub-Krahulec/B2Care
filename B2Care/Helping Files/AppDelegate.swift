@@ -14,13 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let center = UNUserNotificationCenter.current()
+        center.delegate = self
         
         center.requestAuthorization(options: [.alert,.badge,.sound]) { (granted, error) in
-            if granted{
-                
-            } else {
-                
-            }
+            
         }
         
         return true
@@ -41,5 +38,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate{
+    
+    // Volá se pokud uživatel reaguje na notifikaci (aplikace není na popředí)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse, withCompletionHandler
+                                    completionHandler: @escaping () -> Void) {
+        return completionHandler()
+    }
+    
+    // Volá se když je aplikace na popředí
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent
+                                    notification: UNNotification, withCompletionHandler completionHandler:
+                                        @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        // Zobrazí alert když je aplikace na popředí
+        return completionHandler(.banner)
+    }
+    
 }
 

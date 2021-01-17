@@ -6,11 +6,22 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 extension UIViewController{
     
-    var headerHeight: CGFloat {
-        return (self.view.frame.height / 10) + 35
+    var tabbarHeight: CGFloat{
+        return self.tabBarController?.tabBar.frame.height ?? 0
+    }
+    
+    var isFaceIDSupported: Bool {
+        if #available(iOS 11.0, *) {
+            let localAuthenticationContext = LAContext()
+            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                return localAuthenticationContext.biometryType == .faceID
+            }
+        }
+        return false
     }
     
     @objc func hideKeyboardWhenTappedAround(cancelsTouchesInView: Bool = true) {

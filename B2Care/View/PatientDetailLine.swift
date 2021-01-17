@@ -84,11 +84,7 @@ class PatientDetailLine: UIView {
         prepareLocationImageStyle()
         prepareDepartmentLabelStyle()
         preparePersonImageStyle()
-        prepareAgeLabelStyle()
-        
-        snp.makeConstraints { (make) in
-            make.right.equalTo(personLabel.snp.right)
-        }
+        preparePersonLabelStyle()
     }
     
     private func prepareLocationImageStyle(){
@@ -127,7 +123,7 @@ class PatientDetailLine: UIView {
         }
     }
     
-    private func prepareAgeLabelStyle(){
+    private func preparePersonLabelStyle(){
        // ageLabel.text = "57 let, M"
         personLabel.font = UIFont.boldSystemFont(ofSize: 12)
         personLabel.textColor = .lightGray
@@ -136,6 +132,7 @@ class PatientDetailLine: UIView {
         personLabel.snp.makeConstraints { (make) in
             make.left.equalTo(personImage.snp.right).offset(2)
             make.top.equalTo(personImage).offset(2)
+            make.right.equalToSuperview()
         }
     }
 }

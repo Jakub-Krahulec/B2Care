@@ -77,7 +77,7 @@ class LoginHeaderView: UIView {
         }
     }
     
-    func prepareGradientStyle(){
+    public func prepareGradientStyle(){
         
         gradient.colors = [UIColor.mainColor.cgColor, UIColor.headerMainColor.withAlphaComponent(1).cgColor]
         gradient.frame = self.bounds

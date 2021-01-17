@@ -165,7 +165,7 @@ extension PatientsListViewController: UITableViewDelegate, UITableViewDataSource
             
             let urgentMessage = MGSwipeButton(title: NSLocalizedString("urgent-message", comment: ""), backgroundColor: .systemRed) { [weak self] (sender) -> Bool in
                
-                self?.scheduleLocalNotification(title: "Urgentní zpráva", body: "Změna stavu \(data.data[indexPath.row].fullName)", categoryIdentifier: "Pokus", sound: UNNotificationSound.default)
+                self?.scheduleLocalNotification(title: "Urgentní zpráva", body: "Změna stavu \(data.data[indexPath.row].fullName)", categoryIdentifier: "Test", sound: UNNotificationSound.default)
                
                 return true
             }
