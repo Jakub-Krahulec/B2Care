@@ -33,7 +33,7 @@ class SecurityViewController: UIViewController {
         
         // &syntaxe předává odkaz na místo v RAM (pointer)
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
-            let reason = "Identifikujte se"
+            let reason = NSLocalizedString("identify-yourself", comment: "")
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, authenticationError) in
                 
@@ -47,14 +47,14 @@ class SecurityViewController: UIViewController {
                             
                         })
                     } else {
-                        let error = "Proběhl neplatný pokus o přihlášení!"
+                        let error = NSLocalizedString("invalid-login-attempt", comment: "")
                         B2CareService.shared.setPrivacyError(message: error)
                         self?.errorLabel.text = error
                     }
                 }
             }
         } else {
-            showMessage(withTitle: "Chyba", message: "Vaše zařízení není nastaveno!")
+            showMessage(withTitle: "Chyba", message: NSLocalizedString("device-not-set", comment: ""))
         }
     }
     
@@ -83,7 +83,7 @@ class SecurityViewController: UIViewController {
     }
     
     private func prepareTitleLabelStyle(){
-        titleLabel.text = "Prosím ověřte svou identitu"
+        titleLabel.text = NSLocalizedString("verify-identity", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
         
         view.addSubview(titleLabel)

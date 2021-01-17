@@ -31,3 +31,16 @@
 "more-patients-found" = "Nalezen víc než jeden pacient";
 "room" = "Pokoj";
 "without-diagnosis" = "Bez diagnózy";
+"device-not-set" = "Vaše zařízení není nastaveno";
+"open-settings" = "Přejít do nastavení?";
+"settings" = "Nastavení";
+"cancel" = "Zrušit";
+"privacy" = "Soukromí";
+"logout" = "Odhlásit se";
+"identify-youroself" = "Prosím identifikujte se";
+"invalid-login-attempt" = "Proběhl neplatný pokus o přihlášení!";
+"verify-identity" = "Prosím ověřte svou identitu";
+"turn-off-privacy" = "Pro zobrazení dat vypněte režim soukromí";
+"no-data"= "Žádná data";
+"access-denied" = "Přístup odepřen";
+

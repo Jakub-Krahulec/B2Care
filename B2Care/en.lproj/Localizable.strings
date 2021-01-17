@@ -31,3 +31,15 @@
 "more-patients-found" = "more than one patient found";
 "room" = "Room";
 "without-diagnosis" = "Without diagnosis";
+"device-not-set" = "Your device is not set";
+"open-settings" = "Do you want to go to settings?";
+"settings" = "Settings";
+"cancel" = "Cancel";
+"privacy" = "Privacy";
+"logout" = "Logout";
+"identify-youroself" = "Please identify yourself";
+"invalid-login-attempt" = "An invalid login attempt was made";
+"verify-identity" = "Please verify your identity";
+"turn-off-privacy" = "Turn off privacy mode to view data";
+"no-data"= "No data";
+"access-denied" = "Access denied";

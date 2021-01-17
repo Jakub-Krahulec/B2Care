@@ -43,9 +43,9 @@ class UserViewController: BaseViewController {
             privacySwitch.isOn = false
             B2CareService.shared.setPrivacyMode(enabled: privacySwitch.isOn)
             
-            let alertController = UIAlertController (title: "Zařízení není nastaveno", message: "Přejít do nastavení?", preferredStyle: .alert)
+            let alertController = UIAlertController (title: NSLocalizedString("device-not-set", comment: ""), message: NSLocalizedString("open-settings", comment: ""), preferredStyle: .alert)
             
-            let settingsAction = UIAlertAction(title: "Nastavení", style: .default) { (_) -> Void in
+            let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                 
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return
@@ -58,7 +58,7 @@ class UserViewController: BaseViewController {
                 }
             }
             alertController.addAction(settingsAction)
-            let cancelAction = UIAlertAction(title: "Zrušit", style: .default, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
             alertController.addAction(cancelAction)
             
             present(alertController, animated: true, completion: nil)
@@ -133,7 +133,7 @@ class UserViewController: BaseViewController {
     }
     
     private func preparePrivacyLabelStyle(){
-        privacyLabel.text = "Soukromí"
+        privacyLabel.text = NSLocalizedString("privacy", comment: "")
         privacyLabel.textAlignment = .left
         privacyLabel.font = UIFont.systemFont(ofSize: 18)
         privacyLabel.textColor = .black
@@ -159,7 +159,7 @@ class UserViewController: BaseViewController {
     }
     
     private func prepareLogoutButtonStyle(){
-        logoutButton.setTitle("Odhlásit", for: .normal)
+        logoutButton.setTitle(NSLocalizedString("logout", comment: ""), for: .normal)
         logoutButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         logoutButton.backgroundColor = .headerMainColor
         logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)

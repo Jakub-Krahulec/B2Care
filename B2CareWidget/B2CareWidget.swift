@@ -27,17 +27,17 @@ struct Provider: TimelineProvider{
         
         if let user = B2CareService.shared.fetchUserData() {
             if user.enablePrivacy ?? false{
-                entry.error = "Pro zobrazení dat vypněte režim soukromí"
+                entry.error = NSLocalizedString("turn-off-privacy", comment: "")
             } else{
                 if let patient = B2CareService.shared.getLastSelectedPatient(){
                     entry.error = ""
                     entry.patient = patient
                 } else {
-                    entry.error = "Žádná data"
+                    entry.error = NSLocalizedString("no-data", comment: "")
                 }
             }
         } else {
-            entry.error = "Přístup odepřen"
+            entry.error = NSLocalizedString("access-denied", comment: "")
         }
         
         let timeline = Timeline(entries: [entry], policy: .atEnd)
