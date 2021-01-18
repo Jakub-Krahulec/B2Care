@@ -60,7 +60,7 @@ struct Patient: Codable {
         } else {
             address.append("-")
         }
-        return address.joined(separator: ",")
+        return address.joined(separator: ", ")
     }
     
     var fullName: String{
