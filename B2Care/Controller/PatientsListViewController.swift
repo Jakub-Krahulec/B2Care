@@ -106,11 +106,10 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     
     private func fetchPatients(){
         var params = ""
+        cancelDataRequests()
+        refreshControl.programaticallyBeginRefreshing(in: table)
         if let text = searchBar.text  {
-            cancelDataRequests()
-            refreshControl.programaticallyBeginRefreshing(in: table)
             if text.count > 0{
-                
                 params = "?search=\(text)"
             }
         }
