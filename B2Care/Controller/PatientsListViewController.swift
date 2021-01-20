@@ -85,7 +85,6 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     private func prepareView(){
         view.backgroundColor = .backgroundLight
         
-        
         prepareUserButtonStyle(userButton)
         prepareSearchInputStyle()
         prepareTableViewStyle()
@@ -108,7 +107,10 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     private func fetchPatients(){
         var params = ""
         if let text = searchBar.text  {
+            cancelDataRequests()
+            refreshControl.programaticallyBeginRefreshing(in: table)
             if text.count > 0{
+                
                 params = "?search=\(text)"
             }
         }
@@ -119,8 +121,11 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
                     this.patients = data
                     this.refreshControl.endRefreshing()
                 case .failure(let error):
+                    if (!(error.asAFError?.isExplicitlyCancelledError ?? true)){
                     this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
+                    }
             }
+            
             this.removeRequests()
         }
         dataRequests.insert(request)

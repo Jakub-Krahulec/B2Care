@@ -145,6 +145,13 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
+    internal func cancelDataRequests(){
+        for request in dataRequests{
+            request.cancel()
+        }
+        removeRequests()        
+    }
+    
     internal func removeRequests(){
         for request in dataRequests{
             if request.isFinished{

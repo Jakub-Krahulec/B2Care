@@ -61,6 +61,7 @@
 		2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */; };
 		2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */; };
 		2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B66EF259A2B8600FF7105 /* documentsData.swift */; };
+		2A642BFD25B8D15100246379 /* UIRefreshControlExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */; };
 		2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */; };
 		2A6946A425B4AD220045ECA0 /* TitleWithImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6946A325B4AD220045ECA0 /* TitleWithImageView.swift */; };
 		2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1EA2598DB80002FE11A /* MedicationModel.swift */; };
@@ -157,6 +158,7 @@
 		2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		2A5B66EF259A2B8600FF7105 /* documentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentsData.swift; sourceTree = "<group>"; };
+		2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControlExtensions.swift; sourceTree = "<group>"; };
 		2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		2A6946A325B4AD220045ECA0 /* TitleWithImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithImageView.swift; sourceTree = "<group>"; };
 		2A71E1EA2598DB80002FE11A /* MedicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationModel.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				2A58BCCC25AF83B50072DCE4 /* UIViewControllerExtensions.swift */,
 				2A58BCD025AF83D10072DCE4 /* UITextFieldExtensions.swift */,
 				2A58BCD425AF83EC0072DCE4 /* UIApplicationExtensions.swift */,
+				2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */,
 				2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */,
 				2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */,
+				2A642BFD25B8D15100246379 /* UIRefreshControlExtensions.swift in Sources */,
 				2A71E1F72598F2D4002FE11A /* LocationModel.swift in Sources */,
 				2A7EA390259670B000CD8402 /* PatientDetailLine.swift in Sources */,
 				2A29330825ADB7C400E3A71B /* DateExtensions.swift in Sources */,
