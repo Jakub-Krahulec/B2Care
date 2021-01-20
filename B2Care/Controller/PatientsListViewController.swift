@@ -20,6 +20,8 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     private var patients: PatientsData?
     {
         didSet{
+            refreshControl.programaticallyEndRefreshing(in: table)
+//            UIView.transition(with: table, duration: 1.0, options: .transitionCrossDissolve, animations: {self.table.reloadData()}, completion: nil)
             table.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
@@ -105,9 +107,9 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     }
     
     private func fetchPatients(){
-        var params = ""
-        cancelDataRequests()
         refreshControl.programaticallyBeginRefreshing(in: table)
+        cancelDataRequests()
+        var params = ""
         if let text = searchBar.text  {
             if text.count > 0{
                 params = "?search=\(text)"
@@ -118,7 +120,6 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
             switch result{
                 case .success(let data):
                     this.patients = data
-                    this.refreshControl.endRefreshing()
                 case .failure(let error):
                     if (!(error.asAFError?.isExplicitlyCancelledError ?? true)){
                     this.showMessage(withTitle: NSLocalizedString("error", comment: ""), message: error.localizedDescription)
@@ -131,8 +132,9 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     }
     
     private func prepareRefreshControlStyle(){
-        //  refreshControl.attributedTitle = NSAttributedString(string: "Potažením zaktualizujete data")
+       // refreshControl.attributedTitle = NSAttributedString(string: "Načítám")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+       // table.addSubview(refreshControl)
         table.refreshControl = refreshControl
     }
     
