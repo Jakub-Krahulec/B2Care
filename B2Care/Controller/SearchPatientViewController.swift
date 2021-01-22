@@ -26,7 +26,6 @@ class SearchPatientViewController: BaseViewController {
         if let _ = AVCaptureDevice.default(for: AVMediaType.video) {
             session.startRunning()
         }
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {

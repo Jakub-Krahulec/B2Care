@@ -67,7 +67,7 @@ class LoginView: UIView {
                     }
                 case .failure(let error):
                     this.startErrorMode(message: error.localizedDescription)
-                    return
+                   // return
             }
             this.removeBluerLoader()
         }

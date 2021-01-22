@@ -18,8 +18,6 @@ class StartingViewController: BaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
         let user = B2CareService.shared.getUserData()
         if let _ = user{
             navigationController?.pushViewController(MainTabViewController(), animated: false)
@@ -35,6 +33,7 @@ class StartingViewController: BaseViewController{
 
     private func prepareView(){
         view.showBlurLoader()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         let user = B2CareService.shared.getUserData()
         if let _ = user {

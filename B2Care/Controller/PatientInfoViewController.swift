@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class PatientInfoViewController: BaseViewController {
     
@@ -28,6 +29,8 @@ class PatientInfoViewController: BaseViewController {
     private let proffesionInfoBox = SmallInfoBox()
     private let contactsStack = UIStackView()
     private let addressStack = UIStackView()
+    
+    private let mapView = MKMapView()
     
     var patientId: Int? {
         didSet{
@@ -87,6 +90,26 @@ class PatientInfoViewController: BaseViewController {
         proffesionInfoBox.updateView(image: UIImage(systemName: "tag.fill"), title: NSLocalizedString("proffession", comment: ""), value: person.jobDescription  ?? "-")
         
         view.removeBluerLoader()
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(person.fullAddress) { [weak self] (placemarks, erros) in
+            guard let placemarks = placemarks,
+                  let location = placemarks.first?.location
+            else {
+                //Nemám lokaci
+                return
+            }
+            let annotation = MKPointAnnotation()
+            annotation.title = person.fullAddress
+            annotation.coordinate = location.coordinate
+            self?.mapView.addAnnotation(annotation)
+            
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: CLLocationDistance(5000), longitudinalMeters: CLLocationDistance(5000))
+            if let region = self?.mapView.regionThatFits(region){
+                self?.mapView.setRegion(region, animated: true)
+            }
+        }
+        
     }
     
     private func prepareView(){
@@ -98,6 +121,7 @@ class PatientInfoViewController: BaseViewController {
         prepareHorizontalStack(contactsStack, smallInfos: [personalPhoneInfoBox,doctorPhoneInfoBox])
         prepareHorizontalStack(addressStack, smallInfos: [addressInfoBox,proffesionInfoBox])
         prepareVerticalStackStyle()
+        prepareMapViewStyle()
         
         personalPhoneInfoBox.delegate = self
         doctorPhoneInfoBox.delegate = self
@@ -143,12 +167,20 @@ class PatientInfoViewController: BaseViewController {
         verticalStack.addArrangedSubview(importantInfoBox)
         verticalStack.addArrangedSubview(contactsStack)
         verticalStack.addArrangedSubview(addressStack)
+        verticalStack.addArrangedSubview(mapView)
         
         scrollView.addSubview(verticalStack)
         verticalStack.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.width.equalToSuperview()
             make.bottom.equalTo(scrollView)
+        }
+    }
+    
+    private func prepareMapViewStyle(){
+        mapView.layer.cornerRadius = 10
+        mapView.snp.makeConstraints { (make) in
+            make.height.equalTo(self.view).dividedBy(3)
         }
     }
 }
