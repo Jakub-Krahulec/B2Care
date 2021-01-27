@@ -12,7 +12,7 @@ class TitleWithImageView: UIView {
     // MARK: - Properties
     private let titleLabel = UILabel()
     private let titleImage = UIImageView()
-    private let imageSize = 23
+    public let imageSize = 23
     
     // MARK: - Lifecycle
     

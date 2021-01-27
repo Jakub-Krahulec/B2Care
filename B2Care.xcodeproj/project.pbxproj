@@ -42,6 +42,7 @@
 		2A2932FC25ADB68500E3A71B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0F258E25925C1C0077DD02 /* NetworkService.swift */; };
 		2A29330825ADB7C400E3A71B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtensions.swift */; };
 		2A29330D25ADB7D200E3A71B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A29330725ADB7C400E3A71B /* DateExtensions.swift */; };
+		2A32D78125C063C600486852 /* HorizontalHalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A32D78025C063C600486852 /* HorizontalHalfSizePresentationController.swift */; };
 		2A4D6DE225A5BF050040CFA2 /* PatientGraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */; };
 		2A4D6DE525A5D1780040CFA2 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */; };
 		2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */; };
@@ -88,9 +89,11 @@
 		2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEEF25923EF700431A1C /* LoginViewController.swift */; };
 		2A93CEF525923EF900431A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF425923EF900431A1C /* Assets.xcassets */; };
 		2A93CEF825923EF900431A1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A93CEF625923EF900431A1C /* LaunchScreen.storyboard */; };
+		2AAADC0225BF24660019A674 /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAADC0125BF24660019A674 /* HalfSizePresentationController.swift */; };
 		2AB71B3325936B6000965423 /* PatientInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB71B3225936B6000965423 /* PatientInfoViewController.swift */; };
 		2AC9310725B0D40300AD4B56 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310625B0D40300AD4B56 /* UserViewController.swift */; };
 		2AC9310F25B20FFB00AD4B56 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */; };
+		2ACDFE2025BF2BEC004974A4 /* PatientPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */; };
 		2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */; };
 		427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */; };
 		6CF4EC9BEB732B577EDBCA0D /* Pods_B2CareWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2EBD2067EAC21B9F07FB22 /* Pods_B2CareWidgetExtension.framework */; };
@@ -137,6 +140,7 @@
 		2A210E2225ADD1670059E4B8 /* B2CareWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = B2CareWidgetExtension.entitlements; sourceTree = "<group>"; };
 		2A2932BB25ADAE8A00E3A71B /* ColorsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsExtensions.swift; sourceTree = "<group>"; };
 		2A29330725ADB7C400E3A71B /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		2A32D78025C063C600486852 /* HorizontalHalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHalfSizePresentationController.swift; sourceTree = "<group>"; };
 		2A4D6DE125A5BF050040CFA2 /* PatientGraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientGraphsViewController.swift; sourceTree = "<group>"; };
 		2A4D6DE425A5D1780040CFA2 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
 		2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
@@ -187,9 +191,11 @@
 		2A93CEF425923EF900431A1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A93CEF725923EF900431A1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A93CEF925923EF900431A1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AAADC0125BF24660019A674 /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
 		2AB71B3225936B6000965423 /* PatientInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientInfoViewController.swift; sourceTree = "<group>"; };
 		2AC9310625B0D40300AD4B56 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
+		2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientPlanViewController.swift; sourceTree = "<group>"; };
 		2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		3ADEEFED0B0820B57371846E /* Pods-B2CareWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2CareWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-B2CareWidgetExtension/Pods-B2CareWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,6 +266,9 @@
 				2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */,
 				2AC9310625B0D40300AD4B56 /* UserViewController.swift */,
 				2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */,
+				2AAADC0125BF24660019A674 /* HalfSizePresentationController.swift */,
+				2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */,
+				2A32D78025C063C600486852 /* HorizontalHalfSizePresentationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -656,6 +665,7 @@
 				2A02F1082594B5FF00DC26E1 /* BigInfoBox.swift in Sources */,
 				2A6946A425B4AD220045ECA0 /* TitleWithImageView.swift in Sources */,
 				2A58BCD125AF83D10072DCE4 /* UITextFieldExtensions.swift in Sources */,
+				2ACDFE2025BF2BEC004974A4 /* PatientPlanViewController.swift in Sources */,
 				2A0F259F25933FAF0077DD02 /* PatientsListViewController.swift in Sources */,
 				2A02F1052594AB5300DC26E1 /* SmallInfoBox.swift in Sources */,
 				2A93CEF025923EF700431A1C /* LoginViewController.swift in Sources */,
@@ -677,6 +687,7 @@
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
 				2A2932BC25ADAE8A00E3A71B /* ColorsExtensions.swift in Sources */,
+				2AAADC0225BF24660019A674 /* HalfSizePresentationController.swift in Sources */,
 				2A0F2599259333070077DD02 /* PasswordInputField.swift in Sources */,
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
 				2A4D6E1525A781AA0040CFA2 /* StartingViewController.swift in Sources */,
@@ -689,6 +700,7 @@
 				2A4D6DE825A5D52C0040CFA2 /* GraphModel.swift in Sources */,
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
 				2A71E204259A0A80002FE11A /* PatientDocumentsViewController.swift in Sources */,
+				2A32D78125C063C600486852 /* HorizontalHalfSizePresentationController.swift in Sources */,
 				2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */,
 				2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */,
 			);

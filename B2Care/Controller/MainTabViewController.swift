@@ -47,6 +47,26 @@ class MainTabViewController: UITabBarController {
         viewControllers = [nav1 , nav2 ]
     }
     
+//    private func prepareView(){
+//        view.backgroundColor = .clear
+//        
+//        let patientListVC = PatientsListViewController()
+//        patientListVC.tabBarItem.title = NSLocalizedString("patient-list", comment: "")
+//        patientListVC.tabBarItem.image = UIImage(systemName: "person.3.fill")
+//        
+//        let cameraVC = SearchPatientViewController()
+//        cameraVC.tabBarItem.title = NSLocalizedString("patient-search", comment: "")
+//        cameraVC.tabBarItem.image = UIImage(systemName: "qrcode.viewfinder")
+//        
+//        let nav1 = patientListVC
+//       // prepareNavigationControllerStyle(nav: nav1)
+//        
+//        let nav2 =  cameraVC
+//      //  prepareNavigationControllerStyle(nav: nav2)
+//        
+//        viewControllers = [nav1 , nav2 ]
+//    }
+//    
     
     
 }

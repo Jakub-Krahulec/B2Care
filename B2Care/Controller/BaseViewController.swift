@@ -85,17 +85,29 @@ class BaseViewController: UIViewController {
     }
     
     @objc internal func handleUserButtonTapped(){
-        let transition:CATransition = CATransition()
-        transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
-        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+//        let transition:CATransition = CATransition()
+//        transition.duration = 0.3
+//        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+//        transition.type = CATransitionType.push
+//        transition.subtype = CATransitionSubtype.fromLeft
+//        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+//
+//        let controller = UserViewController()
+//        controller.hidesBottomBarWhenPushed = true
+//
+//        self.navigationController?.pushViewController(controller, animated: false)
         
         let controller = UserViewController()
-        controller.hidesBottomBarWhenPushed = true
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .custom
+        controller.view.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        controller.view.layer.borderWidth = 2
+        controller.view.layer.cornerRadius = 20
+        //   controller.modalTransitionStyle = .flipHorizontal
+        //    controller.view.layer.cornerRadius = 40
         
-        self.navigationController?.pushViewController(controller, animated: false)
+        present(controller, animated: true, completion: nil)
+        
     }
     
     @objc internal func handleDidEnterBackground(){
@@ -219,4 +231,45 @@ class BaseViewController: UIViewController {
         }
         
     }
+}
+
+extension BaseViewController: UIViewControllerTransitioningDelegate{
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        // return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
+        return HorizontalHalfSizePresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self
+    }
+}
+
+extension BaseViewController: UIViewControllerAnimatedTransitioning{
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 1.5
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {return}
+        let finalFrameForVC = transitionContext.finalFrame(for: toViewController)
+        let containerView = transitionContext.containerView
+        let bounds = UIScreen.main.bounds
+        toViewController.view.frame = finalFrameForVC.offsetBy(dx: -bounds.size.width, dy: 0)
+        toViewController.view.alpha = 0
+        containerView.addSubview(toViewController.view)
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.4, options: .transitionFlipFromLeft, animations: {
+            toViewController.view.frame = finalFrameForVC
+            toViewController.view.alpha = 1
+        }, completion: {
+            finished in
+            transitionContext.completeTransition(true)
+        })
+    }
+    
+    
 }

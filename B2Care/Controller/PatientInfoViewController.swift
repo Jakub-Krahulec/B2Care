@@ -100,7 +100,7 @@ class PatientInfoViewController: BaseViewController {
                 return
             }
             let annotation = MKPointAnnotation()
-            annotation.title = person.fullAddress
+            annotation.title = person.fullName
             annotation.coordinate = location.coordinate
             self?.mapView.addAnnotation(annotation)
             

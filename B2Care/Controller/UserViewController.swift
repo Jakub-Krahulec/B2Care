@@ -11,11 +11,10 @@ import LocalAuthentication
 class UserViewController: BaseViewController {
     // MARK: - Properties
     
-    private let backButton = UIButton()
-    
-    private let settingsTitleLabel = UILabel()
-    
     // Pokud se bude přidávat předělat na table view
+    private let userTitle = UILabel()
+    private let emailLabel = UILabel()
+    private let userPhoto = UIImageView()
     private let privacyIcon = UIImageView()
     private let privacyLabel = UILabel()
     private let privacySwitch = UISwitch()
@@ -85,7 +84,9 @@ class UserViewController: BaseViewController {
     private func prepareView(){
         view.backgroundColor = .backgroundLight
         
-        prepareNavigationView()
+        prepareUserPhotoStyle()
+        prepareUserTitleStyle()
+        prepareEmailLabelStyle()
         
         preparePrivacyBackgroundStyle()
         preparePrivacyIconStyle()
@@ -96,28 +97,63 @@ class UserViewController: BaseViewController {
     }
     
     private func preparePrivacyBackgroundStyle(){
-        privacyBackgroundView.backgroundColor = .white
+        privacyBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        privacyBackgroundView.layer.borderWidth = 2
+        privacyBackgroundView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
         
         view.addSubview(privacyBackgroundView)
         privacyBackgroundView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(5)
+            //make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
+            make.top.equalTo(emailLabel.snp.bottom).offset(15)
             make.height.equalTo(45)
             make.left.right.equalToSuperview()
         }
     }
     
-    private func prepareNavigationView(){
+    private func prepareEmailLabelStyle(){
         var title = ""
         if let user = user{
-            title = " \(user.name) \(user.surname)"
+            title = "\(user.email)"
         }
-        let titleView = TitleWithImageView()
-        titleView.setImage(UIImage(systemName: "person.fill"), color: .white)
-        titleView.setTitle(title, color: .white)
-        navigationItem.titleView = titleView
+        emailLabel.text = title
+        emailLabel.font = UIFont.systemFont(ofSize: 15)
+        emailLabel.textColor = .gray
         
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .done, target: self, action: #selector(back(sender:)))
+        view.addSubview(emailLabel)
+        emailLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(userTitle.snp.bottom).offset(1)
+            // make.left.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func prepareUserPhotoStyle(){
+        userPhoto.image = UIImage(systemName: "person.crop.circle")
+        userPhoto.tintColor = UIColor.black.withAlphaComponent(0.8)
+        
+        view.addSubview(userPhoto)
+        userPhoto.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
+            make.height.width.equalTo(view.frame.width / 3)
+        }
+    }
+    
+    private func prepareUserTitleStyle(){
+        var title = ""
+        if let user = user{
+            title = "\(user.name) \(user.surname)"
+        }
+        userTitle.text = title
+        userTitle.font = UIFont.systemFont(ofSize: 24)
+        userTitle.textColor = .black
+        
+        view.addSubview(userTitle)
+        userTitle.snp.makeConstraints { (make) in
+            make.top.equalTo(userPhoto.snp.bottom).offset(10)
+           // make.left.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
+        }
     }
     
     private func preparePrivacyIconStyle(){

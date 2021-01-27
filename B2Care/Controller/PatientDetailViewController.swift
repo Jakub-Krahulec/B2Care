@@ -16,7 +16,7 @@ class PatientDetailViewController: BaseViewController {
     private let patientDetailLine = PatientDetailLine()
     
     private lazy var patientDetailVC = PatientInfoViewController()
-    private lazy var planVC = UIViewController()
+    private lazy var planVC = PatientPlanViewController()
     private lazy var documentVC = PatientDocumentsViewController()
     private lazy var messagesVC = UIViewController()
     private lazy var grphsVC = PatientGraphsViewController()
@@ -212,7 +212,6 @@ class PatientDetailViewController: BaseViewController {
                 changeChildVC(to: patientDetailVC)
             case 1:
                 changeChildVC(to: planVC, showButtons: false)
-                planVC.view.backgroundColor = .systemPink
             case 2:
                 changeChildVC(to: documentVC, showButtons: false)
             case 3:

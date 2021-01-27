@@ -37,6 +37,7 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
         super.viewWillAppear(animated)
         setupKeyboardNotificationObservers()
         fetchPatients()
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

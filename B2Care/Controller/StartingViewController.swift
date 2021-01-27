@@ -33,7 +33,11 @@ class StartingViewController: BaseViewController{
 
     private func prepareView(){
         view.showBlurLoader()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if let nav = navigationController{
+            nav.setNavigationBarHidden(true, animated: false)
+            prepareNavigationControllerStyle(nav: nav)
+        }
         
         let user = B2CareService.shared.getUserData()
         if let _ = user {
