@@ -102,9 +102,8 @@ class BaseViewController: UIViewController {
         controller.modalPresentationStyle = .custom
         controller.view.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
         controller.view.layer.borderWidth = 2
-        controller.view.layer.cornerRadius = 20
+       // controller.view.layer.cornerRadius = 20
         //   controller.modalTransitionStyle = .flipHorizontal
-        //    controller.view.layer.cornerRadius = 40
         
         present(controller, animated: true, completion: nil)
         
