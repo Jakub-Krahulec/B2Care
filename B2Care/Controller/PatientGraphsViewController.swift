@@ -19,9 +19,7 @@ class PatientGraphsViewController: BaseViewController {
             updateView(with: data)
         }
     }
-    
-    
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

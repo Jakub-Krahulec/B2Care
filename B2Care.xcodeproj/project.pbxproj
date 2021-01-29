@@ -65,6 +65,9 @@
 		2A642BFD25B8D15100246379 /* UIRefreshControlExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */; };
 		2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */; };
 		2A6946A425B4AD220045ECA0 /* TitleWithImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6946A325B4AD220045ECA0 /* TitleWithImageView.swift */; };
+		2A69ED4325C30D8200C19A68 /* PatientMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A69ED4225C30D8200C19A68 /* PatientMessagesViewController.swift */; };
+		2A69ED4725C3152700C19A68 /* VerticalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A69ED4625C3152700C19A68 /* VerticalPresentationController.swift */; };
+		2A69ED4B25C3181B00C19A68 /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A69ED4A25C3181B00C19A68 /* PlaceDetailViewController.swift */; };
 		2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1EA2598DB80002FE11A /* MedicationModel.swift */; };
 		2A71E1EE2598DBFD002FE11A /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1ED2598DBFD002FE11A /* AddressModel.swift */; };
 		2A71E1F12598DC78002FE11A /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1F02598DC78002FE11A /* ContactModel.swift */; };
@@ -165,6 +168,9 @@
 		2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControlExtensions.swift; sourceTree = "<group>"; };
 		2A6655EC25A0C6B0001BCD32 /* LoginHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		2A6946A325B4AD220045ECA0 /* TitleWithImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithImageView.swift; sourceTree = "<group>"; };
+		2A69ED4225C30D8200C19A68 /* PatientMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMessagesViewController.swift; sourceTree = "<group>"; };
+		2A69ED4625C3152700C19A68 /* VerticalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPresentationController.swift; sourceTree = "<group>"; };
+		2A69ED4A25C3181B00C19A68 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 		2A71E1EA2598DB80002FE11A /* MedicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationModel.swift; sourceTree = "<group>"; };
 		2A71E1ED2598DBFD002FE11A /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		2A71E1F02598DC78002FE11A /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
@@ -269,6 +275,9 @@
 				2AAADC0125BF24660019A674 /* HalfSizePresentationController.swift */,
 				2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */,
 				2A32D78025C063C600486852 /* HorizontalHalfSizePresentationController.swift */,
+				2A69ED4225C30D8200C19A68 /* PatientMessagesViewController.swift */,
+				2A69ED4625C3152700C19A68 /* VerticalPresentationController.swift */,
+				2A69ED4A25C3181B00C19A68 /* PlaceDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -679,10 +688,12 @@
 				2A4D6E3425AD115D0040CFA2 /* B2CareWidget.intentdefinition in Sources */,
 				2A93CEEE25923EF700431A1C /* SceneDelegate.swift in Sources */,
 				2A8E35B125A13AA500AE263D /* BlurLoader.swift in Sources */,
+				2A69ED4B25C3181B00C19A68 /* PlaceDetailViewController.swift in Sources */,
 				2A58BCC925AF83940072DCE4 /* UIViewExtensions.swift in Sources */,
 				2A71E20025993904002FE11A /* PatientDetailViewController.swift in Sources */,
 				2A5B66F0259A2B8600FF7105 /* documentsData.swift in Sources */,
 				2A8E35AE25A114A400AE263D /* BaseViewController.swift in Sources */,
+				2A69ED4325C30D8200C19A68 /* PatientMessagesViewController.swift in Sources */,
 				2A6655ED25A0C6B0001BCD32 /* LoginHeaderView.swift in Sources */,
 				2A0F259325925C8C0077DD02 /* B2CareService.swift in Sources */,
 				2A0F259625926BD00077DD02 /* UserModel.swift in Sources */,
@@ -701,6 +712,7 @@
 				2A0F259C259335010077DD02 /* BaseInputField.swift in Sources */,
 				2A71E204259A0A80002FE11A /* PatientDocumentsViewController.swift in Sources */,
 				2A32D78125C063C600486852 /* HorizontalHalfSizePresentationController.swift in Sources */,
+				2A69ED4725C3152700C19A68 /* VerticalPresentationController.swift in Sources */,
 				2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */,
 				2A7EA39925968D4900CD8402 /* ContactSmallInfoBox.swift in Sources */,
 			);

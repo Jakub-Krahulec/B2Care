@@ -269,6 +269,4 @@ extension BaseViewController: UIViewControllerAnimatedTransitioning{
             transitionContext.completeTransition(true)
         })
     }
-    
-    
 }

@@ -14,6 +14,7 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     
     private let table = UITableView()
     private let userButton = UIButton()
+    private let searchController = UISearchController(searchResultsController: nil)
     private let searchBar = UISearchBar()
     private var refreshControl = UIRefreshControl()
     
@@ -23,6 +24,8 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
             refreshControl.programaticallyEndRefreshing(in: table)
 //            UIView.transition(with: table, duration: 1.0, options: .transitionCrossDissolve, animations: {self.table.reloadData()}, completion: nil)
             table.reloadSections(IndexSet(integer: 0), with: .automatic)
+
+         //   table.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
     
@@ -88,9 +91,29 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
         view.backgroundColor = .backgroundLight
         
         prepareUserButtonStyle(userButton)
-        prepareSearchInputStyle()
+       // prepareSearchInputStyle()
+        
         prepareTableViewStyle()
         prepareRefreshControlStyle()
+        // test jiné implementace searchbaru
+        prepareSearchControllerStyle()
+    }
+    
+    private func prepareSearchControllerStyle(){
+        title = "Seznam pacientů"
+        searchController.searchBar.placeholder = NSLocalizedString("search-patient", comment: "")
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.backgroundColor = UIColor.white.withAlphaComponent(1)
+        searchController.searchBar.layer.cornerRadius = 12
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        
+        definesPresentationContext = true
+    
+        // UISearchbackground
+        
+        table.tableHeaderView = searchController.searchBar
     }
     
     private func prepareSearchInputStyle(){
@@ -110,11 +133,17 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
         refreshControl.programaticallyBeginRefreshing(in: table)
         cancelDataRequests()
         var params = ""
-        if let text = searchBar.text  {
-            if text.count > 0{
-                params = "?search=\(text)"
+//        if let text = searchBar.text  {
+//            if text.count > 0{
+//                params = "?search=\(text)"
+//            }
+//        }
+            if let text = searchController.searchBar.text{
+                if text.count > 0{
+                    params = "?search=\(text)"
+                }
             }
-        }
+        
         let request = B2CareService.shared.fetchPatients(parameters: params) { [weak self] (result) in
             guard let this = self else {return}
             switch result{
@@ -134,6 +163,7 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
     private func prepareRefreshControlStyle(){
        // refreshControl.attributedTitle = NSAttributedString(string: "Načítám")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refreshControl.backgroundColor = .backgroundLight
        // table.addSubview(refreshControl)
         table.refreshControl = refreshControl
     }
@@ -153,6 +183,12 @@ class PatientsListViewController: BaseViewController, UISearchControllerDelegate
             make.left.right.bottom.equalToSuperview().inset(5)
             make.top.equalToSuperview().offset(5)
         }
+        
+        // TEST DRUHÉHO SEARCH BARU
+//        table.snp.makeConstraints { (make) in
+//            make.left.right.bottom.equalToSuperview()
+//            make.top.equalToSuperview()
+//        }
     }
 }
 
@@ -261,4 +297,12 @@ extension PatientsListViewController: UIGestureRecognizerDelegate {
         // searchBar.endEditing(true)
         return true
     }
+}
+
+extension PatientsListViewController: UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        handleSearchChangedValue()
+    }
+    
+    
 }
