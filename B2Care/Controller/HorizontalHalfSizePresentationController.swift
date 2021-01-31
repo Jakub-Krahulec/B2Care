@@ -43,7 +43,7 @@ class HorizontalHalfSizePresentationController: UIPresentationController {
             let absVelocity = abs(velocity.x)
             let duration = absVelocity > 200 ? 0.3 : absVelocity > 100 ? 0.4 : absVelocity > 50 ? 0.5 : absVelocity > 25 ? 0.6 : 0.7
             
-            var cancel = lastPosition < velocity.x && velocity.x > 100
+            let cancel = lastPosition < velocity.x && velocity.x > 100
  
             if translation.x < ((view.frame.width / 100) * 20) * -1 && !cancel{
                 UIView.animate(withDuration: duration, animations: {

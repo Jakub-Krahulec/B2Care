@@ -17,9 +17,38 @@ class VerticalPresentationController: UIPresentationController {
     
     private let closeButton = UIButton()
     private let dragLine = UIView()
+    public var scrollView: UIScrollView?{
+        didSet{
+            guard let scroll = scrollView else {return}
+            scroll.isScrollEnabled = state == .fullScreen ? true : false
+            scroll.panGestureRecognizer.addTarget(self, action: #selector(handleScroll(_:)))
+        }
+    }
     
-    private var state = VerticalPresentationState.halfScreen
+    private var state = VerticalPresentationState.halfScreen{
+        didSet{
+            guard let scroll = scrollView else {return}
+            switch state {
+                case .fullScreen:
+                    scroll.isScrollEnabled = true
+                case .halfScreen:
+                    scroll.isScrollEnabled = false
+                    scroll.setContentOffset(.zero, animated: true)
+                case .almostClosed:
+                    scroll.isScrollEnabled = false
+                    scroll.setContentOffset(.zero, animated: true)
+            }
+        }
+    }
+    
     private var lastPositionY: CGFloat = 0
+    private let topMargin: CGFloat = 50
+    private let bottomMargin: CGFloat = 20
+    private var shouldScrollViewDrag = false
+    private var maxScrolledY: CGFloat = 0
+    private var modalHeight: CGFloat {
+        return UIScreen.main.bounds.height - topMargin
+    }
     
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
@@ -27,61 +56,124 @@ class VerticalPresentationController: UIPresentationController {
         guard let container = containerView else {
             return
         }
-        container.frame = CGRect(x: 0, y: container.bounds.height / 2, width: container.bounds.width, height: container.bounds.height - 50)
+        
+        let height = UIScreen.main.bounds.height - topMargin
+        container.frame = CGRect(x: 0, y: height / 2, width: container.bounds.width, height: height)
     }
     
     @objc private func closeTapped(_ sender: UIButton){
-        guard let view = presentedView else {return}
-        UIView.animate(withDuration: 0.5, animations: {
-            view.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: view.frame.height)
-        }, completion: { (finished) in
-            self.presentingViewController.dismiss(animated: false, completion: nil)
-        })
+//        guard let container = containerView else {return}
+//        UIView.animate(withDuration: 0.5, animations: {
+//            container.frame = CGRect(x: 0, y: container.frame.height, width: container.frame.width, height: container.frame.height)
+//        }, completion: { (finished) in
+//            self.presentingViewController.dismiss(animated: false, completion: nil)
+//        })
+        
+        self.presentingViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc private func handleScroll(_ sender: UIPanGestureRecognizer){
+        guard let scroll = scrollView,
+              let container = containerView else {return}
+        let scrollOffset = scroll.contentOffset.y;
+        // Pokud uživatel scrolluje nad obsah, tak začnu hýbat celým modalem
+        if scrollOffset <= 0{
+            shouldScrollViewDrag = true
+            scroll.contentOffset = CGPoint(x: 0, y: 0)
+            handleDrag(sender)
+            // Pokud se začne během dragování vracet (druhý směr - nahoru)
+        } else if shouldScrollViewDrag {
+            //Pokud není úplně nahoře tak draguju,
+            if container.frame.origin.y > topMargin{
+                scroll.contentOffset = CGPoint(x: 0, y: 0)
+                handleDrag(sender)
+                // jinak přejdu na scroll
+            } else {
+                shouldScrollViewDrag = false
+                print("FALSE")
+            }
+            
+        } else {
+            // Pokud uživatel scrolluje tak si ukládám pozici
+            maxScrolledY = sender.translation(in: scroll).y
+        }
+        
+        if sender.state == .ended{
+            shouldScrollViewDrag = false
+            maxScrolledY = 0
+        }
+        
     }
     
     @objc private func handleDrag(_ sender: UIPanGestureRecognizer){
         guard let container = containerView else {return}
         
         let translation = sender.translation(in: container)
-        let velocity = sender.velocity(in: presentedView)
-        let bottomMargin: CGFloat = 20
-        let height = UIScreen.main.bounds.height - 50
         
         let currentY: CGFloat =
             state == .halfScreen ? container.bounds.height / 2
-            : state == .fullScreen ? 50
+            : state == .fullScreen ? topMargin
             : container.bounds.height - bottomMargin
         
-        let nextPositionY = currentY + translation.y
-        if nextPositionY <= container.bounds.height - bottomMargin && nextPositionY >= 50{
+        // Vemu aktuální Y (viditelnou výšku v podstatě) a přidám translation a odečtu co uživatel případně nascrolloval (defaultně je maxScrolledY 0)
+        let nextPositionY = currentY + translation.y - maxScrolledY
+        
+        
+        // Pokud uživatel překročí horní hranici modalu
+        if nextPositionY < topMargin {
+            container.frame = CGRect(x: 0, y: topMargin, width: container.bounds.width, height: modalHeight)
+            if !shouldScrollViewDrag && nextPositionY <= 0{
+                scrollView?.contentOffset = CGPoint(x: 0, y: abs(nextPositionY))
+            }
+        } else if nextPositionY > modalHeight - bottomMargin{
+            container.frame = CGRect(x: 0, y: modalHeight - bottomMargin, width: container.bounds.width, height: modalHeight)
+        } else {
             container.frame = CGRect(x: 0, y: nextPositionY, width: container.bounds.width, height: container.bounds.height)
-            lastPositionY = nextPositionY
-        }
-        
-        
-        if sender.state == .ended{
-            let absVelocity = abs(velocity.y)
-            let duration = absVelocity > 200 ? 0.1 : absVelocity > 100 ? 0.3 : absVelocity > 50 ? 0.4 : absVelocity > 25 ? 0.5 : 0.6
             
-            if nextPositionY >= (container.bounds.height / 100) * 85{
-                UIView.animate(withDuration: duration) {
-                    container.frame = CGRect(x: 0, y: height - bottomMargin, width: container.bounds.width, height: container.bounds.height)
+            if let scroll = scrollView{
+                if scroll.contentOffset.y > 0{
+                    scroll.setContentOffset(.zero, animated: false)
                 }
-                self.state = .almostClosed
-                
-            } else if nextPositionY > container.bounds.height / 3  {
-                
-                UIView.animate(withDuration: duration) {
-                    container.frame = CGRect(x: 0, y: height / 2, width: container.bounds.width, height: container.bounds.height)
-                }
-                self.state = .halfScreen
-            } else {
-                UIView.animate(withDuration: duration){
-                    container.frame = CGRect(x: 0, y: 50, width: container.bounds.width, height: container.bounds.height)
-                }
-                self.state = .fullScreen
             }
         }
+        
+        if sender.state == .ended{
+            let duration = 0.5
+            
+            if nextPositionY >= (container.bounds.height / 100) * 85{
+                setAlmostClosed(duration: duration)
+            } else if nextPositionY > container.bounds.height / 3  {
+                setHalfScreen(duration: duration)
+            } else {
+                setFullScreen(duration: duration)
+                print("FULLSCREEN")
+            }
+        }
+    }
+    
+    private func setAlmostClosed(duration: Double){
+        guard let container = containerView else {return}
+        UIView.animate(withDuration: duration) {
+            container.frame = CGRect(x: 0, y: self.modalHeight - self.bottomMargin, width: container.bounds.width, height: container.bounds.height)
+        }
+        self.state = .almostClosed
+    }
+    
+    private func setHalfScreen(duration: Double){
+        guard let container = containerView else {return}
+        UIView.animate(withDuration: duration) {
+            container.frame = CGRect(x: 0, y: self.modalHeight / 2, width: container.bounds.width, height: container.bounds.height)
+        }
+        self.state = .halfScreen
+    }
+    
+    private func setFullScreen(duration: Double){
+        guard let container = containerView else {return}
+        UIView.animate(withDuration: duration){
+            container.frame = CGRect(x: 0, y: 50, width: container.bounds.width, height: container.bounds.height)
+        }
+        self.state = .fullScreen
     }
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
@@ -105,7 +197,7 @@ class VerticalPresentationController: UIPresentationController {
                 make.width.height.equalTo(35)
             }
             
-            dragLine.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            dragLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
             dragLine.layer.cornerRadius = 3
             
             view.addSubview(dragLine)

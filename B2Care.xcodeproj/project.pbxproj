@@ -97,6 +97,9 @@
 		2AC9310725B0D40300AD4B56 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310625B0D40300AD4B56 /* UserViewController.swift */; };
 		2AC9310F25B20FFB00AD4B56 /* SecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */; };
 		2ACDFE2025BF2BEC004974A4 /* PatientPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */; };
+		2AF5E25B25C5E34600302BD9 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5E25A25C5E34600302BD9 /* PlaceModel.swift */; };
+		2AF5E25F25C5E47800302BD9 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5E25E25C5E47800302BD9 /* Places.swift */; };
+		2AF5E26325C6015300302BD9 /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5E26225C6015300302BD9 /* MKMapViewExtension.swift */; };
 		2AFC763F25A5B58400B7E798 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */; };
 		427197C6A16CD8F863417A11 /* Pods_B2Care.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */; };
 		6CF4EC9BEB732B577EDBCA0D /* Pods_B2CareWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2EBD2067EAC21B9F07FB22 /* Pods_B2CareWidgetExtension.framework */; };
@@ -202,6 +205,9 @@
 		2AC9310625B0D40300AD4B56 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2AC9310E25B20FFA00AD4B56 /* SecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityViewController.swift; sourceTree = "<group>"; };
 		2ACDFE1F25BF2BEC004974A4 /* PatientPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientPlanViewController.swift; sourceTree = "<group>"; };
+		2AF5E25A25C5E34600302BD9 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		2AF5E25E25C5E47800302BD9 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
+		2AF5E26225C6015300302BD9 /* MKMapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
 		2AFC763E25A5B58400B7E798 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
 		3ADEEFED0B0820B57371846E /* Pods-B2CareWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2CareWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-B2CareWidgetExtension/Pods-B2CareWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		492B1729EB01DC0BAEAF2B5C /* Pods_B2Care.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_B2Care.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +258,7 @@
 				2A58BCD025AF83D10072DCE4 /* UITextFieldExtensions.swift */,
 				2A58BCD425AF83EC0072DCE4 /* UIApplicationExtensions.swift */,
 				2A642BFC25B8D15100246379 /* UIRefreshControlExtensions.swift */,
+				2AF5E26225C6015300302BD9 /* MKMapViewExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -317,6 +324,7 @@
 				2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */,
 				2A5B66EC259A0E1E00FF7105 /* DocumentModel.swift */,
 				2A4D6DE725A5D52C0040CFA2 /* GraphModel.swift */,
+				2AF5E25A25C5E34600302BD9 /* PlaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				2A5B66EF259A2B8600FF7105 /* documentsData.swift */,
+				2AF5E25E25C5E47800302BD9 /* Places.swift */,
 			);
 			path = "Hard Coded Data";
 			sourceTree = "<group>";
@@ -655,6 +664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */,
+				2AF5E26325C6015300302BD9 /* MKMapViewExtension.swift in Sources */,
 				2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */,
 				2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */,
 				2A642BFD25B8D15100246379 /* UIRefreshControlExtensions.swift in Sources */,
@@ -665,11 +675,13 @@
 				2A0F258B25924CD20077DD02 /* LoginView.swift in Sources */,
 				2A5B66EA259A0CF000FF7105 /* DocumentCell.swift in Sources */,
 				2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */,
+				2AF5E25B25C5E34600302BD9 /* PlaceModel.swift in Sources */,
 				2A0F25AD259360980077DD02 /* SearchPatientViewController.swift in Sources */,
 				2AC9310F25B20FFB00AD4B56 /* SecurityViewController.swift in Sources */,
 				2A71E1EB2598DB80002FE11A /* MedicationModel.swift in Sources */,
 				2A71E1F42598DD13002FE11A /* DoctorModel.swift in Sources */,
 				2A5B66ED259A0E1E00FF7105 /* DocumentModel.swift in Sources */,
+				2AF5E25F25C5E47800302BD9 /* Places.swift in Sources */,
 				2A888FA52593799100B6E5DC /* PatientsResponse.swift in Sources */,
 				2A02F1082594B5FF00DC26E1 /* BigInfoBox.swift in Sources */,
 				2A6946A425B4AD220045ECA0 /* TitleWithImageView.swift in Sources */,
