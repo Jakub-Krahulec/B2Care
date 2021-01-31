@@ -23,4 +23,4 @@ var zooZlin = Place(id: 3, name: "Zoologická zahrada Zlín", wikiArticle: zoote
 
 let zootext = "Zoologická zahrada Zlín, zvaná také Zoo Lešná, je zoologická zahrada vzdálená asi 10 km od centra Zlína. První Zoo ve Zlíně založil Tomáš Baťa 1. května 1930.[2] Nejprve byla v parku u zlínského zámku a v roce 1934 byla přesunuta na vrchol Tlusté hory, kde byla do poloviny druhé světové války (a kde jsou v lese pod televizním vysílačem dodnes vidět betonové základy klecí). Provozována je jako příspěvková organizace ZOO a zámek Zlín – Lešná. Zoo chová přes 200 druhů zvířat, z nichž mezi atraktivní patří např. ptáci kivi (český unikát[3]), sloni afričtí nebo nosorožci. Zvláštností Zoo je také přímý vstup návštěvníků do expozice pštrosů emu a klokanů. Součástí areálu je botanická zahrada."
 
-var placesHardCoded = PlacesData(places: [helfstyn,slavic,zooZlin])
+var placesHardCoded = PlacesData(places: [helfstyn,slavic])
