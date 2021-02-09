@@ -62,5 +62,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Aplikace potřebuje Vaši polohu kvůli navigaci</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Aplikace chce přisoupit k vašim fotkám</string>
 </dict>
 </plist>

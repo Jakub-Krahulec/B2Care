@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import QuickLook
 
-class PatientPlanViewController: BaseViewController {
+class PatientPlanViewController: BaseViewController, UINavigationControllerDelegate {
 
     // MARK: - Properties
-    private let openButton = UIButton()
+    private let addButton = UIButton()
+    private let pickerController = UIImagePickerController()
+    private let image = UIImageView()
+    var photoURL: URL?
     
     // MARK: - Lifycycle
     override func viewDidLoad() {
@@ -20,14 +24,8 @@ class PatientPlanViewController: BaseViewController {
     
     // MARK: - Actions
     
-    @objc private func handleOpenButtonTapped(_ sender: UIButton){
-        let controller = UserViewController()
-        controller.transitioningDelegate = self
-        controller.modalPresentationStyle = .custom
-     //   controller.modalTransitionStyle = .flipHorizontal
-    //    controller.view.layer.cornerRadius = 40
-        
-        present(controller, animated: true, completion: nil)
+    @objc private func handleAddButtonTapped(_ sender: UIButton){
+        present(pickerController, animated: true)
     }
     
     // MARK: - Helpers
@@ -36,16 +34,30 @@ class PatientPlanViewController: BaseViewController {
         view.backgroundColor = .white
         
         prepareOpenButtonStyle()
+        preparePickerController()
+        
+        view.addSubview(image)
+        image.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.height.width.equalTo(100)
+        }
+    }
+    
+    private func preparePickerController(){
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.mediaTypes = ["public.image", "public.movie"]
+        pickerController.sourceType = .photoLibrary
     }
     
     private func prepareOpenButtonStyle(){
-        openButton.setTitle("Otevři modal", for: .normal)
-        openButton.backgroundColor = .mainColor
-        openButton.layer.cornerRadius = 10
-        openButton.addTarget(self, action: #selector(handleOpenButtonTapped(_:)), for: .touchUpInside)
+        addButton.setTitle("Přidat", for: .normal)
+        addButton.backgroundColor = .mainColor
+        addButton.layer.cornerRadius = 10
+        addButton.addTarget(self, action: #selector(handleAddButtonTapped(_:)), for: .touchUpInside)
         
-        view.addSubview(openButton)
-        openButton.snp.makeConstraints { (make) in
+        view.addSubview(addButton)
+        addButton.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(50)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
@@ -55,17 +67,44 @@ class PatientPlanViewController: BaseViewController {
 
 }
 
-extension PatientPlanViewController{
-    override func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-       // return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
-        return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
+extension PatientPlanViewController: UIImagePickerControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL{
+            photoURL = imgUrl
+            if QLPreviewController.canPreview(imgUrl as QLPreviewItem) {
+                let previewController = QLPreviewController()
+                previewController.dataSource = self
+                previewController.delegate = self
+                previewController.setEditing(true, animated: true)
+                
+                self.present(previewController, animated: true, completion: nil)
+                return
+            }
+        }
+
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PatientPlanViewController: QLPreviewControllerDataSource{
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
     }
     
-    override func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        guard let url = photoURL else {
+            fatalError("Could not load pdf")
+        }
+        return url as QLPreviewItem
+    }
+    
+    func previewController(_ controller: QLPreviewController, editingModeFor previewItem: QLPreviewItem) -> QLPreviewItemEditingMode{
+        return .updateContents
     }
 
-    override func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
-    }
+}
+
+extension PatientPlanViewController: QLPreviewControllerDelegate{
+    
 }
