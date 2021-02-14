@@ -20,7 +20,7 @@ class PatientDetailViewController: BaseViewController {
     private lazy var documentVC = PatientDocumentsViewController()
     private lazy var messagesVC = PatientMessagesViewController()
     private lazy var grphsVC = PatientGraphsViewController()
-    private lazy var historyVC = UIViewController()
+    private lazy var historyVC = PatientHistoryViewController()
     private lazy var currentVC: UIViewController = UIViewController()
     
     lazy var blurEffect = UIBlurEffect(style: .extraLight)
@@ -222,8 +222,7 @@ class PatientDetailViewController: BaseViewController {
                 }
                 changeChildVC(to: grphsVC)
             case 5:
-                changeChildVC(to: historyVC)
-                historyVC.view.backgroundColor = .systemOrange
+                changeChildVC(to: historyVC, showButtons: false)
             default:
                 print("Default")
         }

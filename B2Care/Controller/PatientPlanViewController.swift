@@ -79,11 +79,8 @@ extension PatientPlanViewController: UIImagePickerControllerDelegate{
                 previewController.setEditing(true, animated: true)
                 
                 self.present(previewController, animated: true, completion: nil)
-                return
             }
         }
-
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 

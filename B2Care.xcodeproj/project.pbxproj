@@ -77,6 +77,8 @@
 		2A71E1FD2598F302002FE11A /* HospitalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */; };
 		2A71E20025993904002FE11A /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E1FF25993904002FE11A /* PatientDetailViewController.swift */; };
 		2A71E204259A0A80002FE11A /* PatientDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */; };
+		2A762F5325D5BD3F00B49983 /* PatientHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A762F5225D5BD3F00B49983 /* PatientHistoryViewController.swift */; };
+		2A762F5B25D5D15C00B49983 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A762F5A25D5D15C00B49983 /* PhotoCollectionViewCell.swift */; };
 		2A7EA3762596590A00CD8402 /* PatientResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA3752596590A00CD8402 /* PatientResponse.swift */; };
 		2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37825965B5A00CD8402 /* PatientModel.swift */; };
 		2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */; };
@@ -183,6 +185,8 @@
 		2A71E1FC2598F302002FE11A /* HospitalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalizationModel.swift; sourceTree = "<group>"; };
 		2A71E1FF25993904002FE11A /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		2A71E203259A0A7F002FE11A /* PatientDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDocumentsViewController.swift; sourceTree = "<group>"; };
+		2A762F5225D5BD3F00B49983 /* PatientHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistoryViewController.swift; sourceTree = "<group>"; };
+		2A762F5A25D5D15C00B49983 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A7EA3752596590A00CD8402 /* PatientResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientResponse.swift; sourceTree = "<group>"; };
 		2A7EA37825965B5A00CD8402 /* PatientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientModel.swift; sourceTree = "<group>"; };
 		2A7EA37C25965B7B00CD8402 /* AlergyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlergyModel.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				2A69ED4225C30D8200C19A68 /* PatientMessagesViewController.swift */,
 				2A69ED4625C3152700C19A68 /* VerticalPresentationController.swift */,
 				2A69ED4A25C3181B00C19A68 /* PlaceDetailViewController.swift */,
+				2A762F5225D5BD3F00B49983 /* PatientHistoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 			children = (
 				2A0F25A1259340B90077DD02 /* PatientCell.swift */,
 				2A5B66E9259A0CF000FF7105 /* DocumentCell.swift */,
+				2A762F5A25D5D15C00B49983 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -666,6 +672,7 @@
 				2A7EA38425965BAB00CD8402 /* GenderModel.swift in Sources */,
 				2AF5E26325C6015300302BD9 /* MKMapViewExtension.swift in Sources */,
 				2A7EA38125965B9100CD8402 /* PersonModel.swift in Sources */,
+				2A762F5325D5BD3F00B49983 /* PatientHistoryViewController.swift in Sources */,
 				2A7EA37D25965B7B00CD8402 /* AlergyModel.swift in Sources */,
 				2A642BFD25B8D15100246379 /* UIRefreshControlExtensions.swift in Sources */,
 				2A71E1F72598F2D4002FE11A /* LocationModel.swift in Sources */,
@@ -715,6 +722,7 @@
 				2A0F258F25925C1C0077DD02 /* NetworkService.swift in Sources */,
 				2A4D6E1525A781AA0040CFA2 /* StartingViewController.swift in Sources */,
 				2AC9310725B0D40300AD4B56 /* UserViewController.swift in Sources */,
+				2A762F5B25D5D15C00B49983 /* PhotoCollectionViewCell.swift in Sources */,
 				2A7EA37925965B5A00CD8402 /* PatientModel.swift in Sources */,
 				2A71E1FA2598F2EB002FE11A /* DiagnosisModel.swift in Sources */,
 				2A58BCCD25AF83B50072DCE4 /* UIViewControllerExtensions.swift in Sources */,

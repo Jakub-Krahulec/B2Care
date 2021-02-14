@@ -245,6 +245,22 @@ extension BaseViewController: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return self
     }
+    
+    func saveImage(_ image: UIImage, name: String) -> URL? {
+        let name = "\(name).jpg"
+        guard let imageData = image.jpegData(compressionQuality: 1) else {
+            return nil
+        }
+        do {
+            
+            guard var imageURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {return nil }
+            imageURL = imageURL.appendingPathComponent(name)
+            try imageData.write(to: imageURL)
+            return imageURL
+        } catch {
+            return nil
+        }
+    }
 }
 
 extension BaseViewController: UIViewControllerAnimatedTransitioning{
